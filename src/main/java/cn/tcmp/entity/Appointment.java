@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 //预约信息表
 public class Appointment{
+	//
 	private int appointmentid;
 	private int clientid;
 	private int projectid;
