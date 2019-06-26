@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 //经理表
+//1
 public class Secondarymanager{
 	private Integer smid;
 	private Integer userid;
