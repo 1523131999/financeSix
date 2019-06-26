@@ -15,7 +15,7 @@ import java.util.Date;
 public class Assets{
 	private Integer assetsid;
 	private Integer clientid;
-	private String productname;
+
 	private Integer pruductid;
 	private String expected;
 	private String contractperiod;
