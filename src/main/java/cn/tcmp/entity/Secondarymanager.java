@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 //经理表
 public class Secondarymanager{
-	private int smid;
-	private int userid;
-	private int managerid;
+	private Integer smid;
+	private Integer userid;
+	private Integer managerid;
 	private String clientid;
 	private String addresason;
-	private int mianmanage;
+	private Integer mianmanage;
 
 
 }

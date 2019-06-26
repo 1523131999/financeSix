@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 //联系人表
 public class Contacts{
-	private int contactid;
+	private Integer contactid;
 	private String contactname;
-	private int clienttype;
-	private int Lcerttype;
+	private Integer clienttype;
+	private Integer Lcerttype;
 	private String certnumber;
-	private int contactstype;
+	private Integer contactstype;
 	private String contactsphone;
 	private String remarks;
 

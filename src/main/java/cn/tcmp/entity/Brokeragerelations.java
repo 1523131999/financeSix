@@ -13,13 +13,13 @@ import java.util.Date;
 @AllArgsConstructor
 //经纪关系变更表
 public class Brokeragerelations{
-	private int blid;
+	private Integer blid;
 	private String clientname;
 	private Date submissiondate;
-	private int userid;
+	private Integer userid;
 	private String Initiator;
 	private String examinationlink;
-	private int examinationstatus;
+	private Integer examinationstatus;
 	private String examinationreason;
 
 

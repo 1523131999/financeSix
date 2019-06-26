@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 //证件表
 public class Cert{
-	private int certid;
-	private int certtype;
+	private Integer certid;
+	private Integer certtype;
 
 
 

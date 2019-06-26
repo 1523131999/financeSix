@@ -13,44 +13,44 @@ import java.util.Date;
 @AllArgsConstructor
 //客户表
 public class Client{
-	private int clientid;
+	private Integer clientid;
 	private String clientName;
-	private int clientType;
+	private Integer clientType;
 	private String certnumber;
-	private int Fmid;
-	private int Fact;
-	private int clientstatus;
-	private int clientlevel;
-	private int risklevelTE;
-	private int risklevelFE;
+	private Integer Fmid;
+	private Integer Fact;
+	private Integer clientstatus;
+	private Integer clientlevel;
+	private Integer risklevelTE;
+	private Integer risklevelFE;
 	private String FinanID;
 	private String contacts;
-	private int assset;
-	private int gender;
-	private int certtime;
+	private Integer assset;
+	private Integer gender;
+	private Integer certtime;
 	private Date birthdateZC;
 	private Date birthdateLC;
 	private String nationality;
-	private int marital;
+	private Integer marital;
 	private String nation;
 	private String phone;
 	private String address;
 	private String eamil;
 	private String occpation;
 	private String remarks;
-	private int contactpreference;
-	private int controller;
-	private int workingyears;
+	private Integer contactpreference;
+	private Integer controller;
+	private Integer workingyears;
 	private String legalname;
-	private int Lcerttype;
+	private Integer Lcerttype;
 	private String Lcertnumber;
 	private String Lcerttime;
 	private String scopebusiness;
-	private int registermoney;
+	private Integer registermoney;
 	private Date creationtime;
 	private String newfinancialmanager;
-	private int blacklist;
-	private int Finance;
+	private Integer blacklist;
+	private Integer Finance;
 
 
 }

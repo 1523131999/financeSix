@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 //认领客户表
 public class Claimclient{
-	private int clid;
-	private int clientid;
-	private int managerid;
+	private Integer clid;
+	private Integer clientid;
+	private Integer managerid;
 
 
 

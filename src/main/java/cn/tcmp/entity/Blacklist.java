@@ -13,11 +13,11 @@ import java.util.Date;
 @AllArgsConstructor
 //黑名单
 public class Blacklist{
-	private int blackid;
+	private Integer blackid;
 	private String blackremarks;
 	private Date newaddblackdate;
 	private Date newrevokeblackdate;
 	private String addingpeople;
-	private int userid;
+	private Integer userid;
 
 }

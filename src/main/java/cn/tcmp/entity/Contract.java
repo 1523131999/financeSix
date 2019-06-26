@@ -13,10 +13,10 @@ import java.util.Date;
 @AllArgsConstructor
 //合同信息表
 public class Contract{
-	private int contractid;
+	private Integer contractid;
 	private String contractnumber;
-	private int pruductid;
-	private int clientid;
+	private Integer pruductid;
+	private Integer clientid;
 	private double contractmoney;
 	private Date contractbd;
 	private Date contractjd;

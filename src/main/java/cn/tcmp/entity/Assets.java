@@ -13,18 +13,18 @@ import java.util.Date;
 @AllArgsConstructor
 //资产信息表
 public class Assets{
-	private int assetsid;
-	private int clientid;
+	private Integer assetsid;
+	private Integer clientid;
 	private String productname;
-	private int pruductid;
+	private Integer pruductid;
 	private String expected;
 	private String contractperiod;
 	private Date establlishdate;
 	private Date expiredate;
-	private int share;
-	private int currentshare;
-	private int currency;
-	private int typeid;
+	private Integer share;
+	private Integer currentshare;
+	private Integer currency;
+	private Integer typeid;
 
 
 

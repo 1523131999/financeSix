@@ -13,13 +13,13 @@ import java.util.Date;
 @AllArgsConstructor
 //Assetsrecord
 public class Assetsrecord{
-	private int samid;
+	private Integer samid;
 	private Date changedate;
-	private int userid;
+	private Integer userid;
 	private double totalassets;
-	private int pruductid;
+	private Integer pruductid;
 	private String changeinformation;
-	private int changetype;
+	private Integer changetype;
 
 
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 //附件表
 public class Enclosure{
-	private int enclosureid;
+	private Integer enclosureid;
 	private String filename;
 	private double filesize;
 	private String founder;

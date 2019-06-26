@@ -13,9 +13,9 @@ import java.util.Date;
 @AllArgsConstructor
 //备注表
 public class Remarks{
-	private int remarksid;
+	private Integer remarksid;
 	private String remarkstype;
-	private int clientid;
+	private Integer clientid;
 	private String remarkstext;
 	private Date remarkstime;
 	private String registrar;

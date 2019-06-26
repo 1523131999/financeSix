@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 //分配转移表
 public class Distributiontransfer{
-	private int dtid;
-	private int financialmana;
-	private int whetherfinancialmana;
+	private Integer dtid;
+	private Integer financialmana;
+	private Integer whetherfinancialmana;
 	private String newfinancialmananame;
-	private int newwhetherfinancialmana;
+	private Integer newwhetherfinancialmana;
 	private String distrireason;
-	private int clientid;
+	private Integer clientid;
 
 }
