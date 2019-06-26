@@ -24,7 +24,8 @@ public class Client{
 	private Integer risklevelTE;
 	private Integer risklevelFE;
 	private String FinanID;
-	private Integer contactsid;
+	//联系人
+	private Secondarymanager secondarymanager;
 	private Integer assset;
 	private Integer gender;
 	private Integer certtime;
