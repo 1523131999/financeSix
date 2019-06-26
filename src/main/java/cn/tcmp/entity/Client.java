@@ -24,7 +24,7 @@ public class Client{
 	private Integer risklevelTE;
 	private Integer risklevelFE;
 	private String FinanID;
-	private String contacts;
+	private Integer contactsid;
 	private Integer assset;
 	private Integer gender;
 	private Integer certtime;
