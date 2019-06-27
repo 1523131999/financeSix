@@ -18,6 +18,7 @@ public class Blacklist{
 	private Date newaddblackdate;
 	private Date newrevokeblackdate;
 	private String addingpeople;
-	private Integer userid;
+	//修改为客户
+	private Integer clientid;
 
 }
