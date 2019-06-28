@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tcmp.ymy.dao.ClientMapper">
+    <resultMap id="map" type="Client" autoMapping="true">
+        <id property="id" column="id"></id>
+        <association property="secondarymanager" resultMap="map1"></association>
+    </resultMap>
+    <resultMap id="map1" type="Secondarymanager" autoMapping="true">
+        <id column="smid" property="smid"></id>
+    </resultMap>
+    <select id="queryAll" parameterType="Client" resultMap="map">
+SELECT * FROM CLIENT,secondarymanager WHERE client.contactsid=secondarymanager.smid AND client.`Fmid`!=0
+    <if test="client.clientName!=null">
+        and clientName like concat('%',#{client.clientName},'%')
+    </if>
+    <if test="startTime!=null">
+        AND client.`creationtime`>#{startTime}
+    </if>
+        <if test="endTime!=null">
+            and client.`creationtime` 	&lt; #{endTime}
+        </if>
+</select>
+</mapper>

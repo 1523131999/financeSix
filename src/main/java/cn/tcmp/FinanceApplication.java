@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("cn.tcmp.*.dao")
 @SpringBootApplication
+@MapperScan("cn.tcmp.*.dao")
 public class FinanceApplication {
 
     public static void main(String[] args) {
