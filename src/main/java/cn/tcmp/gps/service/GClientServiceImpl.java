@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class GClientServiceImpl implements GClientService {
     @Autowired
-    private GClientMapper clientMapper;
+    private GClientMapper gClientMapper;
 
 
     @Override
     public Client query(Integer id) {
-        return clientMapper.query(id);
+        return gClientMapper.query(id);
     }
 }

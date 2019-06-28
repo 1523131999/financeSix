@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GClientController {
 
     @Autowired
-    private GClientService clientService;
+    private GClientService gClientService;
 
 
     //查询客户详情
@@ -20,7 +20,7 @@ public class GClientController {
     public  String queryClient(Integer id, Model model){
         //项目未集成 所以id 暂时写死
         id=1;
-        Client client=clientService.query(id);
+        Client client=gClientService.query(id);
         model.addAttribute("client",client);
         System.out.println(client);
         return  "ziranren";
