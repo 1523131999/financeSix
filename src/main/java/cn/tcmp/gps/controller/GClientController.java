@@ -1,7 +1,7 @@
 package cn.tcmp.gps.controller;
 
 import cn.tcmp.entity.Client;
-import cn.tcmp.gps.service.ClientService;
+import cn.tcmp.gps.service.GClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GClientController {
 
     @Autowired
-    private ClientService clientService;
+    private GClientService clientService;
 
 
     //查询客户详情
