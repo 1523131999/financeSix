@@ -7,6 +7,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,7 +38,7 @@ public class ClientController {
             model.addAttribute("client",client);
             model.addAttribute("startTime",startTime);
             model.addAttribute("endTime",endTime);
-
+            model.addAttribute("pageSize",pagesize);
 
 
 
@@ -46,4 +47,20 @@ public class ClientController {
             return "ymy/list";
         }
 
+    @RequestMapping("renlingClient")
+    @ResponseBody
+    public String renling(Client client) {
+            Integer status=service.queryClientByFour(client);
+        if (status == 2) {
+            return "该用户不存在";
+        }
+        if (status == 3) {
+            return "该用户已有主要经理";
+        }
+        return  "认领客户成功";
+    }
+    @RequestMapping("toreling")
+    public  String renling1() {
+            return  "ymy/renling";
+    }
 }

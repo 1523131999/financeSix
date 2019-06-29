@@ -23,4 +23,20 @@ public class ClientServiceImpl implements ClientService {
         PageInfo<Client> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
+
+    @Override
+    public Integer queryClientByFour(Client client) {
+        Client client1=mapper.queryClientByFour(client);
+        Integer status=1;
+        if (client1 == null) {
+                status=2;
+                return status;
+        }
+        if (client1.getFmid() != null) {
+            status=3;
+            return status;
+        }
+        mapper.updateManager(client1.getClientid(),1);
+        return status;
+    }
 }

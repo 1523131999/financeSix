@@ -22,4 +22,10 @@ SELECT * FROM CLIENT,secondarymanager WHERE client.contactsid=secondarymanager.s
             and client.`creationtime` 	&lt; #{endTime}
         </if>
 </select>
+    <select id="queryClientByFour" parameterType="Client" resultType="Client">
+      SELECT * FROM CLIENT WHERE clientName=#{clientName} AND clientType=#{clientType} AND  certnumber=#{certnumber} AND certid=#{cert.certid}
+    </select>
+    <update id="updateManager" parameterType="integer">
+        update client set fmid=#{fmid} where clientid=#{id}
+    </update>
 </mapper>

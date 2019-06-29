@@ -22,6 +22,9 @@
                     }
                     location.href = 'queryClient?pagenum=' + pagno+"&pagesize="+pageSize+"&"+data;
                 })
+				$("#renling").click(function () {
+					location.href='toreling';
+                })
             })
 		</script>
 	</head>
@@ -31,7 +34,7 @@
 				客户名称<input type="text" name="clientName" th:value="${client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;创建时间<input type="text" name="startTime" th:value="${startTime}"/>-------<input type="text" name="endTime" th:value="${endTime}"/>&nbsp;&nbsp;&nbsp;<button type="submit">查询</button>
 			</form>
 				<br />
-				<button type="button">新建</button>
+				<button type="button" id="renling">新建</button>
 			<br />
 				认领成功客户列表
 				<table>
@@ -47,20 +50,23 @@
 					</tr>
 					<tr th:each="item:${pageinfo.list}">
 						<td th:text="${item.clientName}"></td>
-						<td th:text="${item.clientType}">xxxx</td>
-						<td th:text="${item.certnumber}">xxxx</td>
-						<td th:text="${item.Fact}">xxxx</td>
-						<td th:text="${item.Fmid}">xxxx</td>
-						<td th:text="${item.newfinancialmanager}">xxxx</td>
-						<td th:text="${#dates.format(item.creationtime,'yyyy-MM-dd')}">xxxx</td>
+						<td th:if="${item.clientType eq 1}">自然人</td>
+						<td th:if="${item.clientType eq 2}">机构</td>
+						<td th:text="${item.certnumber}"></td>
+						<td th:if="${item.Fact eq 1}">事实</td>
+						<td th:if="${item.Fact eq 2}">潜在</td>
+						<td th:text="${item.Fmid}"></td>
+						<td th:text="${item.newfinancialmanager}"></td>
+						<td th:text="${#dates.format(item.creationtime,'yyyy-MM-dd')}"></td>
 					</tr>
 
 					
 				</table>
 			每页显示记录	<select id="pageSize">
-				<option value="10">10条</option>
-				<option value="15">15条</option>
-				<option value="20">20条</option>
+
+				<option  value="10">10条</option>
+				<option th:selected="${pageSize}==15" value="15">15条</option>
+				<option th:selected="${pageSize}==20" value="20">20条</option>
 			</select>
 		<button name="jkl" th:no="1">首页</button>
 		<button name="jkl" th:no="${pageinfo.prePage}">上一页</button>
