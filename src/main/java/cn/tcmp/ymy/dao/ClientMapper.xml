@@ -11,14 +11,14 @@
         <id column="smid" property="smid"></id>
     </resultMap>
     <select id="queryAll" parameterType="Client" resultMap="map">
-SELECT * FROM CLIENT,secondarymanager WHERE client.contactsid=secondarymanager.smid AND client.`Fmid`!=0
+    SELECT * FROM CLIENT,secondarymanager WHERE client.contactsid=secondarymanager.smid AND client.`Fmid`!=0
     <if test="client.clientName!=null">
         and clientName like concat('%',#{client.clientName},'%')
     </if>
-    <if test="startTime!=null">
+    <if test="startTime!=null and startTime!=''">
         AND client.`creationtime`>#{startTime}
     </if>
-        <if test="endTime!=null">
+        <if test="endTime!=null and endTime!=''">
             and client.`creationtime` 	&lt; #{endTime}
         </if>
 </select>

@@ -32,7 +32,7 @@
 		认领客户<br />
 			<form id="form" action="/queryClient" method="post">
 				客户名称<input type="text" name="clientName" th:value="${client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;创建时间<input type="text" name="startTime" th:value="${startTime}"/>-------<input type="text" name="endTime" th:value="${endTime}"/>&nbsp;&nbsp;&nbsp;<button type="submit">查询</button>
-			</form>
+
 				<br />
 				<button type="button" id="renling">新建</button>
 			<br />
@@ -62,12 +62,13 @@
 
 					
 				</table>
-			每页显示记录	<select id="pageSize">
+			每页显示记录	<select id="pageSize" name="pagesize">
 
 				<option  value="10">10条</option>
 				<option th:selected="${pageSize}==15" value="15">15条</option>
 				<option th:selected="${pageSize}==20" value="20">20条</option>
 			</select>
+			</form>
 		<button name="jkl" th:no="1">首页</button>
 		<button name="jkl" th:no="${pageinfo.prePage}">上一页</button>
 		<button name="jkl" th:no="${pageinfo.pageNum+1}">下一页</button>

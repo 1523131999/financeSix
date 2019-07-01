@@ -18,6 +18,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public PageInfo<Client> queryAll(Client client,Integer pageSize,Integer pageNum,String startTime,String endTime) {
         PageHelper.startPage(pageNum,pageSize);
+        System.out.println(client);
         List<Client> list=mapper.queryAll(client,startTime,endTime);
 
         PageInfo<Client> pageInfo=new PageInfo<>(list);

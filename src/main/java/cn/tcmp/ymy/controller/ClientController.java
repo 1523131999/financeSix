@@ -18,6 +18,7 @@ public class ClientController {
 
         @RequestMapping("queryClient")
         public  String queryAll(String pagesize, String pagenum, Client client, Model model , HttpServletRequest request) {
+            pagesize=request.getParameter("pagesize");
             System.out.println(client);
             System.out.println(pagenum+"                 "+pagesize);
             if (pagesize == null) {
