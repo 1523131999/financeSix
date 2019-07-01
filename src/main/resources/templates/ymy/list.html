@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+
+
+
+		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+		<script type="text/javascript">
+            $(function () {
+                $("button[name='jkl']").click(function () {
+                    var pages = $("#fff").val();
+                    var pageSize=$("#pageSize").val();
+                    var pagno = $(this).attr("no");
+                    var data=$("#form").serialize();
+                    if (pagno <= 1) {
+                        pagno = 1;
+                    }
+                    if (pagno >= pages) {
+                        pagno = pages;
+                    }
+                    location.href = 'queryClient?pagenum=' + pagno+"&pagesize="+pageSize+"&"+data;
+                })
+				$("#renling").click(function () {
+					location.href='toreling';
+                })
+            })
+		</script>
+	</head>
+	<body>
+		认领客户<br />
+			<form id="form" action="/queryClient" method="post">
+				客户名称<input type="text" name="clientName" th:value="${client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;创建时间<input type="text" name="startTime" th:value="${startTime}"/>-------<input type="text" name="endTime" th:value="${endTime}"/>&nbsp;&nbsp;&nbsp;<button type="submit">查询</button>
+
+				<br />
+				<button type="button" id="renling">新建</button>
+			<br />
+				认领成功客户列表
+				<table>
+					<tr>
+						<td>客户名称</td>
+						<td>客户类型</td>
+
+						<td>证件号码</td>
+						<td>是否事实客户</td>
+						<td>当前理财经理</td>
+						<td>新理财经理</td>
+						<td>创建时间</td>
+					</tr>
+					<tr th:each="item:${pageinfo.list}">
+						<td th:text="${item.clientName}"></td>
+						<td th:if="${item.clientType eq 1}">自然人</td>
+						<td th:if="${item.clientType eq 2}">机构</td>
+						<td th:text="${item.certnumber}"></td>
+						<td th:if="${item.Fact eq 1}">事实</td>
+						<td th:if="${item.Fact eq 2}">潜在</td>
+						<td th:text="${item.Fmid}"></td>
+						<td th:text="${item.newfinancialmanager}"></td>
+						<td th:text="${#dates.format(item.creationtime,'yyyy-MM-dd')}"></td>
+					</tr>
+
+					
+				</table>
+			每页显示记录	<select id="pageSize" name="pagesize">
+
+				<option  value="10">10条</option>
+				<option th:selected="${pageSize}==15" value="15">15条</option>
+				<option th:selected="${pageSize}==20" value="20">20条</option>
+			</select>
+			</form>
+		<button name="jkl" th:no="1">首页</button>
+		<button name="jkl" th:no="${pageinfo.prePage}">上一页</button>
+		<button name="jkl" th:no="${pageinfo.pageNum+1}">下一页</button>
+		<button name="jkl" th:no="${pageinfo.pages}">尾页</button>
+		<input type="hidden" id="fff" th:value="${pageinfo.pages}"></body>
+</html>

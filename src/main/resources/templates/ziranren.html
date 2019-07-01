@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>个人主页</title>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="../../layuiadmin/style/template.css" media="all">
+    <script src="../../echarts.min.js"></script>
 </head>
 <body style="background-color: white">
 
@@ -43,8 +44,18 @@
                         <div class="layadmin-homepage-pad-ver">
                             <img class="layadmin-homepage-pad-img" src="../../layuiadmin/style/res/template/portrait.png" width="96" height="96">
                         </div>
-                        <h4 class="layadmin-homepage-font">张鸿铭</h4>
-                        <p class="layadmin-homepage-min-font">个人事实客户</p>
+                        <h4 class="layadmin-homepage-font" th:text="${client.clientName}">张鸿铭</h4>
+                        <p class="layadmin-homepage-min-font" th:if="${client.clientType eq 1}">个人
+                            <span   th:if="${client.Fact eq 1}">事实</span>
+                            <span   th:if="${client.Fact eq 2}">潜在</span>
+                            客户
+                        </p>
+                        <p class="layadmin-homepage-min-font" th:if="${client.clientType eq 2}">机构
+                            <span   th:if="${client.Fact eq 1}">事实</span>
+                            <span   th:if="${client.Fact eq 2}">潜在</span>
+                            客户
+                        </p>
+
 
                         <button style="margin: 1px;" class="layui-btn layui-btn-fluid">事件提醒</button>
                       <p>
@@ -78,10 +89,30 @@
                 </table>
             </div>
             <hr/>
-            <div >
-                <span>当前存续资产规模（份额）：</span><span>98,000,000.00</span>
-                饼图
-            </div>
+
+                <span>当前存续资产规模（份 额）：</span><span>98,000,000.00</span>
+
+                <div id="main" style="width: 50%;height:100px;"></div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main'));
+                    // 指定图表的配置项和数据
+                    myChart.setOption({
+                        series : [
+                            {
+                                name: '客户收益利率',
+                                type: 'pie',
+                                radius: '80%',
+                                data:[
+                                    {value:335, name:'固定收益'},
+                                    {value:120, name:'浮动收益'}
+                                ]
+                            }
+                        ]
+                    })
+                    myChart.setOption(option);
+                </script>
+
 
             <hr/>
             <div >

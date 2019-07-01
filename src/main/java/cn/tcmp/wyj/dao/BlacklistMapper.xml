@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tcmp.wyj.dao.BlacklistMapper">
+
+        <resultMap id="BlickMap" type="Blacklist" autoMapping="true">
+            <id property="blackid" column="blackid"></id>
+            <association property="client" resultMap="cliMap">
+        </association>
+        </resultMap>
+    <resultMap id="cliMap" type="Client" autoMapping="true">
+        <id column="clientid" property="clientid"></id>
+    </resultMap>
+
+
+    <select id="queryAllBlickByClient" resultMap="BlickMap">
+       SELECT  c.clientid,c.clientName,c.clientType,c.clientstatus,c.Fact,c.Fmid,c.Fmid,c.blacklist,
+      b.blackremarks,b.newaddblackdate,b.newrevokeblackdate,b.addingpeople
+      FROM `client` c,blacklist b
+      ORDER BY newaddblackdate
+    </select>
+
+
+
+
+</mapper>
