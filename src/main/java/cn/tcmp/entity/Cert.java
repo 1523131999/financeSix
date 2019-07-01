@@ -15,6 +15,4 @@ public class Cert{
 	private Integer certid;
 	private Integer certtype;
 
-
-
 }

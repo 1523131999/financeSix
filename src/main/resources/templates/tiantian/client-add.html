@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>创建客户</title>
+	<style type="text/css">
+		*{
+			font-size: 12px;
+		}
+	</style>
+	<script type="text/javascript" src="js/laydate.js"></script>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+</head>
+<body>
+<table align="center" width="90%">
+	<tr>
+		<td width="300px" rowspan="12">
+			<img style="margin-top: -100px; margin-left: 100px;" width="120px" height="160px" src="img/3bbff849d09944ee844715290116c174e8d1ed745db84-LUNs0q_fw658.jpg"/>
+			<br />
+			<span style="background-color: dodgerblue; color: white; margin-left: 147px;">个人潜在用户</span>
+		</td>
+		<td>客户名称:</td>
+		<td width="300px">
+			<input type="text" style="width: 120px;" name="clientName"/>
+		</td>
+		<td>生肖:</td>
+		<td>
+
+		</td>
+	</tr>
+	<tr>
+		<td>证件类型:</td>
+		<td>
+			<select name="certid"  style="width: 124px; height: 24px;">
+				<option value="">身份证</option>
+			</select>
+		</td>
+		<td>星座:</td>
+		<td>
+
+		</td>
+	</tr>
+	<tr>
+		<td>证件号码:</td>
+		<td>
+			<input type="text" style="width: 120px;" name="clientType"/>
+		</td>
+		<td>民族:</td>
+		<td>
+			<select name="nation"  style="width: 124px; height: 24px;">
+				<option value="">汉族</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>证件有效期:</td>
+		<td>
+			<input style="width: 100px;" name="certtime" class="laydate-icon" id="demo" value="">
+		</td>
+		<td>手机号码:</td>
+		<td>
+			<input type="text" style="width: 120px;" name=""/>
+		</td>
+	</tr>
+	<tr>
+		<td>出生日期（公历）:</td>
+		<td>
+			<input style="width: 100px;" name="birthdateZC" class="laydate-icon" id="demo1" value="">
+		</td>
+		<td>联系地址:</td>
+		<td>
+			<input type="text" style="width: 120px;" name="address"/>
+		</td>
+	</tr>
+	<tr>
+		<td>出生日期（农历）:</td>
+		<td></td>
+		<td>电子邮件:</td>
+		<td>
+			<input type="text" style="width: 120px;" name="eamil"/>
+		</td>
+	</tr>
+	<tr>
+		<td>性别:</td>
+		<td>
+			<select name="gender"  style="width: 124px; height: 24px;">
+				<option value="">男</option>
+			</select>
+		</td>
+		<td>客户经理:</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>国籍:</td>
+		<td>
+			<select name="nationality"  style="width: 124px; height: 24px;">
+				<option value="">中国</option>
+			</select>
+		</td>
+		<td>联系电话:</td>
+		<td>
+			<input type="text" style="width: 120px;" name="contactsphone"/>
+		</td>
+	</tr>
+	<tr>
+		<td>婚姻状况:</td>
+		<td>
+			<select name="marital"  style="width: 124px; height: 24px;">
+				<option value="">未婚</option>
+			</select>
+		</td>
+		<td>职业:</td>
+		<td>
+			<input type="text" style="width: 80px;" /> <input type="button" xian="x" onclick="zhiye()" id="zhiye" value="修改"/>
+		</td>
+	</tr>
+	<tr>
+		<td>是否事实客户:</td>
+		<td></td>
+		<td>备注:</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>联系偏好:</td>
+		<td>
+			<input type="checkbox" name="" id="" value=""  />不接收短信
+			<input type="checkbox" name="" id="" value="" />不接收电子邮件
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<input type="button" value="保存" style="margin-left: 300px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
+			<input type="button" value="取消"  style="margin-left: 30px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
+		</td>
+	</tr>
+</table>
+
+<div id="xianshi" style="width: 800px;height: 300px;background-color: azure;display: none;position: absolute;left: 300px;top: 150px;">
+	<table style="border: none; margin-top: 20px;" border="1" cellpadding="0" cellspacing="0"align="center" width="80%">
+		<tr>
+			<td colspan="4" height="30px">职业信息</td>
+		</tr>
+		<tbody id="css01">
+
+		<tr>
+			<td>职业:</td>
+			<td>
+				<input type="text" name=""/>
+			</td>
+			<td>所属行业:</td>
+			<td>
+				<select name=""  style="width: 160px; height: 20px;">
+					<option value="">工业生产</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>工作单位名称:</td>
+			<td>
+				<input type="text" name=""/>
+			</td>
+			<td>单位性质:</td>
+			<td>
+				<select name=""  style="width: 160px; height: 20px;">
+					<option value="">国有</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>职位职务:</td>
+			<td>
+				<input type="text" name=""/>
+			</td>
+			<td>职称:</td>
+			<td>
+				<select name=""  style="width: 160px; height: 20px;">
+					<option value="">高级</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>是否单位实际控制人:</td>
+			<td>
+				<select name=""  style="width: 160px; height: 20px;">
+					<option value="">请选择</option>
+				</select>
+			</td>
+			<td>工龄（年）:</td>
+			<td>
+				<input type="text" name=""/>
+			</td>
+		</tr>
+		</tbody>
+		<tr align="center" height="60px">
+			<td colspan="4">
+				<input type="button"onclick="zhiye()" id="xianshi2"  value="保存" style="background-color: dodgerblue; color: white; width: 70px;"/>
+				<input type="reset" value="取消" style="margin-left: 20px;background-color: dodgerblue; color: white; width: 70px;" />
+			</td>
+		</tr>
+	</table>
+</div>
+
+</body>
+<script type="text/javascript">
+    !function(){
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#demo'});//绑定元素
+    }();
+    !function(){
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#demo1'});//绑定元素
+    }();
+
+
+    function zhiye(){
+        var xian = $('#zhiye').attr("xian");
+        if(xian == 'x'){
+            $("#xianshi").css("display","block");
+            $('#zhiye').attr("xian","y");
+        }else{
+            var baocun = confirm("确定保存吗？");
+            if(baocun == true){
+                $("#xianshi").css("display","none");
+                $('#zhiye').attr("xian","x");
+            }
+        }
+    }
+</script>
+</html>
