@@ -52,7 +52,7 @@ public class Client{
 	private String newfinancialmanager;
 	private Integer blacklist;
 	private Integer Finance;
-	private Cert certid;//证件id
+	private Cert cert;//证件id
 	private String Workunitname;
 	private String trade;
 	private String nature;

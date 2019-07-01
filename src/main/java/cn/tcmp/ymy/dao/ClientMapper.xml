@@ -28,4 +28,33 @@
     <update id="updateManager" parameterType="integer">
         update client set fmid=#{fmid} where clientid=#{id}
     </update>
+    <select id="queryCiYao" parameterType="Secondarymanager" resultMap="smap">
+            select * from secondarymanager,client,cert where secondarymanager.managerid=1 and secondarymanager.mianmanage=0 AND client.`clientid`=secondarymanager.clientid and cert.certid=client.certid
+        <if test="client.clientName!=null and client.ClientName!=''">
+           and client.clientName like concat('%',#{client.ClientName},'%')
+        </if>
+        <if test="client.clientType!=null and client.ClientType!=''">
+            and client.clientType=#{client.clientType}
+        </if>
+        <if test="client.cert.certid!=null and client.cert.certid!=''">
+            and client.certid=#{client.certid.certid}
+        </if>
+        <if test="client.certnumber!=null and client.certnumber!=''">
+            and client.certnumber=#{client.certnumber}
+        </if>
+        <if test="client.clientstatus!=null and client.clientstatus!=''">
+            and client.clientstatus=#{client.clientstatus}
+        </if>
+    </select>
+    <resultMap id="smap" type="Secondarymanager" autoMapping="true">
+            <id property="smid" column="smid"></id>
+            <association property="client" resultMap="map2"></association>
+    </resultMap>
+    <resultMap id="map2" type="Client" autoMapping="true">
+        <id column="clientid" property="clientid"></id>
+        <association property="cert" resultMap="map3"></association>
+    </resultMap>
+    <resultMap id="map3" type="Cert" autoMapping="true">
+        <id property="certid" column="certid"></id>
+    </resultMap>
 </mapper>
