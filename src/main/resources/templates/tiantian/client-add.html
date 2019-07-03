@@ -8,10 +8,11 @@
 			font-size: 12px;
 		}
 	</style>
-	<script type="text/javascript" src="js/laydate.js"></script>
-	<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+
+	<script type="text/javascript" src="/js/jquery-1.12.4.js" ></script>
 </head>
 <body>
+<form action="addClient">
 <table align="center" width="90%">
 	<tr>
 		<td width="300px" rowspan="12">
@@ -23,7 +24,7 @@
 		<td width="300px">
 			<input type="text" style="width: 120px;" name="clientName"/>
 		</td>
-		<td>生肖:</td>
+		<td></td>
 		<td>
 
 		</td>
@@ -35,16 +36,6 @@
 				<option value="">身份证</option>
 			</select>
 		</td>
-		<td>星座:</td>
-		<td>
-
-		</td>
-	</tr>
-	<tr>
-		<td>证件号码:</td>
-		<td>
-			<input type="text" style="width: 120px;" name="clientType"/>
-		</td>
 		<td>民族:</td>
 		<td>
 			<select name="nation"  style="width: 124px; height: 24px;">
@@ -53,9 +44,9 @@
 		</td>
 	</tr>
 	<tr>
-		<td>证件有效期:</td>
+		<td>证件号码:</td>
 		<td>
-			<input style="width: 100px;" name="certtime" class="laydate-icon" id="demo" value="">
+			<input type="text" style="width: 120px;" name="clientType"/>
 		</td>
 		<td>手机号码:</td>
 		<td>
@@ -63,9 +54,9 @@
 		</td>
 	</tr>
 	<tr>
-		<td>出生日期（公历）:</td>
+		<td>证件有效期:</td>
 		<td>
-			<input style="width: 100px;" name="birthdateZC" class="laydate-icon" id="demo1" value="">
+			<input style="width: 100px;" name="certtime" class="laydate-icon" id="demo" value="">
 		</td>
 		<td>联系地址:</td>
 		<td>
@@ -73,8 +64,10 @@
 		</td>
 	</tr>
 	<tr>
-		<td>出生日期（农历）:</td>
-		<td></td>
+		<td>出生日期（公历）:</td>
+		<td>
+			<input style="width: 100px;" name="birthdateZC" class="laydate-icon" id="demo1" value="">
+		</td>
 		<td>电子邮件:</td>
 		<td>
 			<input type="text" style="width: 120px;" name="eamil"/>
@@ -116,7 +109,9 @@
 	</tr>
 	<tr>
 		<td>是否事实客户:</td>
-		<td></td>
+		<td>
+			<input type="text" value="否" disabled="disabled">
+		</td>
 		<td>备注:</td>
 		<td></td>
 	</tr>
@@ -125,10 +120,11 @@
 		<td></td>
 		<td>联系偏好:</td>
 		<td>
-			<input type="checkbox" name="" id="" value=""  />不接收短信
-			<input type="checkbox" name="" id="" value="" />不接收电子邮件
+			<input type="radio" name=""  value=""  />不接收短信
+			<input type="radio" name=""  value="" />不接收电子邮件
 		</td>
 	</tr>
+
 	<tr>
 		<td colspan="4">
 			<input type="button" value="保存" style="margin-left: 300px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
@@ -147,11 +143,11 @@
 		<tr>
 			<td>职业:</td>
 			<td>
-				<input type="text" name=""/>
+				<input type="text" name="occpation"/>
 			</td>
 			<td>所属行业:</td>
 			<td>
-				<select name=""  style="width: 160px; height: 20px;">
+				<select name="trade"  style="width: 160px; height: 20px;">
 					<option value="">工业生产</option>
 				</select>
 			</td>
@@ -159,11 +155,11 @@
 		<tr>
 			<td>工作单位名称:</td>
 			<td>
-				<input type="text" name=""/>
+				<input type="text" name="Workunitname"/>
 			</td>
 			<td>单位性质:</td>
 			<td>
-				<select name=""  style="width: 160px; height: 20px;">
+				<select name="nature"  style="width: 160px; height: 20px;">
 					<option value="">国有</option>
 				</select>
 			</td>
@@ -171,11 +167,11 @@
 		<tr>
 			<td>职位职务:</td>
 			<td>
-				<input type="text" name=""/>
+				<input type="text" name="position"/>
 			</td>
 			<td>职称:</td>
 			<td>
-				<select name=""  style="width: 160px; height: 20px;">
+				<select name="Title"  style="width: 160px; height: 20px;">
 					<option value="">高级</option>
 				</select>
 			</td>
@@ -183,17 +179,17 @@
 		<tr>
 			<td>是否单位实际控制人:</td>
 			<td>
-				<select name=""  style="width: 160px; height: 20px;">
+				<select name="ontroller"  style="width: 160px; height: 20px;">
 					<option value="">请选择</option>
 				</select>
 			</td>
 			<td>工龄（年）:</td>
 			<td>
-				<input type="text" name=""/>
+				<input type="text" name="workingyears"/>
 			</td>
 		</tr>
 		</tbody>
-		<tr align="center" height="60px">
+		<tr style="text-align: center"  height="60px">
 			<td colspan="4">
 				<input type="button"onclick="zhiye()" id="xianshi2"  value="保存" style="background-color: dodgerblue; color: white; width: 70px;"/>
 				<input type="reset" value="取消" style="margin-left: 20px;background-color: dodgerblue; color: white; width: 70px;" />
@@ -203,6 +199,8 @@
 </div>
 
 </body>
+</form>
+<script type="text/javascript" src="/js/laydate.js"></script>
 <script type="text/javascript">
     !function(){
         laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
