@@ -30,13 +30,30 @@ public class GClientController {
         Client client=gClientService.query(id);
         List<Assetsrecord> alist=gClientService.queryAllByClientId(id);
         List<Assets> assetsList=gClientService.queryAllAssets(id);
-        model.addAttribute("assetsList",assetsList);
+        for (Assets assets : assetsList) {
+
+            if (assets.getPruduct().getItemID().getItemtypeID().getItemTypeID() == 1) {
+
+                model.addAttribute("xintuo",1);
+            }
+            if (assets.getPruduct().getItemID().getItemtypeID().getItemTypeID() == 2) {
+                System.out.println(assets.getPruduct().getItemID().getItemtypeID().getItemTypeID());
+                model.addAttribute("jijin",2);
+            }
+            if (assets.getPruduct().getItemID().getItemtypeID().getItemTypeID() == 3) {
+                model.addAttribute("guanli",3);
+            }
+            System.out.println(assets);
+        }
+      //  model.addAttribute("assetsList",assetsList);
         model.addAttribute("client",client);
         model.addAttribute("alist",alist);
         System.out.println(client);
         return  "gps/ziranren";
 
     }
+
+
 
     @ResponseBody
     @RequestMapping("queryTotalByDate")
@@ -54,6 +71,43 @@ public class GClientController {
         Integer shi= gClientService.queryTotalByDate("2019-10-01","2019-10-30",id);
         Integer sy= gClientService.queryTotalByDate("2019-11-01","2019-11-30",id);
         Integer se= gClientService.queryTotalByDate("2019-12-01","2019-12-30",id);
+        if(yi==null){
+            yi=0;
+        }
+        if(er==null){
+            er=0;
+        }
+        if(san==null){
+            san=0;
+        }
+        if(si==null){
+            si=0;
+        }
+        if(wu==null){
+            wu=0;
+        }
+        if(liu==null){
+            liu=0;
+        }
+        if(qi==null){
+            qi=0;
+        }
+        if(ba==null){
+            ba=0;
+        }
+        if(jiu==null){
+            jiu=0;
+        }
+        if(shi==null){
+            shi=0;
+        }
+        if(sy==null){
+            sy=0;
+        }
+        if(se==null){
+            se=0;
+        }
+
         map.put("yi",yi);
         map.put("er",er);
         map.put("san",san);
@@ -69,6 +123,25 @@ public class GClientController {
         System.out.println(liu);
         return  map;
     }
+
+
+
+    @ResponseBody
+    @RequestMapping("queryTotal")
+    private  Map<String,Integer> getTotalAssets(String startDate ,String endDate,Integer id){
+            Map<String,Integer> map=new HashMap<>();
+            //历史最高资产
+            Integer total=gClientService.queryTotalassets(id);
+            //当前月资产
+            Integer Nowtotal=gClientService.queryTotalByNowDate(startDate,endDate,id);
+            Integer yemianxianshi=total-Nowtotal;
+
+            map.put("total",yemianxianshi);
+            map.put("now",Nowtotal);
+            return  map;
+    }
+
+
 
 
 }

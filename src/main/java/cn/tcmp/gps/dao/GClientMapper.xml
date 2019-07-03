@@ -46,6 +46,15 @@ AND p.`ItemID`=i.`ItemID` AND i.`ItemTypeID`=it.`ItemTypeID`
 AND a.`clientid`=#{id}
     </select>
 
+    <select id="queryTotalassets"  parameterType="Integer" resultType="Integer" >
+        SELECT totalassets FROM `assetsrecord`  WHERE userid=#{id} ORDER BY totalassets DESC LIMIT 1
+    </select>
+    <select id="queryTotalByNowDate" resultType="Integer" >
+        SELECT totalassets FROM `assetsrecord`   WHERE  changedate >= #{startDate} AND changedate &lt;#{endDate}  and userid =#{clientid}  ORDER BY changedate ASC LIMIT 1
+    </select>
+
+
+
 
 
 

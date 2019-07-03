@@ -7,6 +7,7 @@ import cn.tcmp.gps.dao.GClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -34,5 +35,16 @@ public class GClientServiceImpl implements GClientService {
     public List<Assets> queryAllAssets(Integer id) {
         return gClientMapper.queryAllAssets(id);
     }
+
+    @Override
+    public Integer queryTotalassets(Integer id) {
+        return gClientMapper.queryTotalassets(id);
+    }
+
+    @Override
+    public Integer queryTotalByNowDate(String startDate, String endDate, Integer id) {
+        return gClientMapper.queryTotalByNowDate(startDate,endDate,id);
+    }
+
 
 }
