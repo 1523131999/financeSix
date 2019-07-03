@@ -124,7 +124,24 @@
             <div>
                 持有产品：
 
-            </div>
+                  <div style="margin-left: 200px">
+                      <img src="/img/chanpin.png"  th:if="" height="40" width="40"/>
+                      <img src="/img/chanpin.png"  height="40" width="40"/>
+                      <img style="margin-left: 70px;" src="/img/chanpin.png" height="40" width="40"/>
+                      <img style="margin-left: 70px;" src="/img/chanpin.png" height="40" width="40"/>
+                      <img  style="margin-left: 70px"  src="/img/chanpin.png" height="40" width="40"/>
+                      <img  style="margin-left: 70px"  src="/img/chanpin.png" height="40" width="40"/>
+
+
+
+                   </div>
+                   <div style="margin-left: 208px">
+                    <span>信托</span>
+                    <span  style="margin-left: 70px" >私募基金</span>
+                    <span  style="margin-left: 40px" >资产管理计划</span>
+
+                  </div>
+
                 <hr/>
 
             <!--时间轴-->
@@ -215,33 +232,6 @@
     var shi=0;
     var sy=0;
     var se=0;
-   $(function () {
-       $.ajax({
-           url:"queryTotalByDate",
-           dataType:"text",
-           data:{id:1},
-           success:function (result) {
-               yi=0;
-               er=0;
-               san=0;
-               si=0;
-               wu=0;
-               liu=result["liu"];
-               qi=result["qi"];
-               ba=0;
-               jiu=0;
-               shi=0;
-               sy=0;
-               se=0;
-
-               console.log(result);
-           }
-       });
-
-
-   })
-
-
 
 </script>
 
@@ -259,11 +249,45 @@
             type: 'value'
         },
         series: [{
-            data: [JSON.parse(yi), JSON.parse(er), JSON.parse(san), JSON.parse(si), JSON.parse(wu) ,JSON.parse(liu), JSON.parse(qi),JSON.parse(ba),JSON.parse(jiu),JSON.parse(shi),JSON.parse(sy),JSON.parse(se)],
+            data: [],
             type: 'line'
         }]
     };
     myline.setOption(option);
+    $.ajax({
+        url:"queryTotalByDate",
+        dataType:"json",
+        data:{id:1},
+        success:function (result) {
+            console.log(result);
+            yi=result["yi"];
+            er=result["er"];
+            san=result["san"];
+            si=result["si"];
+            wu=result["wu"];
+            liu=result["liu"];
+            qi=result["qi"];
+            ba=result["ba"];
+            jiu=result["jiu"];
+            shi=result["shi"];
+            sy=result["sy"];
+            se=result["se"];
+            option = {
+                xAxis: {
+                    type: 'category',
+                    data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月','九月','十月','十一月','十二月']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: [JSON.parse(yi), JSON.parse(er), JSON.parse(san), JSON.parse(si), JSON.parse(wu) ,JSON.parse(liu), JSON.parse(qi),JSON.parse(ba),JSON.parse(jiu),JSON.parse(shi),JSON.parse(sy),JSON.parse(se)],
+                    type: 'line'
+                }]}
+
+            myline.setOption(option);
+        }
+    });
 </script>
 </body>
 </html>
