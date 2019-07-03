@@ -16,6 +16,38 @@
         SELECT totalassets FROM `assetsrecord` WHERE changedate >= #{startDate} AND changedate  &lt; #{endDate} AND userid=#{clientid} ORDER BY totalassets DESC  LIMIT 1
     </select>
 
+    <resultMap id="aMap" type="Assets" autoMapping="true">
+        <id  column="assetsid" property="assetsid"></id>
+        <association property="client" resultMap="cMap"></association>
+        <association property="pruduct" resultMap="pMap"></association>
+    </resultMap>
+    <resultMap id="cMap" type="Client" autoMapping="true">
+        <id column="clientid" property="clientid"></id>
+    </resultMap>
+    <resultMap id="pMap" type="Product_list" autoMapping="true">
+        <id column="productid" property="ProductID"></id>
+        <association property="ItemID" resultMap="iMap"></association>
+    </resultMap>
+    <resultMap id="iMap" type="Item_sheet" autoMapping="true">
+        <id column="ItemID" property="ItemID"></id>
+        <association property="ItemtypeID" resultMap="itMap"></association>
+    </resultMap>
+    <resultMap id="itMap" type="Item_type_table" autoMapping="true">
+        <id column="ItemTypeID" property="ItemTypeID"></id>
+    </resultMap>
+
+
+
+
+    <select id="queryAllAssets" parameterType="Integer"  resultMap="aMap">
+        SELECT i.`ItemTypeID`FROM `assets` a,`client` c,`product_list` p ,`item_sheet` i, `item_type_table` it
+WHERE  a.`clientid`=c.`clientid` AND a.`pruductid`=p.`ProductID`
+AND p.`ItemID`=i.`ItemID` AND i.`ItemTypeID`=it.`ItemTypeID`
+AND a.`clientid`=#{id}
+    </select>
+
+
+
 
 
 </mapper>

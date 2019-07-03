@@ -1,5 +1,6 @@
 package cn.tcmp.gps.controller;
 
+import cn.tcmp.entity.Assets;
 import cn.tcmp.entity.Assetsrecord;
 import cn.tcmp.entity.Client;
 import cn.tcmp.gps.service.GClientService;
@@ -28,6 +29,8 @@ public class GClientController {
         id=1;
         Client client=gClientService.query(id);
         List<Assetsrecord> alist=gClientService.queryAllByClientId(id);
+        List<Assets> assetsList=gClientService.queryAllAssets(id);
+        model.addAttribute("assetsList",assetsList);
         model.addAttribute("client",client);
         model.addAttribute("alist",alist);
         System.out.println(client);

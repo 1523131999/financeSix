@@ -1,5 +1,6 @@
 package cn.tcmp.gps.service;
 
+import cn.tcmp.entity.Assets;
 import cn.tcmp.entity.Assetsrecord;
 import cn.tcmp.entity.Client;
 import cn.tcmp.gps.dao.GClientMapper;
@@ -28,4 +29,10 @@ public class GClientServiceImpl implements GClientService {
     public Integer queryTotalByDate(String startDate, String endDate, Integer id) {
         return gClientMapper.queryTotalByDate(startDate,endDate,id);
     }
+
+    @Override
+    public List<Assets> queryAllAssets(Integer id) {
+        return gClientMapper.queryAllAssets(id);
+    }
+
 }
