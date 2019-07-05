@@ -1,5 +1,6 @@
 package cn.tcmp.ymy.service;
 
+import cn.tcmp.entity.Appointment;
 import cn.tcmp.entity.Client;
 import cn.tcmp.entity.Secondarymanager;
 import cn.tcmp.ymy.dao.ClientMapper;
@@ -45,9 +46,21 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public PageInfo<Secondarymanager> queryCiYao(Secondarymanager secondarymanager, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Secondarymanager> list=mapper.queryCiYao(secondarymanager);
+                            List<Secondarymanager> list=mapper.queryCiYao(secondarymanager);
         PageInfo<Secondarymanager> pageInfo=new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @Override
+    public Appointment queryAppoint(Integer id) {
+
+
+        return mapper.queryAppoint(id);
+    }
+
+    @Override
+    public Integer delete(Integer id) {
+        return mapper.delete(id);
     }
 
 

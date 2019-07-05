@@ -43,7 +43,8 @@
                 <div class="layui-card text-center">
                     <div class="layui-card-body">
                         <div class="layadmin-homepage-pad-ver">
-                            <img class="layadmin-homepage-pad-img" src="../../layuiadmin/style/res/template/portrait.png" width="96" height="96">
+                            <img class="layadmin-homepage-pad-img" th:if="${client.gender eq 1}" src="/img/nan.png" width="96" height="96">
+                            <img class="layadmin-homepage-pad-img" th:if="${client.gender eq 2}" src="/img/nv.png" width="96" height="96">
                         </div>
                         <h4 class="layadmin-homepage-font" th:text="${client.clientName}">张鸿铭</h4>
                         <p class="layadmin-homepage-min-font" th:if="${client.clientType eq 1}">个人
@@ -110,27 +111,28 @@
             <span th:if="${client.assset eq 4}"> 六千万至八千万</span>
             <span th:if="${client.assset eq 5}"> 九千万以上</span>
 
-                <div id="main" style="width: 80%;height:100px;"></div>
+                <div id="main"  style="width: 70%;height:200px;margin-left: 40%"></div>
 
 
 
             <hr/>
-            <div >
-                    <div style="width: 80%;height: 200px"  id="line"></div>
-
-                饼图
+            <div style="width: 100%;margin: 0px;padding: 0px">
+                    <div style="width: 70%;height: 300px;display: inline-block;margin: 0px"  id="line"></div>
+                    <div style="width: 20%;height: 300px;display: inline-block;margin: 0px"  id="huan"> </div>
             </div>
+            <span style="margin-left: 71%;font-size: 18px;color: #00a2d4" >当前月最高金额占历史最高金额的:</span>
+            <span  style="color: red;font-size: 18px" id="zhanbi"></span>
             <hr/>
             <div>
                 持有产品：
 
                   <div style="margin-left: 200px">
-                      <img src="/img/chanpin.png"  th:if="" height="40" width="40"/>
-                      <img src="/img/chanpin.png"  height="40" width="40"/>
-                      <img style="margin-left: 70px;" src="/img/chanpin.png" height="40" width="40"/>
-                      <img style="margin-left: 70px;" src="/img/chanpin.png" height="40" width="40"/>
-                      <img  style="margin-left: 70px"  src="/img/chanpin.png" height="40" width="40"/>
-                      <img  style="margin-left: 70px"  src="/img/chanpin.png" height="40" width="40"/>
+                      <img src="/img/chanpin.png" th:if="${xintuo == null}"  height="40" width="40"/>
+                      <img src="/img/chanpinbule.png"  th:if="${xintuo eq 1}"  height="40" width="40"/>
+                      <img style="margin-left: 70px;" th:if="${jijin == null}" src="/img/chanpin.png" height="40" width="40"/>
+                      <img style="margin-left: 70px;"  th:if="${jijin eq 2}" src="/img/chanpinbule.png" height="40" width="40"/>
+                      <img  style="margin-left: 70px"  th:if="${guanli == null}" src="/img/chanpin.png" height="40" width="40"/>
+                      <img  style="margin-left: 70px"   th:if="${guanli eq 3}" src="/img/chanpinbule.png" height="40" width="40"/>
 
 
 
@@ -143,7 +145,7 @@
                   </div>
 
                 <hr/>
-
+            </div>
             <!--时间轴-->
             <div>
                 <div class="layui-card-body">
@@ -289,5 +291,92 @@
         }
     });
 </script>
+<script type="text/javascript" >
+
+    var myhuan = echarts.init(document.getElementById('huan'));
+
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            //orient: 'vertical',
+            //x: 'left',
+           // data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+        },
+        series: [
+            {
+                name:'资产占比',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[]
+            }
+        ]
+    };
+    myhuan.setOption(option);
+
+    var date=new Date;
+    var year=date.getFullYear();
+    var month=date.getMonth()+1;
+        var startDate=year.toString()+"-0"+month.toString()+"-"+"01";
+        var endDate=year.toString()+"-0"+month.toString()+"-"+"30";
+    $.ajax({
+        url:"queryTotal",
+        dataType:"json",
+        data:{startDate:startDate,endDate:endDate,id:1},
+        success: function (result) {
+            option = {
+                series: [
+                    {
+                        data:[
+                            {value:result["now"], name:'当前月最高金额'},
+                            {value:result["total"], name:'历史最高金额'}
+                        ]
+                    }
+                ]
+            };
+            myhuan.setOption(option);
+            var b=result["now"];
+            var a=result["now"]+result["total"];
+            var c=b/a;
+            var d =c*100;
+          var  zhanbi=d+"%";
+            alert(zhanbi);
+            $("#zhanbi").html(zhanbi);
+
+
+
+        }
+
+
+    })
+
+
+
+
+
+</script>
+
+
 </body>
 </html>

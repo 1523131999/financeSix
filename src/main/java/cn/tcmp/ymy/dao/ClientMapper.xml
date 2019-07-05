@@ -23,21 +23,21 @@
         </if>
 </select>
     <select id="queryClientByFour" parameterType="Client" resultType="Client">
-      SELECT * FROM CLIENT WHERE clientName=#{clientName} AND clientType=#{clientType} AND  certnumber=#{certnumber} AND certid=#{cert.certid}
+      SELECT * FROM CLIENT WHERE clientName=#{clientName} AND clientType=#{clientType} AND  certnumber=#{certnumber} AND cert.certid=#{cert.certid}
     </select>
     <update id="updateManager" parameterType="integer">
         update client set fmid=#{fmid} where clientid=#{id}
     </update>
     <select id="queryCiYao" parameterType="Secondarymanager" resultMap="smap">
             select * from secondarymanager,client,cert where secondarymanager.managerid=1 and secondarymanager.mianmanage=0 AND client.`clientid`=secondarymanager.clientid and cert.certid=client.certid
-        <if test="client.clientName!=null and client.ClientName!=''">
-           and client.clientName like concat('%',#{client.ClientName},'%')
+        <if test="client.clientName!=null and client.clientName!=''">
+           and client.clientName like concat('%',#{client.clientName},'%')
         </if>
-        <if test="client.clientType!=null and client.ClientType!=''">
+        <if test="client.clientType!=null and client.clientType!=''">
             and client.clientType=#{client.clientType}
         </if>
         <if test="client.cert.certid!=null and client.cert.certid!=''">
-            and client.certid=#{client.certid.certid}
+            and client.certid=#{client.cert.certid}
         </if>
         <if test="client.certnumber!=null and client.certnumber!=''">
             and client.certnumber=#{client.certnumber}
@@ -57,4 +57,7 @@
     <resultMap id="map3" type="Cert" autoMapping="true">
         <id property="certid" column="certid"></id>
     </resultMap>
+    <select id="queryAppoint" parameterType="integer" resultType="Appointment">
+        select * from appointment where clientid=#{id} and appois=1
+    </select>
 </mapper>

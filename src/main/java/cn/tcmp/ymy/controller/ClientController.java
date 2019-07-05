@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ClientController {
@@ -70,9 +73,7 @@ public class ClientController {
     public String deleteQuery(Model model, Secondarymanager secondarymanager,String pagenum,String pagesize,HttpServletRequest request) {
         pagesize=request.getParameter("pagesize");
         if (pagesize == null) {
-            pagesize="10";
-        }else {
-
+            pagesize="3";
         }
         if (pagenum == null) {
             pagenum="1";
@@ -88,7 +89,30 @@ public class ClientController {
             client.setCert(cert);
             secondarymanager.setClient(client);
         }
+        if (secondarymanager.getClient().getCert() == null) {
+            Cert cert=new Cert();
+            secondarymanager.getClient().setCert(cert);
+        }
+        model.addAttribute("smanager",secondarymanager);
+        model.addAttribute("pagesize",pagesize);
         model.addAttribute("pageInfo",service.queryCiYao(secondarymanager,pageSize,pageNum));
         return  "ymy/delete";
+    }
+    @RequestMapping("deleteManage")
+    @ResponseBody
+    public Map<Integer,String> deleteManage(String []ids,String[]smids) {
+        System.out.println(Arrays.toString(ids));
+            Map<Integer,String> map=new HashMap<>();
+        for (int i = 0; i < ids.length; i++) {
+            if (service.queryAppoint(Integer.parseInt(ids[i])) == null) {
+                    service.delete(Integer.parseInt(smids[i]));
+                map.put(Integer.parseInt(ids[i]), "成功");
+            } else {
+                map.put(Integer.parseInt(ids[i]),"用户存在预约");
+            }
+        }
+
+
+        return  map;
     }
 }

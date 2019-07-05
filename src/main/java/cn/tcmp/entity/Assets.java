@@ -14,9 +14,9 @@ import java.util.Date;
 //资产信息表
 public class Assets{
 	private Integer assetsid;
-	private Integer clientid;
+	private Client client;
 
-	private Integer pruductid;
+	private Product_list pruduct;
 	private String expected;
 	private String contractperiod;
 	private Date establlishdate;
