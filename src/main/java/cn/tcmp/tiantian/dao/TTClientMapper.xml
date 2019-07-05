@@ -84,7 +84,7 @@
 			#{newfinancialmanager},
 			#{blacklist},
 			#{Finance},
-			#{certid.certid}
+			#{cert.certid}
 			);
     </insert>
 	<insert id="addcontacts" parameterType="Contacts">

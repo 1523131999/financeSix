@@ -16,7 +16,7 @@ public class Secondarymanager{
 	private Integer smid;
 	private Integer userid;
 	private Integer managerid;
-	private Integer clientid;
+	private Client client;
 	private String addresason;
 	private Integer mianmanage;
 

@@ -20,5 +20,10 @@ public class TTClientController {
         return "/tiantian/client-add";
     }
 
+    @RequestMapping("addjigouClient")
+    public String addjigouClient(Client client){
+        service.addClient(client);
+        return "/tiantian/jigouclient-add";
+    }
 
 }

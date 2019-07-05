@@ -1,6 +1,8 @@
 package cn.tcmp.ymy.controller;
 
+import cn.tcmp.entity.Cert;
 import cn.tcmp.entity.Client;
+import cn.tcmp.entity.Secondarymanager;
 import cn.tcmp.ymy.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -63,5 +65,30 @@ public class ClientController {
     @RequestMapping("toreling")
     public  String renling1() {
             return  "ymy/renling";
+    }
+    @RequestMapping("queryDelete")
+    public String deleteQuery(Model model, Secondarymanager secondarymanager,String pagenum,String pagesize,HttpServletRequest request) {
+        pagesize=request.getParameter("pagesize");
+        if (pagesize == null) {
+            pagesize="10";
+        }else {
+
+        }
+        if (pagenum == null) {
+            pagenum="1";
+        }
+        Integer pageNum=Integer.parseInt(pagenum);
+        Integer pageSize=Integer.parseInt(pagesize);
+
+        //如果Secondarymanager为空赋值
+        if (secondarymanager.getClient() == null) {
+
+            Cert cert=new Cert();
+            Client client=new Client();
+            client.setCert(cert);
+            secondarymanager.setClient(client);
+        }
+        model.addAttribute("pageInfo",service.queryCiYao(secondarymanager,pageSize,pageNum));
+        return  "ymy/delete";
     }
 }

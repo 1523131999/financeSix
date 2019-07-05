@@ -8,4 +8,14 @@
         SELECT * FROM `client` where clientid=#{id}
     </select>
 
+    <select id="queryAllByClientId" parameterType="Integer" resultType="Assetsrecord">
+        SELECT * FROM `assetsrecord` WHERE userid=#{id} ORDER BY changedate  desc
+    </select>
+
+    <select id="queryTotalByDate" resultType="Integer">
+        SELECT totalassets FROM `assetsrecord` WHERE changedate >= #{startDate} AND changedate  &lt; #{endDate} AND userid=#{clientid} ORDER BY totalassets DESC  LIMIT 1
+    </select>
+
+
+
 </mapper>

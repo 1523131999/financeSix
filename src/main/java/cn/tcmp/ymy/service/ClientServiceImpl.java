@@ -1,6 +1,7 @@
 package cn.tcmp.ymy.service;
 
 import cn.tcmp.entity.Client;
+import cn.tcmp.entity.Secondarymanager;
 import cn.tcmp.ymy.dao.ClientMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -40,4 +41,14 @@ public class ClientServiceImpl implements ClientService {
         mapper.updateManager(client1.getClientid(),1);
         return status;
     }
+
+    @Override
+    public PageInfo<Secondarymanager> queryCiYao(Secondarymanager secondarymanager, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Secondarymanager> list=mapper.queryCiYao(secondarymanager);
+        PageInfo<Secondarymanager> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
+
+
 }

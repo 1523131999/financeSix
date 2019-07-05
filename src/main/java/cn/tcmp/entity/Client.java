@@ -52,7 +52,7 @@ public class Client{
 	private String newfinancialmanager;
 	private Integer blacklist;
 	private Integer Finance;
-	private Cert certid;//证件id
+	private Cert cert;//证件id
 	private String Workunitname;
 	private String trade;
 	private String nature;
@@ -371,12 +371,12 @@ public class Client{
 		Finance = finance;
 	}
 
-	public Cert getCertid() {
-		return certid;
+	public Cert getCert() {
+		return cert;
 	}
 
-	public void setCertid(Cert certid) {
-		this.certid = certid;
+	public void setCert(Cert cert) {
+		this.cert = cert;
 	}
 
 	public String getWorkunitname() {

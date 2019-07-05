@@ -1,6 +1,7 @@
 package cn.tcmp.ymy.dao;
 
 import cn.tcmp.entity.Client;
+import cn.tcmp.entity.Secondarymanager;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface ClientMapper {
    Client queryClientByFour(Client client);
     //修改客户经理状态
     Integer updateManager(@Param("id") Integer id,@Param("fmid") Integer fmid);
+    //查询用户次要关系
+    List<Secondarymanager> queryCiYao(Secondarymanager secondarymanager);
 }
