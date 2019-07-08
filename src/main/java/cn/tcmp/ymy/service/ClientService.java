@@ -7,10 +7,11 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 
+
 import java.util.List;
 
 public interface ClientService {
-    PageInfo<Client> queryAll(Client client,Integer pageSize,Integer pageNum,String startTime,String endTime);
+    PageInfo<Client> queryAll(Client client, Integer pageSize, Integer pageNum, String startTime, String endTime);
     Integer queryClientByFour(Client client);
     PageInfo<Secondarymanager> queryCiYao(Secondarymanager secondarymanager,Integer pageSize,Integer pageNum);
     Appointment queryAppoint(Integer id);

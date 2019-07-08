@@ -4,6 +4,8 @@ import cn.tcmp.entity.Client;
 import cn.tcmp.entity.Contacts;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface TTClientMapper {
 
@@ -12,6 +14,10 @@ public interface TTClientMapper {
     //创建联系电话
     Integer addcontacts(Contacts contacts );
 
-    //查询客户
+    //创建潜在客户
+    Integer addjigouClient(Client client);
+
+    //查询个人客户
+    List<Client> querygerenAll();
 
 }
