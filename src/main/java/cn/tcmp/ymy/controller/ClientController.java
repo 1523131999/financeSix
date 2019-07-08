@@ -3,6 +3,7 @@ package cn.tcmp.ymy.controller;
 import cn.tcmp.entity.Cert;
 import cn.tcmp.entity.Client;
 import cn.tcmp.entity.Secondarymanager;
+import cn.tcmp.entity.Source_sector;
 import cn.tcmp.ymy.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ClientController {
@@ -115,4 +114,76 @@ public class ClientController {
 
         return  map;
     }
+
+    @RequestMapping("queryFac")
+    public  String queryFac(Client client,String pageSize,String pageNum,Model model) {
+       if (pageNum==null){
+           pageNum="1";
+       }
+       if (pageSize==null){
+           pageSize="3";
+       }
+       Integer pagesize=Integer.parseInt(pageSize);
+       Integer pagenum =Integer.parseInt(pageNum);
+
+
+
+        if (client == null) {
+                client=new Client();
+        }
+        if (client.getCert() == null) {
+                Cert cert=new Cert();
+                client.setCert(cert);
+        }
+        model.addAttribute("pageinfo",service.queryAllFact(client,pagesize,pagenum));
+        model.addAttribute("client",client);
+        model.addAttribute("pagesize",pageSize);
+        return "ymy/zhuangyikehu";
+    }
+
+    @RequestMapping("toFenpei")
+    public String toFenpei(Integer[] ids, Model model) {
+        List<Client> list=new ArrayList<>();
+        for (Integer id : ids) {
+            Client client=service.detail(id);
+            System.out.println(client);
+            list.add(client);
+        }
+        model.addAttribute("list",list);
+            return  "ymy/zhixingfenpai";
+    }
+    @RequestMapping("doFenpei")
+    public  String doFenpei(Integer[] ids,Secondarymanager secondarymanager ,Model model){
+        for (Integer id : ids) {
+            Client client=new Client();
+            client.setClientid(id);
+            secondarymanager.setClient(client);
+            if (secondarymanager.getMianmanage() == 1) {
+                service.updateManager(id, secondarymanager.getManagerid());
+
+            } else {
+                service.insertmanage(secondarymanager);
+            }
+        }
+            return "redirect:queryFac";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

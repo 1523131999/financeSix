@@ -63,5 +63,34 @@ public class ClientServiceImpl implements ClientService {
         return mapper.delete(id);
     }
 
+    @Override
+    public PageInfo<Client> queryAllFact(Client client, Integer pageSize, Integer pageNum) {
+            PageHelper.startPage(pageNum,pageSize);
+            List<Client> list=mapper.queryAllFact(client);
+            PageInfo<Client> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public Client detail(Integer id) {
+
+        return mapper.detail(id);
+    }
+
+    @Override
+    public Integer update(Client client) {
+        return mapper.update(client);
+    }
+
+    @Override
+    public Integer insertmanage(Secondarymanager secondarymanager) {
+        return mapper.insertmanage(secondarymanager);
+    }
+
+    @Override
+    public Integer updateManager(Integer id, Integer fmid) {
+        return mapper.updateManager(id,fmid);
+    }
+
 
 }
