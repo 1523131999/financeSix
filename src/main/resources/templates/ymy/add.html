@@ -20,7 +20,7 @@
                     ids= $.makeArray(ids);
 
                     var  data=$("#form").serialize();
-					location.href='doFenpei?ids='+ids+'&'+data;
+					location.href='doAdd?ids='+ids+'&'+data;
 
                 })
 
@@ -45,6 +45,7 @@
 				<td th:text="${item.clientName}">xx
 
 				</td>
+
 				<td th:if="${item.Fmid eq 1}">总经理</td>
 			</tr>
 
@@ -57,7 +58,7 @@
 				<td>是否主要理财经理<select name="mianmanage"><option value="1">是</option><option value="2">否</option></select></td>
 			</tr>
 			<tr>
-				<td>分配转移原因</td>
+				<td>添加原因</td>
 				<td colspan="2"><textarea rows="5" cols="50" name="addresason"></textarea></td>
 			</tr>
 		</table>

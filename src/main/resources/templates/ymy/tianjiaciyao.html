@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("button[name='jkl']").click(function () {
+                var pages = $("#fff").val();
+                var pagno = $(this).attr("no");
+                var data = $("#form").serialize();
+                var pagesize = $("#pagesize").val();
+                pages=parseInt(pages);
+                pagno=parseInt(pagno);
+                if (pagno <= 1) {
+                    pagno = 1;
+                }
+                if (pagno >= pages) {
+                    pagno = pages;
+                }
+                location.href = 'queryAdd?pagenum=' + pagno + "&pagesize=" + pagesize + "&" + data;
+            })
+            $("#checkAll").change(function () {
+                if ((this).checked) {
+                    $(".check").attr("checked", "checked");
+
+                }
+                else {
+                    $(".check").attr("checked", false);
+                }
+            })
+            $("#delete").click(function () {
+                var ids=[];
+                var check=$(".check");
+                for (i = 0; i < check.length; i++) {
+                    if (check[i].checked == true) {
+                        var id=parseInt(check[i].value);
+
+                        ids.push(id);
+
+                    }
+                }
+                ids=$.makeArray(ids);
+                location.href='toAdd?ids='+ids;
+            })
+
+        })
+    </script>
+</head>
+<body>
+添加理财经理<br/>
+<form action="/queryAdd" method="post" id="form">
+    客户名称<input type="text" name="clientName" th:value="${client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;客户类型
+    <select name="clientType">
+        <option value="">请选择客户类型</option>
+        <option th:selected="${client.clientType}==1" value="1">自然人</option>
+        <option th:selected="${client.clientType}==2" value="2">金融机构</option>
+        <option th:selected="${client.clientType}==3" value="3">非金融机构</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;
+    证件类型<select name="cert.certid">
+    <option value="">请选择证件类型</option>
+    <option th:selected="${client.cert.certid}==1" value="1">身份证</option>
+    <option th:selected="${client.cert.certid}==2" value="2">护照</option>
+
+</select>
+
+    &nbsp;&nbsp;&nbsp;<br/>
+    证件号码<input type="text" name="certnumber" th:value="${client.certnumber}"/>&nbsp;&nbsp;&nbsp;
+    <br/>
+
+    <input type="submit" value="查询"><br/>
+
+    <input type="button" value="添加理财经理" id="delete">
+    <table border="1">
+        <tr>
+            <td>选择</td>
+            <td>客户名称</td>
+            <td>证件类型</td>
+            <td>证件号码</td>
+            <td>客户类型</td>
+            <td>客户等级</td>
+            <td>客户状态</td>
+            <td>是否事实客户</td>
+            <td>理财经理</td>
+        </tr>
+        <tr th:each="item:${pageInfo.list}">
+            <td><input type="checkbox" class="check" th:value="${item.clientid}">
+            </td>
+            <td th:text="${item.clientName}">xxxx</td>
+            <td th:if="${item.cert.certid eq 1}">身份证</td>
+            <td th:if="${item.cert.certid eq 2}">护照</td>
+            <td th:text="${item.certnumber}">xxxx</td>
+            <td th:if="${item.clientType eq 1}">自然人客户</td>
+            <td th:if="${item.clientType eq 2}">金融机构客户</td>
+            <td th:if="${item.clientType eq 3}">非金融机构客户</td>
+            <td th:text="${item.clientlevel}">xxxx</td>
+            <td th:if="${item.clientstatus eq 1}">正常</td>
+            <td th:if="${item.clientstatus eq 2}">流失</td>
+            <td th:text="${item.Fact}">xxxx</td>
+            <td th:if="${item.Fmid eq 1}">总经理</td>
+        </tr>
+
+        <tr>
+            <td colspan="8"><input type="checkbox" id="checkAll">当前页面全选</td>
+        </tr>
+    </table>
+
+    每页显示记录 <select name="pagesize" id="pagesize">
+    <option th:selected="${pagesize}==10" value="10">10条</option>
+    <option th:selected="${pagesize}==15" value="15">15条</option>
+    <option th:selected="${pagesize}==20" value="20">20条</option>
+</select>
+</form>
+<button name="jkl" th:no="1">首页</button>
+<button name="jkl" th:no="${pageInfo.prePage}">上一页</button>
+<button name="jkl" th:no="${pageInfo.pageNum+1}">下一页</button>
+<button name="jkl" th:no="${pageInfo.pages}">尾页</button>
+<input type="hidden" id="fff" th:value="${pageInfo.pages}">
+</body>
+</html>

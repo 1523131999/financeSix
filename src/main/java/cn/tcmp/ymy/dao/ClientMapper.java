@@ -1,6 +1,7 @@
 package cn.tcmp.ymy.dao;
 
 import cn.tcmp.entity.Appointment;
+import cn.tcmp.entity.Brokeragerelations;
 import cn.tcmp.entity.Client;
 import cn.tcmp.entity.Secondarymanager;
 import org.apache.ibatis.annotations.*;
@@ -30,4 +31,10 @@ public interface ClientMapper {
     Integer update(Client client);
     @Insert("insert into secondarymanager values(null,1,#{managerid},#{client.clientid},#{addresason},#{mianmanage})")
     public  Integer insertmanage(Secondarymanager secondarymanager);
+    //查询用户 作为主要经理的客户
+   List<Client> queryAdd(Client client);
+   //查询经纪更改信息
+    List<Brokeragerelations> queryBroke(@Param("bro") Brokeragerelations brokeragerelations,@Param("startDate")String startDate,@Param("endDate")String endDate);
+    @Insert("insert into brokeragerelations values(null,#{submissiondate},#{client.clientid},#{Initiator},'原理财经理',1,null)")
+    Integer addBro(Brokeragerelations brokeragerelations);
 }

@@ -1,8 +1,10 @@
 package cn.tcmp.ymy.service;
 
 import cn.tcmp.entity.Appointment;
+import cn.tcmp.entity.Brokeragerelations;
 import cn.tcmp.entity.Client;
 import cn.tcmp.entity.Secondarymanager;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +23,9 @@ public interface ClientService {
     Integer update(Client client);
     public  Integer insertmanage(Secondarymanager secondarymanager);
     Integer updateManager(@Param("id") Integer id, @Param("fmid") Integer fmid);
+    PageInfo<Client> queryAdd(Client client,Integer pageNum,Integer pageSize);
+    PageInfo<Brokeragerelations> queryBroke(Brokeragerelations brokeragerelations,String startDate,String endDate,Integer pageSize,Integer pgaeNum);
+    Client queryFour(Client client);
+    Integer addBro(Brokeragerelations brokeragerelations);
+
 }

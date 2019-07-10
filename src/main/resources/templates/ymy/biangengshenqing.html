@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/jdbc">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+		<script type="text/javascript">
+            $(function () {
+                $("#button").click(function () {
+                    var data=$("form").serialize();
+                    $.post("doAddBro",data,function (result) {
+                        alert(result);
+                        if (result=='认领客户成功'){
+                            location.href='queryBro';
+                        }
+                    })
+                })
+            })
+		</script>
+	</head>
+	<body>
+	<form>
+			<table border="1">
+				<tr>
+					<td>客户名称：</td>
+					<td><input type="text" name="clientName"/></td>
+					<td>客户类型：</td>
+					<td><select name="clientType">
+						<option value="1">自然人</option>
+						<option value="2">金融机构</option>
+						<option value="3">非金融机构</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>证件类型</td>
+					<td><select name="cert.certid">
+						<option value="1">身份证</option>
+				<td>证件号码：</td>
+					<td><input type="text" name="certnumber"/></td>
+				</tr>
+				
+			</table>
+	</form>
+			<p>
+				说明<br />
+
+<br />1、只有录入的四要素与系统中存在的客户唯一-匹配 才允许进行经纪关系变更申请，
+
+<br />2、当果客户被申请变更经纪关系,处于变更流程中未结束时，该客户可以被其他理财经理再次发起经纪关系变更申请,在市批时判断被变更的客户是否已经发生变更,如果来发生则允许市批.如果已发生交更，则不允许市批,流程被驳回.流程结束。
+
+<br />3、客户经纪关系变更申请，只船针对主要理财经理与客户之间的经纪关系进行,次要理财经理与客户之间的关系不能在此进行申请，<br />4、当客户出于经纪关系交更流程中未结束时,不允许进行分配转移客户，
+</p>
+				<button id="button">确定</button><button>取消</button>
+
+	</body>
+</html>

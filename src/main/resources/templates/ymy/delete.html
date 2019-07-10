@@ -125,7 +125,7 @@
             <td th:if="${item.client.clientstatus eq 1}">正常</td>
             <td th:if="${item.client.clientstatus eq 2}">流失</td>
             <td th:text="${item.client.Fact}">xxxx</td>
-            <td th:text="${item.managerid eq 1}">总经理</td>
+            <td th:if="${item.managerid eq 1}">总经理</td>
         </tr>
 
         <tr>

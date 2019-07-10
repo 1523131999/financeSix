@@ -14,9 +14,9 @@ import java.util.Date;
 //经纪关系变更表
 public class Brokeragerelations{
 	private Integer blid;
-	private String clientname;
+
 	private Date submissiondate;
-	private Integer userid;
+	private Client client;
 	private String Initiator;
 	private String examinationlink;
 	private Integer examinationstatus;

@@ -1,9 +1,6 @@
 package cn.tcmp.ymy.controller;
 
-import cn.tcmp.entity.Cert;
-import cn.tcmp.entity.Client;
-import cn.tcmp.entity.Secondarymanager;
-import cn.tcmp.entity.Source_sector;
+import cn.tcmp.entity.*;
 import cn.tcmp.ymy.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -64,6 +61,29 @@ public class ClientController {
         }
         return  "认领客户成功";
     }
+
+    @RequestMapping("doAddBro")
+    @ResponseBody
+    public String doAddBro(Client client) {
+
+        Brokeragerelations brokeragerelations=new Brokeragerelations();
+            Date date=new Date();
+        brokeragerelations.setSubmissiondate(date);
+
+        client=service.queryFour(client);
+
+        if (client == null) {
+            return  "更改申请失败，该用户不存在";
+        }
+        brokeragerelations.setClient(client);
+        brokeragerelations.setInitiator("理财经理");
+        service.addBro(brokeragerelations);
+        return "更改已申请成功";
+
+    }
+
+
+
     @RequestMapping("toreling")
     public  String renling1() {
             return  "ymy/renling";
@@ -97,6 +117,53 @@ public class ClientController {
         model.addAttribute("pageInfo",service.queryCiYao(secondarymanager,pageSize,pageNum));
         return  "ymy/delete";
     }
+
+
+
+
+
+
+
+    @RequestMapping("queryAdd")
+    public String queryAdd(Model model, Client client,String pagenum,String pagesize,HttpServletRequest request) {
+        if (client.getFmid()==null){
+             client.setFmid(1);
+        }
+            pagesize=request.getParameter("pagesize");
+        if (pagesize == null) {
+            pagesize="3";
+        }
+        if (pagenum == null) {
+            pagenum="1";
+        }
+        Integer pageNum=Integer.parseInt(pagenum);
+        Integer pageSize=Integer.parseInt(pagesize);
+
+        if (client.getCert() == null) {
+            Cert cert=new Cert();
+            client.setCert(cert);
+        }
+        model.addAttribute("client",client);
+        model.addAttribute("pagesize",pagesize);
+        model.addAttribute("pageInfo",service.queryAdd(client,pageNum,pageSize));
+        return  "ymy/tianjiaciyao";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @RequestMapping("deleteManage")
     @ResponseBody
     public Map<Integer,String> deleteManage(String []ids,String[]smids) {
@@ -152,6 +219,37 @@ public class ClientController {
         model.addAttribute("list",list);
             return  "ymy/zhixingfenpai";
     }
+
+    @RequestMapping("toAdd")
+    public String toAdd(Integer[] ids, Model model) {
+        List<Client> list=new ArrayList<>();
+        for (Integer id : ids) {
+            Client client=service.detail(id);
+            System.out.println(client);
+            list.add(client);
+        }
+        model.addAttribute("list",list);
+        return  "ymy/add";
+    }
+    @RequestMapping("doAdd")
+    public  String doAdd(Integer[] ids,Secondarymanager secondarymanager ,Model model){
+        for (Integer id : ids) {
+            Client client=new Client();
+            client.setClientid(id);
+            secondarymanager.setClient(client);
+            if (secondarymanager.getMianmanage() == 1) {
+                service.updateManager(id, secondarymanager.getManagerid());
+
+            } else {
+                service.insertmanage(secondarymanager);
+            }
+        }
+        return "redirect:queryAdd";
+    }
+
+
+
+
     @RequestMapping("doFenpei")
     public  String doFenpei(Integer[] ids,Secondarymanager secondarymanager ,Model model){
         for (Integer id : ids) {
@@ -167,8 +265,38 @@ public class ClientController {
         }
             return "redirect:queryFac";
     }
+    @RequestMapping("queryBro")
+    public String queryBro(Brokeragerelations brokeragerelations,String startDate,String endDate,Model model,String pagesize,String pagenum,HttpServletRequest request) {
+            if (pagesize == null) {
+            pagesize="10";
+        }else {
+
+        }
+        if (pagenum == null) {
+            pagenum="1";
+        }
+        if (brokeragerelations.getClient() == null) {
+            Client client=new Client();
+            brokeragerelations.setClient(client);
+        }
+        Integer pageNum=Integer.parseInt(pagenum);
+        Integer pageSize=Integer.parseInt(pagesize);
+        //获取表单时间
+
+        model.addAttribute("bro",brokeragerelations);
+        model.addAttribute("startDate",startDate);
+        model.addAttribute("endDate",endDate);
+        model.addAttribute("pageSize",pagesize);
 
 
+
+        model.addAttribute("pageinfo",service.queryBroke(brokeragerelations,startDate,endDate,pageSize,pageNum));
+        return "ymy/jingjigaunxi";
+    }
+    @RequestMapping("toAddBro")
+    public String addBro() {
+            return  "ymy/biangengshenqing";
+    }
 
 
 
