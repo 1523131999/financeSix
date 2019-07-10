@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+		<script type="text/javascript">
+			$(function () {
+				$("#submit").click(function () {
+					var ids=[];
+					var input=$(".id");
+
+					for (i=0;i<input.length;i++){
+                        if (input[i].checked == true) {
+                            ids.push(parseInt(input[i].value));
+
+
+                        }
+					}
+                    ids= $.makeArray(ids);
+
+                    var  data=$("#form").serialize();
+					location.href='doFenpei?ids='+ids+'&'+data;
+
+                })
+
+            })
+		</script>
+	</head>
+	<body>
+	<form id="form" action="" method="post">
+
+		<table border="1">
+			<tr>
+				<td rowspan="5">当前选择客户</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>请选择</td>
+				<td>客户名称</td>
+				<td>理财经理</td>
+			</tr>
+			<tr  th:each="item:${list}">
+				<td><input type="checkbox" th:value="${item.clientid}" class="id"></td>
+				<td th:text="${item.clientName}">xx
+
+				</td>
+				<td th:if="${item.Fmid eq 1}">总经理</td>
+			</tr>
+
+			<tr>
+				<td>选择理财经理</td>
+				<td>理财经理<select name="managerid">
+					<option value="1">总经理</option>
+
+				</select></td>
+				<td>是否主要理财经理<select name="mianmanage"><option value="1">是</option><option value="2">否</option></select></td>
+			</tr>
+			<tr>
+				<td>分配转移原因</td>
+				<td colspan="2"><textarea rows="5" cols="50" name="addresason"></textarea></td>
+			</tr>
+		</table>
+		<input id="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;<button>取消</button>
+	</form>
+	</body>
+</html>

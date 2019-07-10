@@ -1,142 +1,148 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
-		<script type="text/javascript">
-            $(function () {
-                $("button[name='jkl']").click(function () {
-                    var pages = $("#fff").val();
-                    var pagno = $(this).attr("no");
-                    var  data=$("#form").serialize();
-                    var	 pagesize=$("#pagesize").val();
-                    if (pagno <= 1) {
-                        pagno = 1;
-                    }
-                    if (pagno >= pages) {
-                        pagno = pages;
-                    }
-                    location.href = 'queryDelete?pagenum=' + pagno+"&pagesize="+pagesize+"&"+data;
-                })
-				$("#checkAll").change(function () {
-                    if ((this).checked) {
-						$(".check").attr("checked","checked");
-
-                    }
-                    else {
-                        $(".check").attr("checked",false);
-                    }
-                })
-				$("#delete").click(function () {
-                    var  check=$(".check");
-                    var smids=$(".hidden");
-                    var boxs=[];
-                    var smid=[];
-
-                    for(i=0;i<check.length;i++){
-                        if( check[i].checked == true){
-
-                            boxs.push(check[i].value);
-                            smid.push(smids[i].value);
-                        }
-                    }
-                    boxs=$.makeArray(boxs);
-                    smid=$.makeArray(smid);
-					$.ajax({
-                        url: 'deleteManage',
-						data:{ids:boxs,smids:smid},
-						type:'post',
-						traditional:true,
-						success:function (data) {
-                            for(var i=0;i<boxs.length;i++){
-                                alert(boxs[i]+"号	"+data[boxs[i]])
-								location.href='queryDelete';
-                            }
-
-                        },
-                        error:function (error) {
-							alert(error);
-                        }
-                    })
-                })
-
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("button[name='jkl']").click(function () {
+                var pages = $("#fff").val();
+                var pagno = $(this).attr("no");
+                var data = $("#form").serialize();
+                var pagesize = $("#pagesize").val();
+                pages=parseInt(pages);
+                pagno=parseInt(pagno);
+                if (pagno <= 1) {
+                    pagno = 1;
+                }
+                if (pagno >= pages) {
+                    pagno = pages;
+                }
+                location.href = 'queryDelete?pagenum=' + pagno + "&pagesize=" + pagesize + "&" + data;
             })
-		</script>
-	</head>
-	<body>
-		删除经纪关系<br />
-				<form action="/queryDelete" method="post" id="form">
-				客户名称<input type="text" name="client.clientName" th:value="${smanager.client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;客户类型
-					<select name="client.clientType">
-						<option value="">请选择客户类型</option>
-						<option th:selected="${smanager.client.clientType}==1" value="1">自然人</option>
-					<option th:selected="${smanager.client.clientType}==2" value="2">金融机构</option>
-					<option th:selected="${smanager.client.clientType}==3" value="3">非金融机构</option>
-				</select>
-					&nbsp;&nbsp;&nbsp;
-					证件类型<select name="client.cert.certid">
-					<option value="">请选择证件类型</option>
-					<option th:selected="${smanager.client.cert.certid}==1" value="1">身份证</option>
-					<option th:selected="${smanager.client.cert.certid}==2" value="2">护照</option>
+            $("#checkAll").change(function () {
+                if ((this).checked) {
+                    $(".check").attr("checked", "checked");
 
-				</select>
+                }
+                else {
+                    $(".check").attr("checked", false);
+                }
+            })
+            $("#delete").click(function () {
+                var check = $(".check");
+                var smids = $(".hidden");
+                var boxs = [];
+                var smid = [];
 
-					&nbsp;&nbsp;&nbsp;<br />
-				证件号码<input type="text" name="client.certnumber" th:value="${smanager.client.certnumber}"/>&nbsp;&nbsp;&nbsp;
-					客户状态<select name="client.clientstatus">
+                for (i = 0; i < check.length; i++) {
+                    if (check[i].checked == true) {
 
-					<option value="">请选择客户状态</option>
-					<option th:selected="${smanager.client.clientstatus}==1" value="1">正常</option>
-					<option th:selected="${smanager.client.clientstatus}==2" value="2">睡眠</option>
-					<option th:selected="${smanager.client.clientstatus}==3" value="3">活跃</option>
+                        boxs.push(check[i].value);
+                        smid.push(smids[i].value);
+                    }
+                }
+                boxs = $.makeArray(boxs);
+                smid = $.makeArray(smid);
+                $.ajax({
+                    url: 'deleteManage',
+                    data: {ids: boxs, smids: smid},
+                    type: 'post',
+                    traditional: true,
+                    success: function (data) {
+                        for (var i = 0; i < boxs.length; i++) {
+                            alert(boxs[i] + "号	" + data[boxs[i]])
+                            location.href = 'queryDelete';
+                        }
 
-				</select><br />
+                    },
+                    error: function (error) {
+                        alert(error);
+                    }
+                })
+            })
 
-							<input type="submit" value="查询"><br />
+        })
+    </script>
+</head>
+<body>
+删除经纪关系<br/>
+<form action="/queryDelete" method="post" id="form">
+    客户名称<input type="text" name="client.clientName" th:value="${smanager.client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;客户类型
+    <select name="client.clientType">
+        <option value="">请选择客户类型</option>
+        <option th:selected="${smanager.client.clientType}==1" value="1">自然人</option>
+        <option th:selected="${smanager.client.clientType}==2" value="2">金融机构</option>
+        <option th:selected="${smanager.client.clientType}==3" value="3">非金融机构</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;
+    证件类型<select name="client.cert.certid">
+    <option value="">请选择证件类型</option>
+    <option th:selected="${smanager.client.cert.certid}==1" value="1">身份证</option>
+    <option th:selected="${smanager.client.cert.certid}==2" value="2">护照</option>
 
-				<input type="button" value="删除经纪关系" id="delete">
-				<table border="1">
-					<tr>
-						<td>选择</td>
-						<td>客户名称</td>
-						<td>证件类型</td>
-						<td>证件号码</td>
-						<td>客户类型</td>
-						<td>客户等级</td>
-						<td>客户状态</td>
-						<td>是否事实客户</td>
-						<td>理财经理</td>
-					</tr>
-					<tr th:each="item:${pageInfo.list}">
-						<td><input type="checkbox" class="check" th:value="${item.client.clientid}">
-							<input type="hidden" class="hidden" th:value="${item.smid}">
-						</td>
-						<td th:text="${item.client.clientName}">xxxx</td>
-						<td th:text="${item.client.cert.certid}">xxxx</td>
-						<td th:text="${item.client.certnumber}">xxxx</td>
-						<td th:text="${item. client.clientType}">xxxx</td>
-						<td th:text="${item.client.clientlevel}">xxxx</td>
-						<td th:text="${item.client.clientstatus}">xxxx</td>
-						<td th:text="${item.client.Fact}">xxxx</td>
-						<td th:text="${item.managerid}">xxxx</td>
-					</tr>
+</select>
 
-					<tr>
-						<td colspan="8"><input type="checkbox" id="checkAll">当前页面全选</td>
-					</tr>		
-				</table>
-				
-			每页显示记录	<select name="pagesize" id="pagesize">
-				<option th:selected="${pagesize}==10" value="10">10条</option>
-				<option th:selected="${pagesize}==15" value="15">15条</option>
-				<option th:selected="${pagesize}==20" value="20">20条</option>
-			</select>
-				</form>
-		<button name="jkl" th:no="1">首页</button>
-		<button name="jkl" th:no="${pageInfo.prePage}">上一页</button>
-		<button name="jkl" th:no="${pageInfo.pageNum+1}">下一页</button>
-		<button name="jkl" th:no="${pageInfo.pages}">尾页</button>
-		<input type="hidden" id="fff" th:value="${pageInfo.pages}"></body>
-	</body>
+    &nbsp;&nbsp;&nbsp;<br/>
+    证件号码<input type="text" name="client.certnumber" th:value="${smanager.client.certnumber}"/>&nbsp;&nbsp;&nbsp;
+    客户状态<select name="client.clientstatus">
+
+    <option value="">请选择客户状态</option>
+    <option th:selected="${smanager.client.clientstatus}==1" value="1">正常</option>
+    <option th:selected="${smanager.client.clientstatus}==2" value="2">睡眠</option>
+    <option th:selected="${smanager.client.clientstatus}==3" value="3">活跃</option>
+
+</select><br/>
+
+    <input type="submit" value="查询"><br/>
+
+    <input type="button" value="删除经纪关系" id="delete">
+    <table border="1">
+        <tr>
+            <td>选择</td>
+            <td>客户名称</td>
+            <td>证件类型</td>
+            <td>证件号码</td>
+            <td>客户类型</td>
+            <td>客户等级</td>
+            <td>客户状态</td>
+            <td>是否事实客户</td>
+            <td>理财经理</td>
+        </tr>
+        <tr th:each="item:${pageInfo.list}">
+            <td><input type="checkbox" class="check" th:value="${item.client.clientid}">
+                <input type="hidden" class="hidden" th:value="${item.smid}">
+            </td>
+            <td th:text="${item.client.clientName}">xxxx</td>
+            <td th:if="${item.client.cert.certid eq 1}">身份证</td>
+            <td th:if="${item.client.cert.certid eq 2}">护照</td>
+            <td th:text="${item.client.certnumber}">xxxx</td>
+            <td th:if="${item. client.clientType eq 1}">自然人客户</td>
+            <td th:if="${item. client.clientType eq 2}">金融机构客户</td>
+            <td th:if="${item. client.clientType eq 3}">非金融机构客户</td>
+            <td th:text="${item.client.clientlevel}">xxxx</td>
+            <td th:if="${item.client.clientstatus eq 1}">正常</td>
+            <td th:if="${item.client.clientstatus eq 2}">流失</td>
+            <td th:text="${item.client.Fact}">xxxx</td>
+            <td th:if="${item.managerid eq 1}">总经理</td>
+        </tr>
+
+        <tr>
+            <td colspan="8"><input type="checkbox" id="checkAll">当前页面全选</td>
+        </tr>
+    </table>
+
+    每页显示记录 <select name="pagesize" id="pagesize">
+    <option th:selected="${pagesize}==10" value="10">10条</option>
+    <option th:selected="${pagesize}==15" value="15">15条</option>
+    <option th:selected="${pagesize}==20" value="20">20条</option>
+</select>
+</form>
+<button name="jkl" th:no="1">首页</button>
+<button name="jkl" th:no="${pageInfo.prePage}">上一页</button>
+<button name="jkl" th:no="${pageInfo.pageNum+1}">下一页</button>
+<button name="jkl" th:no="${pageInfo.pages}">尾页</button>
+<input type="hidden" id="fff" th:value="${pageInfo.pages}">
+</body>
 </html>

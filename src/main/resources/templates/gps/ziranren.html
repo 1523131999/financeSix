@@ -15,27 +15,21 @@
     <script th:src="@{/js/jquery-1.12.4.js}"></script>
 </head>
 <body style="background-color: white">
-
+<!--选项卡开始-->
+<ul class="layui-nav layui-bg-green" lay-filter="component-nav">
+    <li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
+    <li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
+    <li class="layui-nav-item"><a href="/client/toyuyue">预约</a></li>
+    <li class="layui-nav-item"><a href="javascript:;">经纪关系</a></li>
+    <li class="layui-nav-item"><a href="javascript:;">联系人</a></li>
+    <li class="layui-nav-item"><a href="javascript:;">事件提醒</a></li>
+    <li class="layui-nav-item"><a href="javascript:;">附件</a></li>
+</ul>
+<!--选项卡结束-->
 
 <div class="layui-fluid layadmin-homepage-fluid">
     <div class="layui-row layui-col-space8">
-        <!--选项卡开始-->
-        <div class="layui-card" style="margin: 1px">
-            <div class="layui-card-body">
-                <div class="layui-tab layui-tab-card">
-                    <ul class="layui-tab-title">
-                        <li class="layui-this">主页</li>
-                        <li> <a href="javascript:;" data-url="login.html" data-id='5' data-text="资产信息">超级管理员</a></li>
-                        <li>预约</li>
-                        <li>经济关系</li>
-                        <li>联系人</li>
-                        <li>时间提醒</li>
-                        <li>附件</li>
-                    </ul>
-                </div>
-            </div>
-            </div>
-        <!--选项卡结束-->
+
 
             <!--左侧菜单栏开始-->
         <div  style="height: 100%" class="layui-col-md2">
@@ -120,7 +114,7 @@
                     <div style="width: 70%;height: 300px;display: inline-block;margin: 0px"  id="line"></div>
                     <div style="width: 20%;height: 300px;display: inline-block;margin: 0px"  id="huan"> </div>
             </div>
-            <span style="margin-left: 71%;font-size: 18px;color: #00a2d4" >当前月最高金额占历史最高金额的:</span>
+            <span style="margin-left: 68%;font-size: 18px;color: #00a2d4" >当前月最高金额占历史最高金额的:</span>
             <span  style="color: red;font-size: 18px" id="zhanbi"></span>
             <hr/>
             <div>
@@ -200,7 +194,20 @@
         base: '../../layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'sample']);
+    }).use(['index',, 'sample'], function(){
+        var $ = layui.$
+            ,admin = layui.admin
+            ,element = layui.element;
+
+        element.render('nav', 'component-nav');
+        element.render('nav', 'component-nav-active');
+
+        element.on('nav(component-nav-active)', function(elem){
+            layer.msg(elem.text());
+        });
+    });
+
+
 </script>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
@@ -361,7 +368,7 @@
             var c=b/a;
             var d =c*100;
           var  zhanbi=d+"%";
-            alert(zhanbi);
+         //   alert(zhanbi);
             $("#zhanbi").html(zhanbi);
 
 
@@ -376,7 +383,6 @@
 
 
 </script>
-
 
 </body>
 </html>

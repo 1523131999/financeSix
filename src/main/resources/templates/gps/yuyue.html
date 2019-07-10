@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<style type="text/css">
+		*{
+			font-size: 15px;
+
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+	<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+	<link rel="stylesheet" href="../../layuiadmin/style/template.css" media="all">
+	<script th:src="@{/js/jquery-1.12.4.js}"></script>
+
+</head>
+<body>
+<!--选项卡开始-->
+<ul class="layui-nav layui-bg-green" lay-filter="component-nav">
+	<li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
+	<li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
+	<li class="layui-nav-item"><a href="javascript:;">预约</a></li>
+	<li class="layui-nav-item"><a href="javascript:;">经纪关系</a></li>
+	<li class="layui-nav-item"><a href="javascript:;">联系人</a></li>
+	<li class="layui-nav-item"><a href="javascript:;">事件提醒</a></li>
+	<li class="layui-nav-item"><a href="javascript:;">附件</a></li>
+</ul>
+<!--选项卡结束-->
+<span>
+		<table class="layui-table">
+			<tr align="left" height="" style="margin: 0px;padding: 0px">
+				<td colspan="8" width="100px" style="font-size: 20px" >
+					<span >预约信息</span>
+				</td>
+			</tr>
+		</table>
+	</span>
+<form action="queryNowAssets" id="form" method="get">
+
+	<table align="center" width="90%" >
+		<br/>
+		<tr height="50px">
+			<td width="">到账状态</td>
+			<td  style="font-size: 11px;">
+				<input type="checkbox" name=""    value="未到账"  />未到账
+				<input type="checkbox" name=""  value="确认中" />确认中
+				<input type="checkbox" name=""  value="部分到账" />部分到账
+				<input type="checkbox" name=""  value="足额到账" />足额到账
+			</td>
+			<td width="">预约状态</td>
+			<td  style="font-size: 11px;">
+				<input type="checkbox" name=""    value="排队中"  />排队中
+				<input type="checkbox" name=""  value="已撤销" />已撤销
+				<input type="checkbox" name=""  value="已过期" />已过期
+				<input type="checkbox" name=""  value="排队成功" />排队成功
+			</td>
+			<td width="">收款收据状态</td>
+			<td  style="font-size: 11px;">
+				<input type="checkbox" name=""    value="未申请"  />未申请
+				<input type="checkbox" name=""  value="已导出" />已导出
+				<input type="checkbox" name=""  value="已申请" />已申请
+				<input type="checkbox" name=""  value="已撤销" />已撤销
+			</td>
+
+
+		</tr>
+
+
+
+		<tr align="center" height="60px">
+
+			<td>项目名称:</td>
+			<td >
+				<input type="text"name="" id=""/>
+			</td>
+			<td>销售渠道:</td>
+			<td >
+				<input type="text" id="Distributionchannel" name="Distributionchannel"/>
+			</td>
+			<td>预约时间:</td>
+			<td >
+				<input type="text"  id="" name="Distributionchannel"/>&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text"   id="" name="Distributionchannel"/>
+			</td>
+
+
+		</tr>
+		<tr align="center" height="60px">
+			<td colspan="6" width="100px">
+				<button class="layui-btn layui-btn-normal layui-btn-radius" id="query">查询</button>
+				<button class="layui-btn layui-btn-normal layui-btn-radius" id="reset">重置</button>
+			</td>
+		</tr>
+	</table>
+</form>
+<hr />
+<table  width="90%" align="center"  class="layui-table">
+	<tr>
+		<td>
+			<button  style="margin: 0px;" id="now" class="layui-btn layui-btn-normal">新建</button>
+			<button style="margin: 0px;" id="all" class="layui-btn layui-btn-normal">查看详情</button>
+
+		</td>
+	</tr>
+</table>
+<table class="layui-table" id="dataTable" style="border: none; margin-top: 20px;" align="center" width="90%" border="1" cellpadding="0" cellspacing="0">
+	<tr align="center">
+		<td>操作</td>
+		<td>客户类型</td>
+		<td>客户名称</td>
+		<td>项目名称</td>
+		<td>预约金额</td>
+		<td>预期年华收益率</td>
+		<td>认购费率</td>
+		<td>认购费合计</td>
+		<td>预约时间</td>
+		<td>排队成功时间</td>
+		<td>预约状态</td>
+		<td>业务类型</td>
+		<td>到账状态</td>
+		<td>合同状态</td>
+		<td>实际到期时间</td>
+		<td>收款收据状态</td>
+	</tr>
+
+
+	<!--<tr align="center" >
+		<td colspan="11">
+
+			每页显示记录
+			<select name=""  style="width: 60px;">
+				<option value="">10条</option>
+			</select>
+
+			<button name="jkl" th:no="1">首页</button>
+			<button name="jkl" th:no="${pageInfo.prePage}">上一页</button>
+			<button name="jkl" th:no="${pageInfo.pageNum+1}">下一页</button>
+			<button name="jkl" th:no="${pageInfo.pages}">尾页</button>
+			<input type="hidden" id="fff" th:value="${pageInfo.pages}">
+		</td>
+	</tr>-->
+</table>
+<script type="text/javascript" >
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+		<script type="text/javascript">
+			$(function () {
+                $("button[name='jkl']").click(function () {
+                    var pages = $("#fff").val();
+                    var pagno = $(this).attr("no");
+                    var data = $("#form").serialize();
+                    var pagesize = $("#pagesize").val();
+                    pages=parseInt(pages);
+                    pagno=parseInt(pagno);
+                    if (pagno <= 1) {
+                        pagno = 1;
+                    }
+                    if (pages <= pagno) {
+                        pagno=pages;
+                    }
+                    location.href = 'queryBro?pageNum=' + pagno + "&pageSize=" + pagesize + "&" + data;
+                })
+				$("#toAddBro").click(function () {
+					location.href='toAddBro';
+                })
+            })
+		</script>
+	</head>
+	<body>
+	<form action="/queryBro" method="get" id="form">
+		<br />
+		客户名称<input type="text" name="client.clientName" th:value="${bro.client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;创建时间<input type="text" name="startDate" th:value="${startDate}"/>-------<input type="text" name="endDate" th:value="${endDate}"/>&nbsp;&nbsp;&nbsp;
+		审批状态<select name="examinationstatus"><option value="">全部</option>
+		<option th:selected="${bro.examinationstatus}==1" value="1">待审批</option>
+		<option th:selected="${bro.examinationstatus}==2" value="2">审批通过</option>
+		<option th:selected="${bro.examinationstatus}==3" value="3">审批不通过</option>
+	</select>
+		<br />
+		<input type="submit" value="查询"><br/>
+				<button type="button" id="toAddBro">新建</button><br />
+				<table>
+					<tr>
+						<td>操作</td>
+						<td>客户名称</td>
+						<td>客户类型</td>
+						<td>证件号码</td>
+						<td>发起人</td>
+						<td>审批环节</td>
+						<td>审批状态</td>
+					</tr>
+					<tr th:each="item:${pageinfo.list}">
+						<td><input type="button" value="查看"></td>
+						<td th:text="${item.client.clientName}">xxxx</td>
+						<td th:text="${item.client.clientType}">xxxx</td>
+						<td th:text="${item.client.certnumber}">xxxx</td>
+						<td th:text="${item.Initiator}">xxxx</td>
+						<td th:text="${item.Examinationlink}">xxxx</td>
+						<td th:text="${item.examinationstatus}">xxxx</td>
+					</tr>
+
+				</table>
+		每页显示记录 <select name="pagesize" id="pagesize">
+		<option value="3">3条</option>
+		<option th:selected="${pagesize}==10" value="10">10条</option>
+		<option th:selected="${pagesize}==15" value="15">15条</option>
+		<option th:selected="${pagesize}==20" value="20">20条</option>
+	</select>
+		</form>
+	<button name="jkl" th:no="1">首页</button>
+	<button name="jkl" th:no="${pageinfo.prePage}">上一页</button>
+	<button name="jkl" th:no="${pageinfo.pageNum+1}">下一页</button>
+	<button name="jkl" th:no="${pageinfo.pages}">尾页</button>
+	<input type="hidden" id="fff" th:value="${pageinfo.pages}">
+	</body>
+</html>
