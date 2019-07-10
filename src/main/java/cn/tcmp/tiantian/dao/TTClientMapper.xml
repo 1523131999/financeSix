@@ -145,17 +145,27 @@
 		<if test="client.clientstatus!=null and client.clientstatus!= 0">
 			AND clientstatus = #{client.clientstatus}
 		</if>
-		<if test="client.tclientlevel!=null and client.tclientlevel!=''">
-			AND clientlevel IN (#{client.tclientlevel})
+		<if test="client.tclientlevel!=null ">
+			AND clientlevel IN
+			<foreach collection="client.tclientlevel" open="(" close=")" item="trisk" separator=",">
+				#{trisk}
+			</foreach>
 		</if>
-		<if test="client.trisklevelTE!=null and client.trisklevelTE!=''">
-			AND risklevelTE IN (#{client.trisklevelTE})
+		<if test="client.trisklevelTE!=null ">
+			AND risklevelTE IN 
+			<foreach collection="client.trisklevelTE" open="(" close=")" item="trisk" separator=",">
+				#{trisk}
+			</foreach>
 		</if>
-		<if test="client.trisklevelFE!=null and client.trisklevelFE!=''">
-			AND risklevelFE IN (#{client.trisklevelFE})
+		<if test="client.trisklevelFE!=null">
+			AND risklevelFE IN
+			<foreach collection="client.trisklevelFE" open="(" close=")" item="trisk" separator=",">
+				#{trisk}
+			</foreach>
 		</if>
 	</select>
 	<select id="queryCertAll" resultType="Cert">
 		SELECT * FROM cert
 	</select>
+
 </mapper>

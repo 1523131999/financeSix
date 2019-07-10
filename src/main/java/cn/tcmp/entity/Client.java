@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * client  generated at 2019-06-26 10:30:13 by: eric
@@ -58,32 +59,32 @@ public class Client{
 	private String nature;
 	private String position;
 	private String Title;
-	private String tclientlevel;
-	private String trisklevelTE;
-	private String trisklevelFE;
+	private List<Integer> tclientlevel;
+	private List<Integer> trisklevelTE;
+	private List<Integer> trisklevelFE;
 
-	public String getTrisklevelTE() {
-		return trisklevelTE;
-	}
-
-	public void setTrisklevelTE(String trisklevelTE) {
-		this.trisklevelTE = trisklevelTE;
-	}
-
-	public String getTrisklevelFE() {
-		return trisklevelFE;
-	}
-
-	public void setTrisklevelFE(String trisklevelFE) {
-		this.trisklevelFE = trisklevelFE;
-	}
-
-	public String getTclientlevel() {
+	public List<Integer> getTclientlevel() {
 		return tclientlevel;
 	}
 
-	public void setTclientlevel(String tclientlevel) {
+	public void setTclientlevel(List<Integer> tclientlevel) {
 		this.tclientlevel = tclientlevel;
+	}
+
+	public List<Integer> getTrisklevelTE() {
+		return trisklevelTE;
+	}
+
+	public void setTrisklevelTE(List<Integer> trisklevelTE) {
+		this.trisklevelTE = trisklevelTE;
+	}
+
+	public List<Integer> getTrisklevelFE() {
+		return trisklevelFE;
+	}
+
+	public void setTrisklevelFE(List<Integer> trisklevelFE) {
+		this.trisklevelFE = trisklevelFE;
 	}
 
 	public Integer getClientid() {

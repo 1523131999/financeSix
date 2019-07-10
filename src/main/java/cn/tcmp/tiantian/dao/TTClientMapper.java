@@ -21,5 +21,8 @@ public interface TTClientMapper {
     List<Client> querygerenAll(@Param("client") Client client);
     //证件查询
     List<Cert> queryCertAll(@Param("cert")Cert cert);
+    //查询机构客户
+    List<Client> queryjigouAll(Client client);
+
 
 }

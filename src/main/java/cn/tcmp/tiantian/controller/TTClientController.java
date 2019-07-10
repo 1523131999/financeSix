@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -32,49 +33,28 @@ public class TTClientController {
     }
 
     @RequestMapping("querygerenAll")
-    public String querygerenAll(Integer pagesize, Integer pagenum,String creatid,Client client, Model model,String[] xintuo,String[] jijin,String[] kehu){
+    public String querygerenAll(Integer pagesize, Integer pagenum,String creatid,Client client, Model model,Integer[] xintuo,Integer[] jijin,Integer[] kehu){
         if (creatid != null){
             Cert c = new Cert();
             c.setCertid(Integer.parseInt(creatid));
             client.setCert(c);
         }
-        //客户等级
-        if (kehu != null && kehu.length != 0) {
-            String k = "";
-            for (int i = 0; i < kehu.length; i++) {
-                if (kehu.length - 1 == i) {
-                    k += kehu[i];
-                }else{
-                    k += kehu[i]+"'"+",'";
-                }
-
-            }
-            client.setTclientlevel(k);
-        }
         //客户风险等级信托版
         if(xintuo != null && xintuo.length != 0){
-            String k = "";
-            for (int i = 0; i < xintuo.length; i++) {
-                if (xintuo.length - 1 == i) {
-                    k += xintuo[i];
-                }else{
-                    k += xintuo[i]+"'"+",'";
-                }
-            }
-            client.setTrisklevelTE(k);
+            List<Integer> integers = Arrays.asList(xintuo);
+            client.setTrisklevelTE(integers);
         }
-        //客户风险等级基金版
-        if (jijin != null && jijin.length != 0){
-            String k = "";
-            for (int i = 0; i < jijin.length; i++) {
-                if (jijin.length - 1 == i) {
-                    k += jijin[i];
-                }else{
-                    k += jijin[i]+",";
-                }
-            }
-            client.setTrisklevelFE(k);
+        //客户风险等级信托版
+        if(jijin != null && jijin.length != 0){
+            List<Integer> integers = Arrays.asList(jijin);
+            client.setTrisklevelFE(integers);
         }
+        //客户风险等级信托版
+        if(kehu != null && kehu.length != 0){
+            List<Integer> integers = Arrays.asList(kehu);
+            client.setTclientlevel(integers);
+        }
+
         System.out.println("-------------------"+client);
         PageInfo<Client> clientPageInfo = service.querygerenAll(pagesize, pagenum, client);
         for (Client client1 : clientPageInfo.getList()) {
