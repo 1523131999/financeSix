@@ -48,7 +48,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public PageInfo<Secondarymanager> queryCiYao(Secondarymanager secondarymanager, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum,pageSize);
-                            List<Secondarymanager> list=mapper.queryCiYao(secondarymanager);
+        List<Secondarymanager> list=mapper.queryCiYao(secondarymanager);
         PageInfo<Secondarymanager> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }

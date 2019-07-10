@@ -50,9 +50,9 @@
         </if>
     </select>
     <resultMap id="smap" type="Secondarymanager" autoMapping="true">
-            <id property="smid" column="smid"></id>
-            <association property="client" resultMap="map2"></association>
-    </resultMap>
+    <id property="smid" column="smid"></id>
+    <association property="client" resultMap="map2"></association>
+</resultMap>
     <resultMap id="map2" type="Client" autoMapping="true">
         <id column="clientid" property="clientid"></id>
         <association property="cert" resultMap="map3"></association>

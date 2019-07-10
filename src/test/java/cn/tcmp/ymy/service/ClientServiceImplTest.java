@@ -24,7 +24,6 @@ public class ClientServiceImplTest {
         Secondarymanager secondarymanager=new Secondarymanager();
         Cert cert=new Cert();
         Client client=new Client();
-
         secondarymanager.setClient(client);
 
     }
