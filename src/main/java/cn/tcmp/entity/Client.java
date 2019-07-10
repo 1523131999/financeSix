@@ -58,6 +58,33 @@ public class Client{
 	private String nature;
 	private String position;
 	private String Title;
+	private String tclientlevel;
+	private String trisklevelTE;
+	private String trisklevelFE;
+
+	public String getTrisklevelTE() {
+		return trisklevelTE;
+	}
+
+	public void setTrisklevelTE(String trisklevelTE) {
+		this.trisklevelTE = trisklevelTE;
+	}
+
+	public String getTrisklevelFE() {
+		return trisklevelFE;
+	}
+
+	public void setTrisklevelFE(String trisklevelFE) {
+		this.trisklevelFE = trisklevelFE;
+	}
+
+	public String getTclientlevel() {
+		return tclientlevel;
+	}
+
+	public void setTclientlevel(String tclientlevel) {
+		this.tclientlevel = tclientlevel;
+	}
 
 	public Integer getClientid() {
 		return clientid;
@@ -417,5 +444,59 @@ public class Client{
 
 	public void setTitle(String title) {
 		Title = title;
+	}
+
+	@Override
+	public String toString() {
+		return "Client{" +
+				"clientid=" + clientid +
+				", clientName='" + clientName + '\'' +
+				", clientType=" + clientType +
+				", certnumber='" + certnumber + '\'' +
+				", Fmid=" + Fmid +
+				", Fact=" + Fact +
+				", clientstatus=" + clientstatus +
+				", clientlevel=" + clientlevel +
+				", risklevelTE=" + risklevelTE +
+				", risklevelFE=" + risklevelFE +
+				", FinanID='" + FinanID + '\'' +
+				", contactsid=" + contactsid +
+				", secondarymanager=" + secondarymanager +
+				", assset=" + assset +
+				", gender=" + gender +
+				", certtime=" + certtime +
+				", birthdateZC=" + birthdateZC +
+				", birthdateLC=" + birthdateLC +
+				", nationality='" + nationality + '\'' +
+				", marital=" + marital +
+				", nation='" + nation + '\'' +
+				", phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", eamil='" + eamil + '\'' +
+				", occpation='" + occpation + '\'' +
+				", remarks='" + remarks + '\'' +
+				", contactpreference=" + contactpreference +
+				", controller=" + controller +
+				", workingyears=" + workingyears +
+				", legalname='" + legalname + '\'' +
+				", Lcerttype=" + Lcerttype +
+				", Lcertnumber='" + Lcertnumber + '\'' +
+				", Lcerttime='" + Lcerttime + '\'' +
+				", scopebusiness='" + scopebusiness + '\'' +
+				", registermoney=" + registermoney +
+				", creationtime=" + creationtime +
+				", newfinancialmanager='" + newfinancialmanager + '\'' +
+				", blacklist=" + blacklist +
+				", Finance=" + Finance +
+				", cert=" + cert +
+				", Workunitname='" + Workunitname + '\'' +
+				", trade='" + trade + '\'' +
+				", nature='" + nature + '\'' +
+				", position='" + position + '\'' +
+				", Title='" + Title + '\'' +
+				", tclientlevel='" + tclientlevel + '\'' +
+				", trisklevelTE='" + trisklevelTE + '\'' +
+				", trisklevelFE='" + trisklevelFE + '\'' +
+				'}';
 	}
 }

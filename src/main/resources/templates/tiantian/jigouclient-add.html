@@ -17,17 +17,17 @@
 				
 				<td>客户名称:</td>
 				<td width="300px">
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="clientName"/>
 				</td>
 				<td>是否事实客户:</td>
 				<td>
-					
+					<input type="text" value="否" disabled="disabled">
 				</td>
 			</tr>
 			<tr>
 				<td>证件类型:</td>
 				<td>
-					<select name=""  style="width: 124px; height: 24px;">
+					<select name="clientType"  style="width: 124px; height: 24px;">
 						<option value="">技术监督局代码</option>
 					</select>
 				</td>
@@ -39,7 +39,7 @@
 			<tr>
 				<td>证件号码:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="certnumber"/>
 				</td>
 				<td>风险评级(基金版):</td>
 				<td>
@@ -65,35 +65,35 @@
 				</td>
 				<td>联系地址:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="address"/>
 				</td>
 			</tr>
 			<tr>
 				<td>法人代表名称:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="legalname"/>
 				</td>
 				<td>电子邮件:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="eamil"/>
 				</td>
 			</tr>
 			<tr>
 				<td>法人代表证件类型:</td>
 				<td>
-					<select name=""  style="width: 124px; height: 24px;">
+					<select name="clientType"  style="width: 124px; height: 24px;">
 						<option value="">身份证</option>
 					</select>
 				</td>
 				<td>联系电话:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="contactsphone"/>
 				</td>
 			</tr>
 			<tr>
 				<td>法人代表证件号码:</td>
 				<td>
-					<select name=""  style="width: 124px; height: 24px;">
+					<select name="Lcertnumber"  style="width: 124px; height: 24px;">
 						<option value="">未婚</option>
 					</select>
 				</td>
@@ -105,21 +105,21 @@
 			<tr>
 				<td>法人代表证件有效期:</td>
 				<td>
-					<input style="width: 100px;" class="laydate-icon" id="demo" value="">
+					<input style="width: 100px;" class="laydate-icon" id="demo" value="" name="Lcerttime">
 				</td>
 				<td>备注:</td>
 				<td>
-					<input type="text" style="width: 80px;" /> <input type="button" xian="x" onclick="zhiye()" id="zhiye" value="修改"/>
+					<input type="text" style="width: 80px;"  name="remarks"/> <input type="button" xian="x" onclick="zhiye()" id="zhiye" value="修改"/>
 				</td>
 			</tr>
 			<tr>
 				<td>经营范围:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="scopebusiness"/>
 				</td>
 				<td>注册币种:</td>
 				<td>
-					<select name=""  style="width: 124px; height: 24px;">
+					<select name="currency"  style="width: 124px; height: 24px;">
 						<option value="">人民币</option>
 					</select>
 				</td>
@@ -127,14 +127,14 @@
 			<tr>
 				<td>注册资金:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="registermoney"/>
 				</td>
-				<td>注册地址:</td>
+				<td></td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+
 				</td>
 			</tr>
-			<tr>
+			<tr style="text-align: center">
 				<td colspan="4" style="text-align: center">
 					<input type="button" value="保存" style="margin-left: 300px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
 					<input type="button" value="取消"  style="margin-left: 30px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
