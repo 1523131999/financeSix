@@ -16,8 +16,8 @@ import java.util.Date;
 public class Appointment{
 	//hj
 	private Integer appointmentid;
-	private Integer clientid;
-	private Integer projectid;
+	private Client client;
+	private Item_sheet item_sheet;
 	private double appoinm;
 	private double appoinyear;
 	private double subscriptionf;

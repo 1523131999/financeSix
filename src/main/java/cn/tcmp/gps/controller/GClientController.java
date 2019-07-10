@@ -1,13 +1,14 @@
 package cn.tcmp.gps.controller;
 
-import cn.tcmp.entity.Assets;
-import cn.tcmp.entity.Assetsrecord;
-import cn.tcmp.entity.Client;
+import cn.tcmp.entity.*;
 import cn.tcmp.gps.service.GClientService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -142,6 +143,60 @@ public class GClientController {
     }
 
 
+
+    @RequestMapping("queryNowAssets")
+    public  String to(Integer pageNo,Integer pageSize,Integer id, Integer ProductClassificationID,Product_list product_list,Model model){
+//        if(ProductClassificationID==null){
+//            ProductClassificationID=1;
+//
+//        }
+//        if (product_list == null) {
+//
+//            product_list= new Product_list();
+//        }
+//        Product_classification_table table=new Product_classification_table(ProductClassificationID,"");
+//        product_list.setProductClassificationID(table);
+        id=1;
+        if(null == pageNo){
+            pageNo=1;
+        }
+        if(null==pageSize){
+            pageSize=3;
+        }
+        PageInfo<Assets> pageInfo =gClientService.queryNowAssetsBycliendId(product_list,id,pageNo,pageSize);
+         System.out.println(pageInfo);
+        model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("ProductName",product_list.getProductName());
+        model.addAttribute("Distributionchannel",product_list.getDistributionchannel());
+        model.addAttribute("Incometype",product_list.getIncometype());
+        return "gps/zichan";
+    }
+
+
+    @RequestMapping(value = "queryAllAssetsBycliendId",method = RequestMethod.GET)
+    public  String queryAllAssetsBycliendId(Product_list product_list,Integer id,Integer pageNo,Integer pageSize,Model model){
+        id=1;
+        if(null == pageNo){
+            pageNo=1;
+        }
+        if(null==pageSize){
+            pageSize=3;
+        }
+        PageInfo<Assets> pageInfo=gClientService.queryAllAssetsBycliendId(null,id,pageNo,pageSize);
+        model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("ProductName",product_list.getProductName());
+        model.addAttribute("Distributionchannel",product_list.getDistributionchannel());
+        model.addAttribute("Incometype",product_list.getIncometype());
+        return  "gps/zichan";
+    }
+
+
+    //跳转预约信息
+
+    @RequestMapping(value = "toyuyue",method = RequestMethod.GET)
+    public  String toyuyue(){
+        return  "gps/yuyue";
+    }
 
 
 }

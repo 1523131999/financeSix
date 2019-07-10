@@ -31,9 +31,13 @@
     <resultMap id="iMap" type="Item_sheet" autoMapping="true">
         <id column="ItemID" property="ItemID"></id>
         <association property="ItemtypeID" resultMap="itMap"></association>
+        <association property="ChanneltableID" resultMap="chMap"></association>
     </resultMap>
     <resultMap id="itMap" type="Item_type_table" autoMapping="true">
         <id column="ItemTypeID" property="ItemTypeID"></id>
+    </resultMap>
+    <resultMap id="chMap" type="Channel_list" autoMapping="true">
+        <id column="ChannelID" property="ID"></id>
     </resultMap>
 
 
@@ -52,6 +56,43 @@ AND a.`clientid`=#{id}
     <select id="queryTotalByNowDate" resultType="Integer" >
         SELECT totalassets FROM `assetsrecord`   WHERE  changedate >= #{startDate} AND changedate &lt;#{endDate}  and userid =#{clientid}  ORDER BY changedate ASC LIMIT 1
     </select>
+<resultMap id="queryNowAssetsBycliendMap" type="Assets" autoMapping="true">
+    <id property="assetsid" column="assetsid"/>
+    <association property="pruduct" resultMap="pMap"></association>
+</resultMap>
+
+
+    <select id="queryNowAssetsBycliendId"  resultMap="queryNowAssetsBycliendMap" >
+      SELECT a.* ,p.* ,c.*
+FROM `assets`  a ,`product_list` p ,`item_sheet` i,`channel_list` c
+ WHERE a.`pruductid`=p.`ProductID`
+ AND   p.`ItemID`=i.`ItemID`
+ AND  i.`ChannelTableID` =c.`ChannelID`
+ AND a.`expiredate` > NOW()
+ AND a.clientid=#{id}
+
+
+ <if test="pro.Incometype!=null and pro.Incometype !=''">
+     AND p.`IncomeType` =#{pro.Incometype}
+ </if>
+ <if test="pro.ProductName !=null and pro.ProductName !=''">
+     AND p.`ProductName` =#{pro.ProductName}
+    </if>
+<if test="pro.Distributionchannel !=null and pro.Distributionchannel !='' ">
+    AND p.`DistributionChannel`=#{pro.Distributionchannel}
+</if>
+    </select>
+
+<select id="queryAllAssetsBycliendId" resultMap="queryNowAssetsBycliendMap">
+
+    SELECT a.* ,p.* ,c.*
+FROM `assets`  a ,`product_list` p ,`item_sheet` i,`channel_list`  c
+ WHERE a.`pruductid`=p.`ProductID`
+ AND   p.`ItemID`=i.`ItemID`
+ AND  i.`ChannelTableID` =c.`ChannelID`
+ AND clientid=#{id}
+
+</select>
 
 
 
