@@ -3,7 +3,10 @@ package cn.tcmp.gps.service;
 import cn.tcmp.entity.Assets;
 import cn.tcmp.entity.Assetsrecord;
 import cn.tcmp.entity.Client;
+import cn.tcmp.entity.Product_list;
 import cn.tcmp.gps.dao.GClientMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +47,22 @@ public class GClientServiceImpl implements GClientService {
     @Override
     public Integer queryTotalByNowDate(String startDate, String endDate, Integer id) {
         return gClientMapper.queryTotalByNowDate(startDate,endDate,id);
+    }
+
+    @Override
+    public PageInfo<Assets> queryNowAssetsBycliendId(Product_list product_list, Integer id,Integer pageNo,Integer pageSize) {
+        PageHelper.startPage(pageNo ,pageSize);
+        List<Assets>list=gClientMapper.queryNowAssetsBycliendId(product_list,id);
+        PageInfo<Assets> pageInfo=new PageInfo<>(list);
+        return  pageInfo;
+    }
+
+    @Override
+    public  PageInfo<Assets> queryAllAssetsBycliendId(Product_list product_list, Integer id,Integer pageNo,Integer pageSize) {
+        PageHelper.startPage(pageNo ,pageSize);
+        List<Assets>list=gClientMapper.queryAllAssetsBycliendId(product_list,id);
+        PageInfo<Assets> pageInfo=new PageInfo<>(list);
+        return  pageInfo;
     }
 
 

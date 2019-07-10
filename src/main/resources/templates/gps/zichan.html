@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				font-size: 15px;
+
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/template.css" media="all">
+		<script th:src="@{/js/jquery-1.12.4.js}"></script>
+
+	</head>
+<body>
+	<!--选项卡开始-->
+	<ul class="layui-nav layui-bg-green" lay-filter="component-nav">
+		<li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
+		<li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
+		<li class="layui-nav-item"><a href="javascript:;">预约</a></li>
+		<li class="layui-nav-item"><a href="javascript:;">经纪关系</a></li>
+		<li class="layui-nav-item"><a href="javascript:;">联系人</a></li>
+		<li class="layui-nav-item"><a href="javascript:;">事件提醒</a></li>
+		<li class="layui-nav-item"><a href="javascript:;">附件</a></li>
+	</ul>
+	<!--选项卡结束-->
+	<span>
+		<table class="layui-table">
+			<tr align="left" height="" style="margin: 0px;padding: 0px">
+				<td colspan="8" width="100px" style="font-size: 20px" >
+					<span >资产信息</span>
+				</td>
+			</tr>
+			<tr align="left" height=""style="margin: 0px;padding: 0px">
+				<td colspan="8" width="100px">
+					  <button  style="margin: 0px;" class="layui-btn layui-btn-normal">资产信息</button>
+					  <button style="margin: 0px;"class="layui-btn layui-btn-normal">业务汇总</button>
+					  <button style="margin: 0px;"class="layui-btn layui-btn-normal">即将收益</button>
+					  <button style="margin: 0px;"class="layui-btn layui-btn-normal">合同信息</button>
+
+				</td>
+			</tr>
+		</table>
+	</span>
+			<form action="queryNowAssets" id="form" method="get">
+
+				<table align="center" width="90%" >
+					<br/>
+					<tr height="50px">
+						<td width="80px">收益类型</td>
+						<td colspan="2" style="font-size: 11px;">
+							<input type="radio" name="Incometype"    value="浮动收益"  />浮动收益
+							<input type="radio" name="Incometype"  value="固定收益" />固定收益
+						</td>
+						<td>
+							产品名称:<input type="text" style="width: 100px;" th:value="${ProductName}" name="ProductName" id="ProductName"/>
+						</td>
+						<td>
+							销售渠道:<input type="text" style="width: 100px;" th:value="${Distributionchannel}" id="Distributionchannel" name="Distributionchannel"/>
+						</td>
+
+					</tr>
+
+					<tr>
+
+					<tr align="center" height="60px">
+						<td colspan="8" width="100px">
+							<button class="layui-btn layui-btn-normal layui-btn-radius" id="query">查询</button>
+							<button class="layui-btn layui-btn-normal layui-btn-radius" id="reset">重置</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		<hr />
+		
+		<table  width="90%" align="center"  class="layui-table">
+			<tr>
+				<td>
+					<button  style="margin: 0px;" id="now" class="layui-btn layui-btn-normal">当前资产</button>
+					<button style="margin: 0px;" id="all" class="layui-btn layui-btn-normal">全部资产</button>
+
+				</td>
+			</tr>
+		</table>
+			
+		<table class="layui-table" id="dataTable" style="border: none; margin-top: 20px;" align="center" width="90%" border="1" cellpadding="0" cellspacing="0">
+			
+
+				
+			<tr align="center">
+				<td>操作</td>
+				<td>产品名称</td>
+				<td>项目来源方</td>
+				<td>销售渠道</td>
+				<td>预期收益</td>
+				<td>合同期限</td>
+				<td>成立日期</td>
+				<td>到期日期</td>
+				<td>份额</td>
+				<td>当前份额</td>
+				<td>币种</td>
+			</tr>
+			<tr align="center"  id="dataTr" th:each="a:${pageInfo.list}" th:object="${a}">
+				<td>
+					<input type="checkbox" />
+				</td>
+				<td th:text="*{pruduct.ProductName}" >xxx</td>
+				<td th:text="*{pruduct.ItemID.ChanneltableID.Corporatename}">xxx</td>
+				<td th:text="*{pruduct.Distributionchannel}">xxx</td>
+				<td>预期收益</td>
+				<td  th:text="*{contractperiod}+'年'">xxx</td>
+				<td th:text="*{#dates.format(establlishdate,'yyyy-MM-dd')}">xxx</td>
+				<td th:text="*{#dates.format(expiredate,'yyyy-MM-dd')}">xxx</td>
+				<td th:text="*{share}">xxx</td>
+				<td th:text="*{currentshare}">xxx</td>
+
+				<td th:if="*{currency eq 1}">人民币</td>
+				<td th:if="*{currency eq 3}">美元</td>
+				<td th:if="*{currency eq 2}">英镑</td>
+			</tr>
+
+			<tr align="center" >
+				<td colspan="11">
+					
+					每页显示记录 
+					<select name=""  style="width: 60px;">
+						<option value="">10条</option>
+					</select>
+
+					<button name="jkl" th:no="1">首页</button>
+					<button name="jkl" th:no="${pageInfo.prePage}">上一页</button>
+					<button name="jkl" th:no="${pageInfo.pageNum+1}">下一页</button>
+					<button name="jkl" th:no="${pageInfo.pages}">尾页</button>
+					<input type="hidden" id="fff" th:value="${pageInfo.pages}">
+				</td>
+			</tr>
+		</table>
+<script type="text/javascript" >
+	$(function () {
+
+	    //重置
+	    $("#reset").click(function () {
+				$("#ProductName").val("");
+				$("#Distributionchannel").val("");
+        });
+
+	    //查询全部资产
+		$("#all").click(function () {
+			location.href="queryAllAssetsBycliendId";
+        });
+		//查询当前资产
+		$("#now").click(function () {
+		    location.href="queryNowAssets";
+
+        });
+        $("button[name='jkl']").click(function () {
+            var pages = $("#fff").val();
+            var pageSize=3;
+            var pagno = $(this).attr("no");
+            var data=$("#form").serialize();
+            if (pagno <= 1) {
+                pagno = 1;
+            }
+            if (pagno >= pages) {
+                pagno = pages;
+            }
+            location.href = 'queryNowAssets?pageNo='+ pagno+"&pageSize="+pageSize+"&"+data;
+        })
+
+
+
+
+
+
+    })
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
