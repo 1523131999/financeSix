@@ -29,5 +29,6 @@ public interface ClientService {
     Integer addBro(Brokeragerelations brokeragerelations);
     PageInfo<Brokeragerelations> queryByBro(Brokeragerelations brokeragerelations,String startDate,String endDate,Integer pageSize,Integer pageNum);
     Integer updateStatus(Brokeragerelations brokeragerelations);
+    Brokeragerelations detailBro(Integer id);
 
 }

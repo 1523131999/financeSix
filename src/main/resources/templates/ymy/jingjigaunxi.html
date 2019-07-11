@@ -24,6 +24,10 @@
 				$("#toAddBro").click(function () {
 					location.href='toAddBro';
                 })
+				$(".ibutton").click(function () {
+					var id=$(this).attr("no");
+					location.href='toDetailBro?id='+id;
+				})
             })
 		</script>
 	</head>
@@ -50,7 +54,7 @@
 						<td>审批状态</td>
 					</tr>
 					<tr th:each="item:${pageinfo.list}">
-						<td><input type="button" value="查看"></td>
+						<td><input type="button" value="查看" th:no="${item.blid}" class="ibutton"></td>
 						<td th:text="${item.client.clientName}">xxxx</td>
 						<td th:text="${item.client.clientType}">xxxx</td>
 						<td th:text="${item.client.certnumber}">xxxx</td>

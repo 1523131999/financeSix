@@ -147,7 +147,9 @@
             Brokeragerelations.submissiondate&lt;#{endDate}
         </if>
     </select>
-
+    <select id="detailBro" parameterType="integer" resultMap="broMap">
+        SELECT * FROM `brokeragerelations`,CLIENT,cert WHERE brokeragerelations.`userid`=client.`clientid` AND cert.certid=client.certid AND brokeragerelations.`blid`=#{id};
+    </select>
 
 
 

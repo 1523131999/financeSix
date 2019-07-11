@@ -133,5 +133,10 @@ public class ClientServiceImpl implements ClientService {
         return mapper.updateStatus(brokeragerelations);
     }
 
+    @Override
+    public Brokeragerelations detailBro(Integer id) {
+        return mapper.detailBro(id);
+    }
+
 
 }

@@ -42,5 +42,5 @@ public interface ClientMapper {
     //修改审批状态
     @Update("update brokeragerelations set examinationstatus=#{examinationstatus},examinationreason=#{examinationreason} where blid=#{blid}")
     Integer updateStatus(Brokeragerelations brokeragerelations);
-
+    Brokeragerelations detailBro(Integer id);
 }

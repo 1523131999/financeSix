@@ -350,7 +350,13 @@ public class ClientController {
         }
             return "redirect:queryBybro";
     }
+    @RequestMapping("toDetailBro")
+    public String detail(Integer id,Model model)
+    {
+        model.addAttribute("bro",service.detailBro(id));
 
+        return "ymy/biangengjiluxiangqing";
+    }
 
 
 
