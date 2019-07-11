@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
 		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
 		<script type="text/javascript">
 			$(function () {
@@ -41,9 +43,9 @@
 		<option th:selected="${bro.examinationstatus}==3" value="3">审批不通过</option>
 	</select>
 		<br />
-		<input type="submit" value="查询"><br/>
-				<button type="button" id="toAddBro">新建</button><br />
-				<table>
+		<input type="submit" value="查询" class="layui-btn layui-btn-normal layui-btn-radius"><br/>
+				<button type="button" id="toAddBro" class="layui-btn layui-btn-normal layui-btn-radius">新建</button><br />
+				<table class="layui-table">
 					<tr>
 						<td>操作</td>
 						<td>客户名称</td>

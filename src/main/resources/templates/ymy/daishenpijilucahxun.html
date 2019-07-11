@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
 		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
 		<script type="text/javascript">
             $(function () {
@@ -48,9 +50,9 @@
 		<form action="/queryBybro" method="get" id="form">
 
 		客户名称<input type="text" name="client.clientName" th:value="${bro.client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;创建时间<input type="text" name="startDate" th:value="${startDate}"/>-------<input type="text" name="endDate" th:value="${endDate}"/>&nbsp;&nbsp;&nbsp;
-				<input value="查询" type="submit"><br />
-				<button type="button" id="button">执行审批</button>
-				<table>
+				<input value="查询" type="submit" class="layui-btn layui-btn-normal layui-btn-radius"><br />
+				<button type="button" id="button" class="layui-btn layui-btn-normal layui-btn-radius">执行审批</button>
+				<table class="layui-table">
 					<tr>
 						<td>操作</td>
 						<td>客户名称</td>

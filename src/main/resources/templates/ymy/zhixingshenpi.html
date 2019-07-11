@@ -3,10 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
 	</head>
 	<body>
 	<form action="doShenpi" method="post">
-		<table border="1">
+		<table border="1" class="layui-table">
 			<tr>
 				<td>id</td>
 				<td>客户名称</td>
@@ -24,7 +26,7 @@
 				<td colspan="2"><textarea rows="5" cols="50" name="examinationreason"></textarea></td>
 			</tr>
 		</table>
-		<input type="submit">提交</input>&nbsp;&nbsp;&nbsp;&nbsp;<button>取消</button>
+		<input type="submit" class="layui-btn layui-btn-normal layui-btn-radius">提交</input>&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-normal layui-btn-radius">取消</button>
 	</form>
 	</body>
 </html>
