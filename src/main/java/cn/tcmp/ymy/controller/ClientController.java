@@ -264,7 +264,7 @@ public class ClientController {
             }
         }
             return "redirect:queryFac";
-    }
+}
     @RequestMapping("queryBro")
     public String queryBro(Brokeragerelations brokeragerelations,String startDate,String endDate,Model model,String pagesize,String pagenum,HttpServletRequest request) {
             if (pagesize == null) {
