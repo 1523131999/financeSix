@@ -48,7 +48,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public PageInfo<Secondarymanager> queryCiYao(Secondarymanager secondarymanager, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum,pageSize);
-                            List<Secondarymanager> list=mapper.queryCiYao(secondarymanager);
+        List<Secondarymanager> list=mapper.queryCiYao(secondarymanager);
         PageInfo<Secondarymanager> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
@@ -118,6 +118,24 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Integer addBro(Brokeragerelations brokeragerelations) {
         return mapper.addBro(brokeragerelations);
+    }
+
+    @Override
+    public PageInfo<Brokeragerelations> queryByBro(Brokeragerelations brokeragerelations, String startDate, String endDate, Integer pageSize, Integer pageNum) {
+       PageHelper.startPage(pageNum,pageSize);
+        List<Brokeragerelations> list=mapper.queryByBro(brokeragerelations,startDate,endDate);
+        PageInfo<Brokeragerelations> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public Integer updateStatus(Brokeragerelations brokeragerelations) {
+        return mapper.updateStatus(brokeragerelations);
+    }
+
+    @Override
+    public Brokeragerelations detailBro(Integer id) {
+        return mapper.detailBro(id);
     }
 
 

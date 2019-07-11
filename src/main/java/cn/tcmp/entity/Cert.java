@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 //证件表
 public class Cert{
 	private Integer certid;
-	private Integer certtype;
+	private String certtype;
 
 }

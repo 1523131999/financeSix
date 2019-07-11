@@ -37,4 +37,10 @@ public interface ClientMapper {
     List<Brokeragerelations> queryBroke(@Param("bro") Brokeragerelations brokeragerelations,@Param("startDate")String startDate,@Param("endDate")String endDate);
     @Insert("insert into brokeragerelations values(null,#{submissiondate},#{client.clientid},#{Initiator},'原理财经理',1,null)")
     Integer addBro(Brokeragerelations brokeragerelations);
+    //查询待审批
+    List<Brokeragerelations> queryByBro(@Param("bro") Brokeragerelations brokeragerelations,@Param("startDate")String startDate,@Param("endDate") String endDate );
+    //修改审批状态
+    @Update("update brokeragerelations set examinationstatus=#{examinationstatus},examinationreason=#{examinationreason} where blid=#{blid}")
+    Integer updateStatus(Brokeragerelations brokeragerelations);
+    Brokeragerelations detailBro(Integer id);
 }

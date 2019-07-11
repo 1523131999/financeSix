@@ -293,13 +293,70 @@ public class ClientController {
         model.addAttribute("pageinfo",service.queryBroke(brokeragerelations,startDate,endDate,pageSize,pageNum));
         return "ymy/jingjigaunxi";
     }
+    @RequestMapping("queryBybro")
+    public String queryBybro(Brokeragerelations brokeragerelations,String startDate,String endDate,Model model,String pagesize,String pagenum,HttpServletRequest request) {
+        if (pagesize == null) {
+            pagesize="10";
+        }else {
+
+        }
+        if (pagenum == null) {
+            pagenum="1";
+        }
+        if (brokeragerelations.getClient() == null) {
+            Client client=new Client();
+            brokeragerelations.setClient(client);
+        }
+        Integer pageNum=Integer.parseInt(pagenum);
+        Integer pageSize=Integer.parseInt(pagesize);
+        //获取表单时间
+
+        model.addAttribute("bro",brokeragerelations);
+        model.addAttribute("startDate",startDate);
+        model.addAttribute("endDate",endDate);
+        model.addAttribute("pageSize",pagesize);
+
+
+
+        model.addAttribute("pageinfo",service.queryByBro(brokeragerelations,startDate,endDate,pageSize,pageNum));
+        return "ymy/daishenpijilucahxun";
+    }
     @RequestMapping("toAddBro")
     public String addBro() {
             return  "ymy/biangengshenqing";
     }
+    @RequestMapping("toShenpi")
+    public  String toShenpi(String [] names,Integer [] ids,Model model) {
+            List<Brokeragerelations> list=new ArrayList<>();
+        for (int i=0;i<names.length;i++){
+            Brokeragerelations brokeragerelations=new Brokeragerelations();
+            Client client=new Client();
+            brokeragerelations.setBlid(ids[i]);
+            client.setClientName(names[i]);
+            brokeragerelations.setClient(client);
+            list.add(brokeragerelations);
+        }
+            model.addAttribute("list",list);
 
 
+            return "ymy/zhixingshenpi";
+    }
 
+    @RequestMapping("doShenpi")
+    public String doShenpi(String[] Name, Integer[] id, Brokeragerelations brokeragerelations) {
+        for (Integer i : id) {
+            brokeragerelations.setBlid(i);
+            service.updateStatus(brokeragerelations);
+        }
+            return "redirect:queryBybro";
+    }
+    @RequestMapping("toDetailBro")
+    public String detail(Integer id,Model model)
+    {
+        model.addAttribute("bro",service.detailBro(id));
+
+        return "ymy/biangengjiluxiangqing";
+    }
 
 
 

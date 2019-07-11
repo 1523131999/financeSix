@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	<form action="doShenpi" method="post">
+		<table border="1">
+			<tr>
+				<td>id</td>
+				<td>客户名称</td>
+			</tr>
+			<tr th:each="item:${list}">
+				<td><input  th:value="${item.blid}" name="id"></td>
+				<td ><input th:value="${item.client.clientName}" name="Name" readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td>审批结果</td>
+				<td><input type="radio" name="examinationstatus" value="2">同意<input type="radio" name="examinationstatus" value="3">拒绝</td>
+			</tr>
+			<tr>
+				<td>分配转移原因</td>
+				<td colspan="2"><textarea rows="5" cols="50" name="examinationreason"></textarea></td>
+			</tr>
+		</table>
+		<input type="submit">提交</input>&nbsp;&nbsp;&nbsp;&nbsp;<button>取消</button>
+	</form>
+	</body>
+</html>

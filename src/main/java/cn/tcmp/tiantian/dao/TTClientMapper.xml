@@ -3,6 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tcmp.tiantian.dao.TTClientMapper">
+	<resultMap id="map" type="Client" autoMapping="true">
+		<id property="clientid" column="clientid"></id>
+		<association property="cert" resultMap="map2"></association>
+	</resultMap>
+	<resultMap id="map2" type="Cert" autoMapping="true">
+		<id property="certid" column="certid"></id>
+	</resultMap>
+
     <insert id="addClient" parameterType="Client">
         INSERT INTO financedb.client
 			(clientid,
@@ -109,4 +117,55 @@
 			#{remarks}
 			);
 	</insert>
+	<select id="querygerenAll" parameterType="Client" resultMap="map">
+
+		SELECT * FROM
+			financedb.client cl,
+			financedb.cert ce
+			WHERE
+			cl.certid = ce.certid
+		<if test="client.clientName!=null and client.clientName!=''">
+			and clientName LIKE CONCAT ('%',#{client.clientName},'%')
+		</if>
+		<if test="client.clientType!=null and client.clientType!= 2">
+			AND clientType = #{client.clientType}
+		</if>
+		<if test="client.cert!=null and client.cert.certid != 0">
+			AND cl.certid = #{client.cert.certid}
+		</if>
+		<if test="client.certnumber!=null and client.certnumber!=''">
+			AND certnumber LIKE CONCAT ('%',#{client.certnumber},'%')
+		</if>
+		<if test="client.Fmid!=null and client.Fmid!=''">
+			AND Fmid LIKE CONCAT ('%',#{client.Fmid},'%')
+		</if>
+		<if test="client.Fact!=null and client.Fact!= 0">
+			AND Fact = #{client.Fact}
+		</if>
+		<if test="client.clientstatus!=null and client.clientstatus!= 0">
+			AND clientstatus = #{client.clientstatus}
+		</if>
+		<if test="client.tclientlevel!=null ">
+			AND clientlevel IN
+			<foreach collection="client.tclientlevel" open="(" close=")" item="trisk" separator=",">
+				#{trisk}
+			</foreach>
+		</if>
+		<if test="client.trisklevelTE!=null ">
+			AND risklevelTE IN 
+			<foreach collection="client.trisklevelTE" open="(" close=")" item="trisk" separator=",">
+				#{trisk}
+			</foreach>
+		</if>
+		<if test="client.trisklevelFE!=null">
+			AND risklevelFE IN
+			<foreach collection="client.trisklevelFE" open="(" close=")" item="trisk" separator=",">
+				#{trisk}
+			</foreach>
+		</if>
+	</select>
+	<select id="queryCertAll" resultType="Cert">
+		SELECT * FROM cert
+	</select>
+
 </mapper>
