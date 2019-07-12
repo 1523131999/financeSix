@@ -5,6 +5,7 @@ import cn.tcmp.entity.Client;
 import cn.tcmp.entity.Contacts;
 import cn.tcmp.entity.Secondarymanager;
 import cn.tcmp.tiantian.dao.TTClientMapper;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,8 @@ public class TTClientServiceImpl implements TTClientService {
     }
 
     @Override
-    public PageInfo<Client> querygerenAll(Integer pagesize, Integer pagenum,Client client) {
-        //PageHelper.startPage(pagenum,pagesize);
+    public PageInfo<Client> querygerenAll(Integer pageSize, Integer pageNum,Client client) {
+        PageHelper.startPage(pageNum,pageSize);
         List<Client> list=clientMapper.querygerenAll(client);
         PageInfo<Client> pageInfo=new PageInfo<>(list);
         return pageInfo;
@@ -45,4 +46,19 @@ public class TTClientServiceImpl implements TTClientService {
     public List<Cert> queryCertAll(Cert cert) {
         return clientMapper.queryCertAll(cert);
     }
+
+    @Override
+    public PageInfo<Client> queryjigouAll(Integer pageSize, Integer pageNum, Client client) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Client> clients = clientMapper.queryjigouAll(client);
+        PageInfo<Client> pageInfo1=new PageInfo<>(clients);
+        return pageInfo1;
+    }
+
+    @Override
+    public List<Contacts> queryContactsAll(Contacts contacts) {
+        return clientMapper.queryContactsAll(contacts);
+    }
+
+
 }

@@ -3,6 +3,7 @@ package cn.tcmp.ymy.service;
 import cn.tcmp.entity.Cert;
 import cn.tcmp.entity.Client;
 import cn.tcmp.entity.Secondarymanager;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,13 @@ public class ClientServiceImplTest {
         Cert cert=new Cert();
         Client client=new Client();
         secondarymanager.setClient(client);
+
+    }
+
+    @Test
+    public void queryAll() {
+        Client client = new Client();
+        PageInfo<Client> clientPageInfo = service.queryAllFact(client, 1, 2);
 
     }
 }

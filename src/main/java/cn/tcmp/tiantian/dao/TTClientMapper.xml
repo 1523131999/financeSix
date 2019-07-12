@@ -6,14 +6,18 @@
 	<resultMap id="map" type="Client" autoMapping="true">
 		<id property="clientid" column="clientid"></id>
 		<association property="cert" resultMap="map2"></association>
+		<association property="contacts" resultMap="map3"></association>
 	</resultMap>
 	<resultMap id="map2" type="Cert" autoMapping="true">
 		<id property="certid" column="certid"></id>
 	</resultMap>
+	<resultMap id="map3" type="Contacts" autoMapping="true">
+		<id property="contactid" column="contactsid"></id>
+	</resultMap>
 
     <insert id="addClient" parameterType="Client">
         INSERT INTO financedb.client
-			(clientid,
+			(
 			clientName,
 			clientType,
 			certnumber,
@@ -54,7 +58,7 @@
 			certid
 			)
 			VALUES
-			(#{clientid},
+			(
 			#{clientName},
 			#{clientType},
 			#{certnumber},
@@ -65,7 +69,7 @@
 			#{risklevelTE},
 			#{risklevelFE},
 			#{FinanID},
-			#{contactsid.contactid},
+			#{contacts.contactid},
 			#{assset},
 			#{gender},
 			#{certtime},
@@ -167,5 +171,41 @@
 	<select id="queryCertAll" resultType="Cert">
 		SELECT * FROM cert
 	</select>
+	<select id="queryjigouAll" parameterType="Client" resultMap="map">
+		SELECT * FROM
+			financedb.client cl,
+			financedb.cert ce,
+			financedb.contacts co
+			WHERE
+			cl.certid = ce.certid
+			AND cl.contactsid = co.contactid
+		<if test="client.clientName!=null and client.clientName!=''">
+			and clientName LIKE CONCAT ('%',#{client.clientName},'%')
+		</if>
+		<if test="client.cert!=null and client.cert.certid != 0">
+			AND cl.certid = #{client.cert.certid}
+		</if>
+		<if test="client.certnumber!=null and client.certnumber!=''">
+			AND certnumber LIKE CONCAT ('%',#{client.certnumber},'%')
+		</if>
+		<if test="client.FinanID!=null and client.FinanID!= ''">
+			AND clientType = #{client.clientType}
+		</if>
+		<if test="client.contacts!=null and client.contacts.contactname != ''">
+			AND co.contactname LIKE CONCAT ('%', #{client.contacts.contactname},'%')
+		</if>
+		<if test="client.Fmid!=null and client.Fmid!=''">
+			AND Fmid LIKE CONCAT ('%',#{client.Fmid},'%')
+		</if>
+		<if test="client.clientstatus!=null and client.clientstatus!= 0">
+			AND clientstatus = #{client.clientstatus}
+		</if>
+		<if test="client.Fact!=null and client.Fact!= 0">
+			AND Fact = #{client.Fact}
+		</if>
 
+	</select>
+	<select id="queryContactsAll" resultType="Contacts">
+		select * from financedb.contacts
+	</select>
 </mapper>

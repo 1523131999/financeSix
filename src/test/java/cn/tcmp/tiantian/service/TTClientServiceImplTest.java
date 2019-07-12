@@ -38,4 +38,8 @@ public class TTClientServiceImplTest {
             System.out.println(client);
         }
     }
+
+    @Test
+    public void querygerenAll1() {
+    }
 }
