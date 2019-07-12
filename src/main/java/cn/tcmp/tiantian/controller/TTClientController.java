@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("ttClientController")
 public class TTClientController {
 
 
@@ -34,7 +33,7 @@ public class TTClientController {
         service.addClient(client);
         System.out.println(client.getCert());
         service.addcontacts(contacts);
-        return "/tiantian/client-add";
+        return "tiantian/client-add";
 }
 
     @RequestMapping("toaddClient")
@@ -43,13 +42,13 @@ public class TTClientController {
         List<Cert> certs = service.queryCertAll(cert);
         System.out.println("-------------------------"+certs);
         model.addAttribute("cert",certs);
-        return "/tiantian/client-add";
+        return "tiantian/client-add";
     }
 
     @RequestMapping("addjigouClient")
     public String addjigouClient(Client client){
         service.addClient(client);
-        return "/tiantian/jigouclient-add";
+        return "tiantian/jigouclient-add";
     }
 
     @RequestMapping("queryAll")
@@ -104,7 +103,7 @@ public class TTClientController {
             client.setCert(c2);
         }
         model.addAttribute("clienthuixian",client);
-        return "tiantian/client-queryAll";
+        return "clientqueryAll";
     }
 
     @RequestMapping("toqueryAll")
@@ -112,7 +111,7 @@ public class TTClientController {
         List<Cert> certs = service.queryCertAll(cert);
         System.out.println("-------------------------"+certs);
         model.addAttribute("cert",certs);
-        return "client-queryAll";
+        return "tiantian/clientqueryAll";
     }
 
 
@@ -121,13 +120,11 @@ public class TTClientController {
         if(pagenum == null){
             pagenum = 1;
         }
-
         if (creatid != null){
             Cert c = new Cert();
             c.setCertid(Integer.parseInt(creatid));
             client.setCert(c);
         }
-
         if (contactname != null && contactname != ""){
             Contacts co = new Contacts();
             co.setContactname(contactname);
@@ -148,7 +145,7 @@ public class TTClientController {
             client.setCert(c2);
         }
         model.addAttribute("clienthuixian",client);
-        return "tiantian/client-jigouqueryAll";
+        return "tiantian/clientjigouqueryAll";
     }
 
     @RequestMapping("querygerenAll")
@@ -156,6 +153,7 @@ public class TTClientController {
         if(pagenum == null){
             pagenum = 1;
         }
+        System.out.println("-=-=-=-=-=-=-=-=-="+client);
         if (creatid != null){
             Cert c = new Cert();
             c.setCertid(Integer.parseInt(creatid));
@@ -202,8 +200,10 @@ public class TTClientController {
             c2.setCertid(0);
             client.setCert(c2);
         }
+        client.setClientName("");
+        System.out.println("=================="+client);
         model.addAttribute("clienthuixian",client);
-        return "tiantian/client-queryAll";
+        return "tiantian/clientqueryAll";
     }
 
     @RequestMapping("toquerygerenAll")
@@ -211,7 +211,7 @@ public class TTClientController {
         List<Cert> certs = service.queryCertAll(cert);
         System.out.println("-------------------------"+certs);
         model.addAttribute("cert",certs);
-        return "client-queryAll";
+        return "tiantian/clientqueryAll";
     }
 
 

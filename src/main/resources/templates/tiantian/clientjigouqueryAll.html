@@ -16,11 +16,11 @@
 		<script th:src="@{/js/jquery-1.12.4.js}"></script>
 	</head>
 	<body>
-	<form  action="/ttClientController/queryAll" method="post">
+	<form  action="queryjigouAll" method="post">
 		<table align="center" width="90%">
 			<tr align="left" width="60px">
 				<td colspan="8" width="100px">
-					<span style="background-color: dodgerblue; color: white;" >客户查询</span>
+					<span style="background-color: dodgerblue; color: white;" >客户查询(机构)</span>
 				</td>
 			</tr>
 			<br />
@@ -28,14 +28,6 @@
 				<td width="80px">客户名称</td>
 				<td width="140px">
 					<input type="text" style="width: 120px;"  th:value="${clienthuixian.clientName}" name="clientName" />
-				</td>
-				<td width="80px">客户类型</td>
-				<td width="80px">
-					<select name="clientType" style="width: 120px;">
-						<option th:attr="selected=${clienthuixian.clientType == 2}"  value="2">全部</option>
-						<option th:attr="selected=${clienthuixian.clientType == 0}"  value="0">机构</option>
-						<option th:attr="selected=${clienthuixian.clientType == 1}"  value="1">自然人</option>
-					</select>
 				</td>
 				<td width="80px">证件类型</td>
 				<td width="80px">
@@ -48,25 +40,22 @@
 				<td width="80px">
 					<input type="text" style="width: 120px;" th:value="${clienthuixian.certnumber}" name="certnumber" />
 				</td>
+				<td width="80px">理财账号</td>
+				<td width="80px">
+					<input type="text" style="width: 120px;" th:value="${clienthuixian.FinanID}" name="FinanID" />
+				</td>
 			</tr>
 			<tr height="50px">
-				<td>主要客户经理</td>
+				<td>联系人</td>
 				<td>
-					<select name="Fmid" style="width: 120px;">
-						<option value="0">全部</option>
-						<option th:attr="selected=${clienthuixian.Fmid == 1}" value="1">张国强</option>
-						<option th:attr="selected=${clienthuixian.Fmid == 2}" value="2">李佳霖</option>
-						<option th:attr="selected=${clienthuixian.Fmid == 3}" value="3">郭德纲</option>
-						<option th:attr="selected=${clienthuixian.Fmid == 4}" value="4">蔡文姬</option>
-						<option th:attr="selected=${clienthuixian.Fmid == 5}" value="5">狄仁杰</option>
-					</select>
+					<input type="text" style="width: 120px;"  th:value="${clienthuixian.contacts.contactname}" name="contactname" />
 				</td>
 				<td>是否事实客户</td>
 				<td>
 					<select name="Fact"  style="width: 120px;">
-						<option th:attr="selected=${clienthuixian.Fact == 0}" value="0">全部</option>
-						<option th:attr="selected=${clienthuixian.Fact == 1}" value="1">是</option>
-						<option th:attr="selected=${clienthuixian.Fact == 2}" value="2">否</option>
+						<option th:attr="selected=${clienthuixian.Fact == 1}" value="1">全部</option>
+						<option th:attr="selected=${clienthuixian.Fact == 2}" value="2">是</option>
+						<option th:attr="selected=${clienthuixian.Fact == 3}" value="3">否</option>
 					</select>
 				</td>
 				<td>客户状态</td>
@@ -83,34 +72,11 @@
 				<td></td>
 				<td></td>
 			</tr>
-			<tr>
-				<td>客户等级</td>
-				<td style="font-size: 11px;" >
-					<input type="checkbox" name="kehu" value="1"  />高级用户
-					<input type="checkbox" name="kehu" value="2" />VIP客户
-				</td>
-				<td width="105px">风险等级(信托版)</td>
-				<td colspan="2" style="font-size: 12px;">
-					<input type="checkbox" name="xintuo" value="1"  />保守型
-					<input type="checkbox" name="xintuo" value="2" />稳健型
-					<input type="checkbox" name="xintuo" value="3"  />平衡型
-					<input type="checkbox" name="xintuo" value="4" />成长型
-					<input type="checkbox" name="xintuo" value="5" />进取型
-				</td>
-				<td>风险等级(基金版)</td>
-				<td colspan="2" style="font-size: 11px;">
-					<input type="checkbox" name="jijin" value="1"  />专业投资者
-					<input type="checkbox" name="jijin" value="2" />普通投资者C1
-					<input type="checkbox" name="jijin" value="3"  />普通投资者C2
-					<input type="checkbox" name="jijin" value="4" />普通投资者C3
-					<input type="checkbox" name="jijin" value="5" />普通投资者C4
-					<input type="checkbox" name="jijin" value="6" />普通投资者C5
-				</td>
-			</tr>
 			<tr align="center" height="60px">
 				<td colspan="8" width="100px">
 					<input type="submit"  value="查询" style="margin-right: 30px;"/>
-					<input type="reset" value="重置" />
+					<input type="reset" value="重置"  style="margin-right: 30px;"/>
+					<input type="submit"  value="高级查询" />
 				</td>
 			</tr>
 		</table>
@@ -121,7 +87,9 @@
 		<table  width="90%" align="center" >
 			<tr>
 				<td>
-					<input style="width: 80px;" type="submit" value="新建" />
+					<a href="addjigouClient">
+						<input style="width: 80px;" type="button" value="新建" />
+					</a>
 				</td>
 			</tr>
 		</table>
@@ -131,30 +99,34 @@
 				
 			<tr align="center">
 				<td>选择</td>
+				<td>客户类型</td>
+				<td>客户编号</td>
 				<td>客户名称</td>
 				<td>证件类型</td>
 				<td>证件号码</td>
-				<td>客户类型</td>
 				<td>客户等级</td>
 				<td>客户状态</td>
-				<td>是否事实客户</td>
 				<td>客户经理</td>
+				<td>是否事实客户</td>
+				<td>理财账号</td>
 			</tr>
 
 			<tr th:each="cli:${client.list}" align="center" >
 				<td>
 					<input type="checkbox" />
 				</td>
-				<td th:text="${cli.clientName}"></td>
-				<td th:text="${cli.cert.certtype}"></td>
-				<td th:text="${cli.certnumber}"></td>
 
 				<td th:text="'机构'" th:if="${cli.clientType == 1}"></td>
 				<td th:text="'自然人'" th:if="${cli.clientType == 2}"></td>
 				<td th:text="'全部'" th:if="${cli.clientType == 3}"></td>
 
-				<td th:text="'高级客户'"  th:if="${cli.clientlevel == 1}"></td>
-				<td th:text="'VIP客户'"  th:if="${cli.clientlevel == 2}"></td>
+				<td th:text="${cli.clientid}"></td>
+				<td th:text="${cli.clientName}"></td>
+				<td th:text="${cli.cert.certtype}"></td>
+				<td th:text="${cli.certnumber}"></td>
+
+				<td th:text="'高级客户'" th:if="${cli.clientlevel == 1}"></td>
+				<td th:text="'VIP客户'" th:if="${cli.clientlevel == 2}"></td>
 
 				<td th:text="'全部'"  th:if="${cli.clientstatus == 1}"></td>
 				<td th:text="'无'"  th:if="${cli.clientstatus == 2}"></td>
@@ -163,24 +135,28 @@
 				<td th:text="'睡眠'"  th:if="${cli.clientstatus == 5}"></td>
 				<td th:text="'流失'"  th:if="${cli.clientstatus == 6}"></td>
 
-				<td th:text="'全部'"  th:if="${cli.Fact == 1}"></td>
-				<td th:text="'是'"  th:if="${cli.Fact == 2}"></td>
-				<td th:text="'否'"  th:if="${cli.Fact == 3}"></td>
-
 				<td th:text="'张国强'" th:if="${cli.Fmid == 1}"></td>
 				<td th:text="'李佳霖'" th:if="${cli.Fmid == 2}"></td>
 				<td th:text="'郭德纲'" th:if="${cli.Fmid == 3}"></td>
 				<td th:text="'蔡文姬'" th:if="${cli.Fmid == 4}"></td>
 				<td th:text="'狄仁杰'" th:if="${cli.Fmid == 5}"></td>
+
+				<td th:text="'全部'"  th:if="${cli.Fact == 1}"></td>
+				<td th:text="'是'"  th:if="${cli.Fact == 2}"></td>
+				<td th:text="'否'"  th:if="${cli.Fact == 3}"></td>
+
+
+				<td th:text="${cli.FinanID}"></td>
+
 			</tr>
 			<tr>
-				<td colspan="10">
+				<td colspan="11">
 					<input type="checkbox" name=""  value="" />当前页面全选
 					
 				</td>
 			</tr>
 			<tr align="center" >
-				<td colspan="10">
+				<td colspan="11">
 
 					每页显示记录
 					<select name=""  style="width: 60px;">
@@ -209,7 +185,7 @@
                 pagno = pages;
             }
             $("#yeshu").val(pagno);
-            //location.href = 'querygerenAll?pagenum='+ pagno+"&pageSize="+pageSize+"&"+data;
+            //location.href = 'queryjigouAll?pagenum='+ pagno+"&pageSize="+pageSize+"&"+data;
         	$('form').submit();
         })
 

@@ -9,7 +9,7 @@
 		}
 	</style>
 
-	<script type="text/javascript" src="/js/jquery-1.12.4.js" ></script>
+	<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
 </head>
 <body>
 <form action="addClient">
@@ -133,7 +133,8 @@
 		</td>
 		<td>职业:</td>
 		<td>
-			<input type="text" style="width: 80px;" /> <input type="button" xian="x" onclick="zhiye()" id="zhiye" value="修改"/>
+			<input type="text" style="width: 80px;" />
+			<input type="button" xian="x" onclick="zhiye1()" id="zhiye" value="修改" name=""/>
 		</td>
 	</tr>
 	<tr>
@@ -220,7 +221,7 @@
 		</tbody>
 		<tr style="text-align: center"  height="60px">
 			<td colspan="4">
-				<input type="button"onclick="zhiye()" id="xianshi2"  value="保存" style="background-color: dodgerblue; color: white; width: 70px;"/>
+				<input type="button"onclick="zhiye1()" id="xianshi2"  value="保存" style="background-color: dodgerblue; color: white; width: 70px;"/>
 				<input type="reset" value="取消" style="margin-left: 20px;background-color: dodgerblue; color: white; width: 70px;" />
 			</td>
 		</tr>
@@ -231,17 +232,7 @@
 </form>
 <script type="text/javascript" src="/js/laydate.js"></script>
 <script type="text/javascript">
-    !function(){
-        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-        laydate({elem: '#demo'});//绑定元素
-    }();
-    !function(){
-        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
-        laydate({elem: '#demo1'});//绑定元素
-    }();
-
-
-    function zhiye(){
+    function zhiye1(){
         var xian = $('#zhiye').attr("xian");
         if(xian == 'x'){
             $("#xianshi").css("display","block");
@@ -254,5 +245,15 @@
             }
         }
     }
+</script>
+<script type="text/javascript">
+    !function(){
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#demo'});//绑定元素
+    }();
+    !function(){
+        laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+        laydate({elem: '#demo1'});//绑定元素
+    }();
 </script>
 </html>

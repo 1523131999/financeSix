@@ -9,7 +9,7 @@
 			}
 		</style>
 		<script type="text/javascript" src="js/laydate.js"></script>
-		<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
 	</head>
 	<body>
 		<table align="center" width="90%">
@@ -151,6 +151,71 @@
 				</td>
 			</tr>
 		</table>
+
+		<div id="xianshi" style="width: 800px;height: 300px;background-color: azure;display: none;position: absolute;left: 300px;top: 150px;">
+			<table style="border: none; margin-top: 20px;" border="1" cellpadding="0" cellspacing="0"align="center" width="80%">
+				<tr>
+					<td colspan="4" height="30px">职业信息</td>
+				</tr>
+				<tbody id="css01">
+
+				<tr>
+					<td>职业:</td>
+					<td>
+						<input type="text" name="occpation"/>
+					</td>
+					<td>所属行业:</td>
+					<td>
+						<select name="trade"  style="width: 160px; height: 20px;">
+							<option value="">工业生产</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>工作单位名称:</td>
+					<td>
+						<input type="text" name="Workunitname"/>
+					</td>
+					<td>单位性质:</td>
+					<td>
+						<select name="nature"  style="width: 160px; height: 20px;">
+							<option value="">国有</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>职位职务:</td>
+					<td>
+						<input type="text" name="position"/>
+					</td>
+					<td>职称:</td>
+					<td>
+						<select name="Title"  style="width: 160px; height: 20px;">
+							<option value="">高级</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>是否单位实际控制人:</td>
+					<td>
+						<select name="ontroller"  style="width: 160px; height: 20px;">
+							<option value="">请选择</option>
+						</select>
+					</td>
+					<td>工龄（年）:</td>
+					<td>
+						<input type="text" name="workingyears"/>
+					</td>
+				</tr>
+				</tbody>
+				<tr style="text-align: center"  height="60px">
+					<td colspan="4">
+						<input type="button"onclick="zhiye()" id="xianshi2"  value="保存" style="background-color: dodgerblue; color: white; width: 70px;"/>
+						<input type="reset" value="取消" style="margin-left: 20px;background-color: dodgerblue; color: white; width: 70px;" />
+					</td>
+				</tr>
+			</table>
+		</div>
 	</body>
 	<script type="text/javascript">
 		!function(){
@@ -165,6 +230,7 @@
 		
 		function zhiye(){
 			var xian = $('#zhiye').attr("xian");
+
 			if(xian == 'x'){
 				$("#xianshi").css("display","block");
 				$('#zhiye').attr("xian","y");
