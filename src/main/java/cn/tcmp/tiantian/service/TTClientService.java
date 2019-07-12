@@ -19,4 +19,8 @@ public interface TTClientService {
     PageInfo<Client> querygerenAll(Integer pagesize, Integer pagenum, Client client);
     //证件查询
     List<Cert> queryCertAll(Cert cert);
+    //查询机构客户
+    PageInfo<Client> queryjigouAll(Integer pagesize, Integer pagenum,Client client);
+    //联系人查询
+    List<Contacts> queryContactsAll(Contacts contacts);
 }

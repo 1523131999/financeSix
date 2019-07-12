@@ -8,6 +8,12 @@
 				font-size: 15px;
 			}
 		</style>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/template.css" media="all">
+		<script th:src="@{/js/jquery-1.12.4.js}"></script>
 	</head>
 	<body>
 	<form  action="/ttClientController/querygerenAll" method="post">
@@ -21,50 +27,57 @@
 			<tr height="50px">
 				<td width="80px">客户名称</td>
 				<td width="140px">
-					<input type="text" style="width: 120px;" name="clientName" />
+					<input type="text" style="width: 120px;"  th:value="${clienthuixian.clientName}" name="clientName" />
 				</td>
 				<td width="80px">客户类型</td>
 				<td width="80px">
-					<select name="clientType"  style="width: 120px;">
-						<option value="2">全部</option>
-						<option value="0">机构</option>
-						<option value="1">自然人</option>
+					<select name="clientType" style="width: 120px;">
+						<option th:attr="selected=${clienthuixian.clientType == 2}"  value="2">全部</option>
+						<option th:attr="selected=${clienthuixian.clientType == 0}"  value="0">机构</option>
+						<option th:attr="selected=${clienthuixian.clientType == 1}"  value="1">自然人</option>
 					</select>
 				</td>
 				<td width="80px">证件类型</td>
 				<td width="80px">
 					<select name="creatid"  style="width: 120px;">
 						<option value="0">全部</option>
-						<option th:each="cert1:${cert}" th:text="${cert1.certtype}"  th:value="${cert1.certid}">身份证</option>
+						<option th:attr="selected=${clienthuixian.cert.certid == cert1.certid}" th:each="cert1:${cert}" th:text="${cert1.certtype}"  th:value="${cert1.certid}">身份证</option>
 					</select>
 				</td>
 				<td width="80px">证件号码</td>
 				<td width="80px">
-					<input type="text" style="width: 120px;" name="certnumber" />
+					<input type="text" style="width: 120px;" th:value="${clienthuixian.certnumber}" name="certnumber" />
 				</td>
 			</tr>
 			<tr height="50px">
 				<td>主要客户经理</td>
 				<td>
-					<input type="text" style="width: 100px;" name="Fmid"/>
+					<select name="Fmid" style="width: 120px;">
+						<option value="0">全部</option>
+						<option th:attr="selected=${clienthuixian.Fmid == 1}" value="1">张国强</option>
+						<option th:attr="selected=${clienthuixian.Fmid == 2}" value="2">李佳霖</option>
+						<option th:attr="selected=${clienthuixian.Fmid == 3}" value="3">郭德纲</option>
+						<option th:attr="selected=${clienthuixian.Fmid == 4}" value="4">蔡文姬</option>
+						<option th:attr="selected=${clienthuixian.Fmid == 5}" value="5">狄仁杰</option>
+					</select>
 				</td>
 				<td>是否事实客户</td>
 				<td>
 					<select name="Fact"  style="width: 120px;">
-						<option value="0">全部</option>
-						<option value="1">是</option>
-						<option value="2">否</option>
+						<option th:attr="selected=${clienthuixian.Fact == 0}" value="0">全部</option>
+						<option th:attr="selected=${clienthuixian.Fact == 1}" value="1">是</option>
+						<option th:attr="selected=${clienthuixian.Fact == 2}" value="2">否</option>
 					</select>
 				</td>
 				<td>客户状态</td>
 				<td>
-					<select name="clientstatus"  style="width: 120px;">
+					<select name="clientstatus" style="width: 120px;">
 						<option value="0">全部</option>
-						<option value="1">无</option>
-						<option value="2">正常</option>
-						<option value="3">活跃</option>
-						<option value="4">睡眠</option>
-						<option value="5">流失</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 1}" value="1">无</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 2}" value="2">正常</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 3}" value="3">活跃</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 4}" value="4">睡眠</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 5}" value="5">流失</option>
 					</select>
 				</td>
 				<td></td>
@@ -72,7 +85,7 @@
 			</tr>
 			<tr>
 				<td>客户等级</td>
-				<td style="font-size: 11px;">
+				<td style="font-size: 11px;" >
 					<input type="checkbox" name="kehu" value="1"  />高级用户
 					<input type="checkbox" name="kehu" value="2" />VIP客户
 				</td>
@@ -97,10 +110,12 @@
 			<tr align="center" height="60px">
 				<td colspan="8" width="100px">
 					<input type="submit"  value="查询" style="margin-right: 30px;"/>
-					<input type="reset" value="重置" />
+					<input type="reset" value="重置"  style="margin-right: 30px;"/>
+					<input type="submit"  value="高级查询" />
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" id="yeshu" name="pagenum">
 	</form>
 		<hr />
 		
@@ -108,18 +123,15 @@
 			<tr>
 				<td>
 					<input style="width: 80px;" type="submit" value="新建" />
-					<input style="width: 80px;" type="submit" value="添加关注" />
 				</td>
 			</tr>
 		</table>
 			
 		<table style="border: none; margin-top: 20px;" align="center" width="90%" border="1" cellpadding="0" cellspacing="0">
-			
-					
+
 				
 			<tr align="center">
 				<td>选择</td>
-				<td>操作</td>
 				<td>客户名称</td>
 				<td>证件类型</td>
 				<td>证件号码</td>
@@ -134,7 +146,6 @@
 				<td>
 					<input type="checkbox" />
 				</td>
-				<td></td>
 				<td th:text="${cli.clientName}"></td>
 				<td th:text="${cli.cert.certtype}"></td>
 				<td th:text="${cli.certnumber}"></td>
@@ -157,9 +168,9 @@
 				<td th:text="'是'"  th:if="${cli.Fact == 2}"></td>
 				<td th:text="'否'"  th:if="${cli.Fact == 3}"></td>
 
-				<td th:text="'张帅柯'" th:if="${cli.Fmid == 1}"></td>
-				<td th:text="'习近平'" th:if="${cli.Fmid == 2}"></td>
-				<td th:text="'吕康'" th:if="${cli.Fmid == 3}"></td>
+				<td th:text="'张国强'" th:if="${cli.Fmid == 1}"></td>
+				<td th:text="'李佳霖'" th:if="${cli.Fmid == 2}"></td>
+				<td th:text="'郭德纲'" th:if="${cli.Fmid == 3}"></td>
 				<td th:text="'蔡文姬'" th:if="${cli.Fmid == 4}"></td>
 				<td th:text="'狄仁杰'" th:if="${cli.Fmid == 5}"></td>
 			</tr>
@@ -171,21 +182,40 @@
 			</tr>
 			<tr align="center" >
 				<td colspan="10">
-					
-					每页显示记录 
+
+					每页显示记录
 					<select name=""  style="width: 60px;">
 						<option value="">10条</option>
 					</select>
-					
-					<input style="width: 80px;" type="submit" value="首页" />
-					<input style="width: 80px;" type="submit" value="<上一页" />
-					<input style="width: 80px;" type="submit" value="下一页>" />
-					<input style="width: 80px;" type="submit" value="末页" />
-					第1页/共25页   到第<input type="text" style="width: 40px;"/>页   <input type="submit" value="转到" />
+
+					<button name="pagenum" th:no="1">首页</button>
+					<button name="pagenum" th:no="${client.prePage}">上一页</button>
+					<button name="pagenum" th:no="${client.pageNum+1}">下一页</button>
+					<button name="pagenum" th:no="${client.pages}">尾页</button>
+					<input type="hidden" id="fff" th:value="${client.pages}">
 				</td>
 			</tr>
 		</table>
-		
+	<script type="text/javascript" >
+
+        $("button[name='pagenum']").click(function () {
+            var pages = $("#fff").val();
+            var pageSize=3;
+            var pagno = $(this).attr("no");
+            var data=$("#form").serialize();
+            if (pagno <= 1) {
+                pagno = 1;
+            }
+            if (pagno >= pages) {
+                pagno = pages;
+            }
+            $("#yeshu").val(pagno);
+            //location.href = 'querygerenAll?pagenum='+ pagno+"&pageSize="+pageSize+"&"+data;
+        	$('form').submit();
+        })
+
+	</script>
+
 		
 	</body>
 </html>

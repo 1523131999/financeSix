@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				font-size: 15px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/template.css" media="all">
+		<script th:src="@{/js/jquery-1.12.4.js}"></script>
+	</head>
+	<body>
+	<form  action="queryjigouAll" method="post">
+		<table align="center" width="90%">
+			<tr align="left" width="60px">
+				<td colspan="8" width="100px">
+					<span style="background-color: dodgerblue; color: white;" >客户查询(机构)</span>
+				</td>
+			</tr>
+			<br />
+			<tr height="50px">
+				<td width="80px">客户名称</td>
+				<td width="140px">
+					<input type="text" style="width: 120px;"  th:value="${clienthuixian.clientName}" name="clientName" />
+				</td>
+				<td width="80px">证件类型</td>
+				<td width="80px">
+					<select name="creatid"  style="width: 120px;">
+						<option value="0">全部</option>
+						<option th:attr="selected=${clienthuixian.cert.certid == cert1.certid}" th:each="cert1:${cert}" th:text="${cert1.certtype}"  th:value="${cert1.certid}">身份证</option>
+					</select>
+				</td>
+				<td width="80px">证件号码</td>
+				<td width="80px">
+					<input type="text" style="width: 120px;" th:value="${clienthuixian.certnumber}" name="certnumber" />
+				</td>
+				<td width="80px">理财账号</td>
+				<td width="80px">
+					<input type="text" style="width: 120px;" th:value="${clienthuixian.FinanID}" name="FinanID" />
+				</td>
+			</tr>
+			<tr height="50px">
+				<td>联系人</td>
+				<td>
+					<input type="text" style="width: 120px;"  th:value="${clienthuixian.contacts.contactname}" name="contactname" />
+				</td>
+				<td>是否事实客户</td>
+				<td>
+					<select name="Fact"  style="width: 120px;">
+						<option th:attr="selected=${clienthuixian.Fact == 1}" value="1">全部</option>
+						<option th:attr="selected=${clienthuixian.Fact == 2}" value="2">是</option>
+						<option th:attr="selected=${clienthuixian.Fact == 3}" value="3">否</option>
+					</select>
+				</td>
+				<td>客户状态</td>
+				<td>
+					<select name="clientstatus" style="width: 120px;">
+						<option value="0">全部</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 1}" value="1">无</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 2}" value="2">正常</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 3}" value="3">活跃</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 4}" value="4">睡眠</option>
+						<option th:attr="selected=${clienthuixian.clientstatus == 5}" value="5">流失</option>
+					</select>
+				</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr align="center" height="60px">
+				<td colspan="8" width="100px">
+					<input type="submit"  value="查询" style="margin-right: 30px;"/>
+					<input type="reset" value="重置"  style="margin-right: 30px;"/>
+					<input type="submit"  value="高级查询" />
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" id="yeshu" name="pagenum">
+	</form>
+		<hr />
+		
+		<table  width="90%" align="center" >
+			<tr>
+				<td>
+					<a href="addjigouClient">
+						<input style="width: 80px;" type="button" value="新建" />
+					</a>
+				</td>
+			</tr>
+		</table>
+			
+		<table style="border: none; margin-top: 20px;" align="center" width="90%" border="1" cellpadding="0" cellspacing="0">
+
+				
+			<tr align="center">
+				<td>选择</td>
+				<td>客户类型</td>
+				<td>客户编号</td>
+				<td>客户名称</td>
+				<td>证件类型</td>
+				<td>证件号码</td>
+				<td>客户等级</td>
+				<td>客户状态</td>
+				<td>客户经理</td>
+				<td>是否事实客户</td>
+				<td>理财账号</td>
+			</tr>
+
+			<tr th:each="cli:${client.list}" align="center" >
+				<td>
+					<input type="checkbox" />
+				</td>
+
+				<td th:text="'机构'" th:if="${cli.clientType == 1}"></td>
+				<td th:text="'自然人'" th:if="${cli.clientType == 2}"></td>
+				<td th:text="'全部'" th:if="${cli.clientType == 3}"></td>
+
+				<td th:text="${cli.clientid}"></td>
+				<td th:text="${cli.clientName}"></td>
+				<td th:text="${cli.cert.certtype}"></td>
+				<td th:text="${cli.certnumber}"></td>
+
+				<td th:text="'高级客户'" th:if="${cli.clientlevel == 1}"></td>
+				<td th:text="'VIP客户'" th:if="${cli.clientlevel == 2}"></td>
+
+				<td th:text="'全部'"  th:if="${cli.clientstatus == 1}"></td>
+				<td th:text="'无'"  th:if="${cli.clientstatus == 2}"></td>
+				<td th:text="'正常'"  th:if="${cli.clientstatus == 3}"></td>
+				<td th:text="'活跃'"  th:if="${cli.clientstatus == 4}"></td>
+				<td th:text="'睡眠'"  th:if="${cli.clientstatus == 5}"></td>
+				<td th:text="'流失'"  th:if="${cli.clientstatus == 6}"></td>
+
+				<td th:text="'张国强'" th:if="${cli.Fmid == 1}"></td>
+				<td th:text="'李佳霖'" th:if="${cli.Fmid == 2}"></td>
+				<td th:text="'郭德纲'" th:if="${cli.Fmid == 3}"></td>
+				<td th:text="'蔡文姬'" th:if="${cli.Fmid == 4}"></td>
+				<td th:text="'狄仁杰'" th:if="${cli.Fmid == 5}"></td>
+
+				<td th:text="'全部'"  th:if="${cli.Fact == 1}"></td>
+				<td th:text="'是'"  th:if="${cli.Fact == 2}"></td>
+				<td th:text="'否'"  th:if="${cli.Fact == 3}"></td>
+
+
+				<td th:text="${cli.FinanID}"></td>
+
+			</tr>
+			<tr>
+				<td colspan="11">
+					<input type="checkbox" name=""  value="" />当前页面全选
+					
+				</td>
+			</tr>
+			<tr align="center" >
+				<td colspan="11">
+
+					每页显示记录
+					<select name=""  style="width: 60px;">
+						<option value="">10条</option>
+					</select>
+
+					<button name="pagenum" th:no="1">首页</button>
+					<button name="pagenum" th:no="${client.prePage}">上一页</button>
+					<button name="pagenum" th:no="${client.pageNum+1}">下一页</button>
+					<button name="pagenum" th:no="${client.pages}">尾页</button>
+					<input type="hidden" id="fff" th:value="${client.pages}">
+				</td>
+			</tr>
+		</table>
+	<script type="text/javascript" >
+
+        $("button[name='pagenum']").click(function () {
+            var pages = $("#fff").val();
+            var pageSize=3;
+            var pagno = $(this).attr("no");
+            var data=$("#form").serialize();
+            if (pagno <= 1) {
+                pagno = 1;
+            }
+            if (pagno >= pages) {
+                pagno = pages;
+            }
+            $("#yeshu").val(pagno);
+            //location.href = 'queryjigouAll?pagenum='+ pagno+"&pageSize="+pageSize+"&"+data;
+        	$('form').submit();
+        })
+
+	</script>
+
+		
+	</body>
+</html>

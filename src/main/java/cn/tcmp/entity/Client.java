@@ -2,6 +2,7 @@ package cn.tcmp.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -25,12 +26,14 @@ public class Client{
 	private Integer risklevelTE;
 	private Integer risklevelFE;
 	private String FinanID;
-	private Contacts contactsid;//联系人
+	private Contacts contacts;//联系人
 	private Secondarymanager secondarymanager;
 	private Integer assset;
 	private Integer gender;
 	private Integer certtime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdateZC;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdateLC;
 	private String nationality;
 	private Integer marital;
@@ -175,12 +178,12 @@ public class Client{
 		FinanID = finanID;
 	}
 
-	public Contacts getContactsid() {
-		return contactsid;
+	public Contacts getContacts() {
+		return contacts;
 	}
 
-	public void setContactsid(Contacts contactsid) {
-		this.contactsid = contactsid;
+	public void setContacts(Contacts contacts) {
+		this.contacts = contacts;
 	}
 
 	public Secondarymanager getSecondarymanager() {
@@ -461,7 +464,7 @@ public class Client{
 				", risklevelTE=" + risklevelTE +
 				", risklevelFE=" + risklevelFE +
 				", FinanID='" + FinanID + '\'' +
-				", contactsid=" + contactsid +
+				", contacts=" + contacts +
 				", secondarymanager=" + secondarymanager +
 				", assset=" + assset +
 				", gender=" + gender +

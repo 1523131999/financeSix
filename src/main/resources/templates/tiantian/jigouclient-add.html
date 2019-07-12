@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -9,7 +9,7 @@
 			}
 		</style>
 		<script type="text/javascript" src="js/laydate.js"></script>
-		<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
 	</head>
 	<body>
 		<table align="center" width="90%">
@@ -21,14 +21,15 @@
 				</td>
 				<td>是否事实客户:</td>
 				<td>
-					<input type="text" value="否" disabled="disabled">
+					<input type="text" value="否" name="Fact" disabled="disabled">
 				</td>
 			</tr>
 			<tr>
 				<td>证件类型:</td>
 				<td>
-					<select name="clientType"  style="width: 124px; height: 24px;">
-						<option value="">技术监督局代码</option>
+					<select name="creatid"  style="width: 124px; height: 24px;">
+						<option value="0">全部</option>
+						<option th:each="cert1:${cert}" th:text="${cert1.certtype}"  th:value="${cert1.certid}">身份证</option>
 					</select>
 				</td>
 				<td>风险评级(信托版):</td>
@@ -49,11 +50,11 @@
 			<tr>
 				<td>证件有效期:</td>
 				<td>
-					<input style="width: 100px;" class="laydate-icon" id="demo" value=""> 
+					<input style="width: 100px;" name="certtime">
 				</td>
 				<td>手机号码:</td>
 				<td>
-					<input type="text" style="width: 120px;" name=""/>
+					<input type="text" style="width: 120px;" name="phone"/>
 				</td>
 			</tr>
 			<tr>
@@ -82,7 +83,11 @@
 				<td>法人代表证件类型:</td>
 				<td>
 					<select name="clientType"  style="width: 124px; height: 24px;">
-						<option value="">身份证</option>
+						<option value="0">全部</option>
+						<option value="1">身份证</option>
+						<option value="2">外籍护照</option>
+						<option value="3">港澳居民往来内地通行证</option>
+						<option value="4">台胞证</option>
 					</select>
 				</td>
 				<td>联系电话:</td>
@@ -93,9 +98,7 @@
 			<tr>
 				<td>法人代表证件号码:</td>
 				<td>
-					<select name="Lcertnumber"  style="width: 124px; height: 24px;">
-						<option value="">未婚</option>
-					</select>
+					<input type="text" style="width: 120px;" name="Lcertnumber"/>
 				</td>
 				<td>主要客户经理:</td>
 				<td>
@@ -105,7 +108,7 @@
 			<tr>
 				<td>法人代表证件有效期:</td>
 				<td>
-					<input style="width: 100px;" class="laydate-icon" id="demo" value="" name="Lcerttime">
+					<input style="width: 100px;" name="Lcerttime">
 				</td>
 				<td>备注:</td>
 				<td>
@@ -120,7 +123,14 @@
 				<td>注册币种:</td>
 				<td>
 					<select name="currency"  style="width: 124px; height: 24px;">
-						<option value="">人民币</option>
+						<option value="0"></option>
+						<option value="1">人民币</option>
+						<option value="2">港币</option>
+						<option value="3">台币</option>
+						<option value="4">美元</option>
+						<option value="5">韩币</option>
+						<option value="6">欧元</option>
+						<option value="7">加元</option>
 					</select>
 				</td>
 			</tr>
@@ -129,9 +139,9 @@
 				<td>
 					<input type="text" style="width: 120px;" name="registermoney"/>
 				</td>
-				<td></td>
+				<td>注册地址:</td>
 				<td>
-
+					<input type="text" style="width: 120px;" name="registermoney"/>
 				</td>
 			</tr>
 			<tr style="text-align: center">
@@ -141,6 +151,71 @@
 				</td>
 			</tr>
 		</table>
+
+		<div id="xianshi" style="width: 800px;height: 300px;background-color: azure;display: none;position: absolute;left: 300px;top: 150px;">
+			<table style="border: none; margin-top: 20px;" border="1" cellpadding="0" cellspacing="0"align="center" width="80%">
+				<tr>
+					<td colspan="4" height="30px">职业信息</td>
+				</tr>
+				<tbody id="css01">
+
+				<tr>
+					<td>职业:</td>
+					<td>
+						<input type="text" name="occpation"/>
+					</td>
+					<td>所属行业:</td>
+					<td>
+						<select name="trade"  style="width: 160px; height: 20px;">
+							<option value="">工业生产</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>工作单位名称:</td>
+					<td>
+						<input type="text" name="Workunitname"/>
+					</td>
+					<td>单位性质:</td>
+					<td>
+						<select name="nature"  style="width: 160px; height: 20px;">
+							<option value="">国有</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>职位职务:</td>
+					<td>
+						<input type="text" name="position"/>
+					</td>
+					<td>职称:</td>
+					<td>
+						<select name="Title"  style="width: 160px; height: 20px;">
+							<option value="">高级</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>是否单位实际控制人:</td>
+					<td>
+						<select name="ontroller"  style="width: 160px; height: 20px;">
+							<option value="">请选择</option>
+						</select>
+					</td>
+					<td>工龄（年）:</td>
+					<td>
+						<input type="text" name="workingyears"/>
+					</td>
+				</tr>
+				</tbody>
+				<tr style="text-align: center"  height="60px">
+					<td colspan="4">
+						<input type="button"onclick="zhiye()" id="xianshi2"  value="保存" style="background-color: dodgerblue; color: white; width: 70px;"/>
+						<input type="reset" value="取消" style="margin-left: 20px;background-color: dodgerblue; color: white; width: 70px;" />
+					</td>
+				</tr>
+			</table>
+		</div>
 	</body>
 	<script type="text/javascript">
 		!function(){
@@ -155,6 +230,7 @@
 		
 		function zhiye(){
 			var xian = $('#zhiye').attr("xian");
+
 			if(xian == 'x'){
 				$("#xianshi").css("display","block");
 				$('#zhiye').attr("xian","y");

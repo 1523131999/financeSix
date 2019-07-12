@@ -22,7 +22,9 @@ public interface TTClientMapper {
     //证件查询
     List<Cert> queryCertAll(@Param("cert")Cert cert);
     //查询机构客户
-    List<Client> queryjigouAll(Client client);
+    List<Client> queryjigouAll(@Param("client") Client client);
+    //联系人查询
+    List<Contacts> queryContactsAll(Contacts contacts);
 
 
 }
