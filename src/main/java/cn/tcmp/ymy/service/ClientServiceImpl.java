@@ -120,5 +120,23 @@ public class ClientServiceImpl implements ClientService {
         return mapper.addBro(brokeragerelations);
     }
 
+    @Override
+    public PageInfo<Brokeragerelations> queryByBro(Brokeragerelations brokeragerelations, String startDate, String endDate, Integer pageSize, Integer pageNum) {
+       PageHelper.startPage(pageNum,pageSize);
+        List<Brokeragerelations> list=mapper.queryByBro(brokeragerelations,startDate,endDate);
+        PageInfo<Brokeragerelations> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @Override
+    public Integer updateStatus(Brokeragerelations brokeragerelations) {
+        return mapper.updateStatus(brokeragerelations);
+    }
+
+    @Override
+    public Brokeragerelations detailBro(Integer id) {
+        return mapper.detailBro(id);
+    }
+
 
 }

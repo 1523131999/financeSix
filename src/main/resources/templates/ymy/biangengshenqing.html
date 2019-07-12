@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
 		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
 		<script type="text/javascript">
             $(function () {
@@ -20,7 +22,7 @@
 	</head>
 	<body>
 	<form>
-			<table border="1">
+			<table border="1" class="layui-table">
 				<tr>
 					<td>客户名称：</td>
 					<td><input type="text" name="clientName"/></td>
@@ -50,7 +52,7 @@
 
 <br />3、客户经纪关系变更申请，只船针对主要理财经理与客户之间的经纪关系进行,次要理财经理与客户之间的关系不能在此进行申请，<br />4、当客户出于经纪关系交更流程中未结束时,不允许进行分配转移客户，
 </p>
-				<button id="button">确定</button><button>取消</button>
+				<button id="button" class="layui-btn layui-btn-normal layui-btn-radius">确定</button><button class="layui-btn layui-btn-normal layui-btn-radius">取消</button>
 
 	</body>
 </html>

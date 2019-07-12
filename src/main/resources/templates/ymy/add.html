@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
 		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
 		<script type="text/javascript">
 			$(function () {
@@ -30,7 +32,7 @@
 	<body>
 	<form id="form" action="" method="post">
 
-		<table border="1">
+		<table border="1" class="layui-table">
 			<tr>
 				<td rowspan="5">当前选择客户</td>
 				<td></td>
@@ -62,7 +64,7 @@
 				<td colspan="2"><textarea rows="5" cols="50" name="addresason"></textarea></td>
 			</tr>
 		</table>
-		<input id="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;<button>取消</button>
+		<input id="submit" value="提交" class="layui-btn layui-btn-normal layui-btn-radius">&nbsp;&nbsp;&nbsp;&nbsp;<button class="layui-btn layui-btn-normal layui-btn-radius">取消</button>
 	</form>
 	</body>
 </html>

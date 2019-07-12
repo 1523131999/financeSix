@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+		<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}"></script>
+		<script type="text/javascript">
+            $(function () {
+                $("button[name='jkl']").click(function () {
+                    var pages = $("#fff").val();
+                    var pagno = $(this).attr("no");
+                    var data = $("#form").serialize();
+                    var pagesize = $("#pagesize").val();
+                    pages=parseInt(pages);
+                    pagno=parseInt(pagno);
+                    if (pagno <= 1) {
+                        pagno = 1;
+                    }
+                    if (pages <= pagno) {
+                        pagno=pages;
+                    }
+                    location.href = 'queryBybro?pageNum=' + pagno + "&pageSize=" + pagesize + "&" + data;
+                })
+                $("#toAddBro").click(function () {
+                    location.href='toAddBro';
+                })
+                $("#button").click(function () {
+                    var check = $(".check");
+                    var ids=[];
+					var names=[];
+                    for (i = 0; i < check.length; i++) {
+                        if (check[i].checked == true) {
+                            var id=parseInt(check[i].value);
+							names.push($(check[i]).parent().next().text());
+                            ids.push(id);
+
+                        }
+                    }
+                    names=$.makeArray(names);
+                    ids= $.makeArray(ids);
+					location.href='toShenpi?names='+names+'&ids='+ids;
+                })
+            })
+		</script>
+	</head>
+	<body>
+		认领客户<br />
+		<form action="/queryBybro" method="get" id="form">
+
+		客户名称<input type="text" name="client.clientName" th:value="${bro.client.clientName}"/>&nbsp;&nbsp;&nbsp;&nbsp;创建时间<input type="text" name="startDate" th:value="${startDate}"/>-------<input type="text" name="endDate" th:value="${endDate}"/>&nbsp;&nbsp;&nbsp;
+				<input value="查询" type="submit" class="layui-btn layui-btn-normal layui-btn-radius"><br />
+				<button type="button" id="button" class="layui-btn layui-btn-normal layui-btn-radius">执行审批</button>
+				<table class="layui-table">
+					<tr>
+						<td>操作</td>
+						<td>客户名称</td>
+						<td>证件类型</td>
+						<td>证件号码</td>
+						<td>客户类型</td>
+						<td>发起人</td>
+						<td>客户状态</td>
+					</tr>
+					<tr th:each="item:${pageinfo.list}">
+						<td><input type="checkbox" th:value="${item.blid}" class="check"></td>
+						<td th:text="${item.client.clientName}" name="clientName">xxxx</td>
+						<td th:if="${item.client.cert.certid eq 1}">身份证</td>
+						<td th:if="${item.client.cert.certid eq 2}">护照</td>
+						<td th:text="${item.client.certnumber}">xxxx</td>
+						<td th:if="${item.client.clientType eq 1}">自然人</td>
+						<td th:if="${item.client.clientType eq 2}">金融机构</td>
+						<td th:if="${item.client.clientType eq 3}">非金融机构</td>
+						<td th:text="${item.Initiator}">xxxx</td>
+						<td th:if="${item.examinationstatus eq 1}"	>待审批</td>
+					</tr>
+
+				</table>
+			每页显示记录 <select name="pagesize" id="pagesize">
+			<option value="3">3条</option>
+			<option th:selected="${pagesize}==10" value="10">10条</option>
+			<option th:selected="${pagesize}==15" value="15">15条</option>
+			<option th:selected="${pagesize}==20" value="20">20条</option>
+		</select>
+		</form>
+		<button name="jkl" th:no="1">首页</button>
+		<button name="jkl" th:no="${pageinfo.prePage}">上一页</button>
+		<button name="jkl" th:no="${pageinfo.pageNum+1}">下一页</button>
+		<button name="jkl" th:no="${pageinfo.pages}">尾页</button>
+		<input type="hidden" id="fff" th:value="${pageinfo.pages}">
+	</body>
+</html>

@@ -13,15 +13,63 @@
         <id column="clientid" property="clientid"></id>
     </resultMap>
 
+    <!--黑名单查询-->
+    <select id="queryAllBlickByClient" parameterType="Blacklist" resultMap="BlickMap">
+        SELECT c.`clientid`,c.`clientName`,c.`clientType`,c.`clientstatus`,c.`Fact`,
+        c.`Fmid`,c.`Fmid`,c.`blacklist`,c.`certnumber`,b.`blackremarks`,b.`newaddblackdate`,b.`newrevokeblackdate`
+        ,b.`addingpeople`  FROM  blacklist b,`client`c
+        WHERE b.`clientid`=c.`clientid`
+        <!--黑名单查询,客户名称-->
+        <if test="client.clientName!=null and  client.clientName!=''">
+        and c.clientName like concat('%',#{client.clientName},'%')
+       </if>
+        <!--黑名单查询,客户类型-->
+        <if test="client.clientType!=null and client.clientType!=-1">
+            and c.clientType=#{client.clientType}
+        </if>
+        <!--黑名单查询,客户状态-->
+        <if test="client.clientstatus!=null and client.clientstatus!=-1">
+            and c.clientstatus =#{client.clientstatus}
+        </if>
+        <!--黑名单查询,客户身份证号-->
+         <if test="client.certnumber!=null and client.certnumber!=''">
+             and c.certnumber like concat('%',#{client.certnumber},'%')
+            </if>
+        <!--黑名单查询,客户身份证号-->
+        <if test="client.blacklist!=null and client.blacklist!=-1">
+            and c.blacklist=#{client.blacklist}
+        </if>
+        <!--黑名单查询,客户证件类型-->
+        <if test="client.blacklist!=null and client.blacklist!=-1">
+            and c.blacklist=#{client.blacklist}
+        </if>
 
-    <select id="queryAllBlickByClient" resultMap="BlickMap">
-       SELECT  c.clientid,c.clientName,c.clientType,c.clientstatus,c.Fact,c.Fmid,c.Fmid,c.blacklist,
-      b.blackremarks,b.newaddblackdate,b.newrevokeblackdate,b.addingpeople
-      FROM `client` c,blacklist b
-      ORDER BY newaddblackdate
+        ORDER BY newaddblackdate
+
     </select>
 
+    <!--查询黑名单客户状态-->
+    <select id="queryBlickId" resultType="Integer" parameterType="Integer">
+      SELECT * FROM CLIENT WHERE blacklist=#{blacklist}
+    </select>
+    <!--修改黑名单状态-->
+    <update id="updateByClientByBlackState" parameterType="Blacklist">
+        UPDATE `client` SET
+              blacklist=#{blacklist}
+            WHERE clientid=#{clientid}
+    </update>
 
+    <!--添加黑名单 -->
+    <update id="upBlacklist" parameterType="Integer">
+       UPDATE `blacklist` SET
+  blackremarks=#{blackremarks}
+    WHERE blackid=#{blackid}
+    </update>
+
+    <!--查询黑名单客户名称-->
+    <select id="queryBlickCName" resultType="Client" parameterType="Integer">
+        select  * from client where clientid=#{id}
+    </select>
 
 
 </mapper>

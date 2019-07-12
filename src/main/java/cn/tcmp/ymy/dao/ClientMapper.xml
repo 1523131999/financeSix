@@ -113,7 +113,7 @@
         <association property="cert" resultMap="cmap"></association>
     </resultMap>
     <select id="queryBroke" resultMap="broMap" parameterType="Brokeragerelations">
-        SELECT * FROM `brokeragerelations`,CLIENT WHERE brokeragerelations.`userid`=client.`clientid`
+        SELECT * FROM `brokeragerelations`,CLIENT,cert WHERE brokeragerelations.`userid`=client.`clientid` and cert.certid=client.certid
         <if test="bro.client.clientName!=null and bro.client.clientName!=''">
            and clientName like concat('%',#{bro.client.clientName},'%')
         </if>
@@ -133,9 +133,23 @@
     </resultMap>
     <resultMap id="omap" type="Client" autoMapping="true">
         <id column="clientid" property="clientid"></id>
+        <association property="cert" resultMap="map3"></association>
     </resultMap>
-
-
+    <select id="queryByBro" parameterType="Brokeragerelations" resultMap="broMap">
+        select * from Brokeragerelations,client,cert where examinationstatus=1 and cert.certid=client.certid and Brokeragerelations.userid=client.clientid
+        <if test="bro.client.clientName!=null and bro.client.clientName!=''">
+            and client.clientname like concat('%',#{bro.client.clientName},'%')
+        </if>
+        <if test="startDate!=null and startDate!=''">
+            Brokeragerelations.submissiondate>#{startDate}
+        </if>
+        <if test="endDate!=null and endDate!=''">
+            Brokeragerelations.submissiondate&lt;#{endDate}
+        </if>
+    </select>
+    <select id="detailBro" parameterType="integer" resultMap="broMap">
+        SELECT * FROM `brokeragerelations`,CLIENT,cert WHERE brokeragerelations.`userid`=client.`clientid` AND cert.certid=client.certid AND brokeragerelations.`blid`=#{id};
+    </select>
 
 
 

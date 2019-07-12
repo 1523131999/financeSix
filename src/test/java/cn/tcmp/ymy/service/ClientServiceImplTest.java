@@ -29,9 +29,14 @@ public class ClientServiceImplTest {
     }
 
     @Test
-    public void queryAll() {
-        Client client = new Client();
-        PageInfo<Client> clientPageInfo = service.queryAllFact(client, 1, 2);
-
+    public void queryAdd() {
+        Client client=new Client();
+        client.setFmid(1);
+        Cert cert=new Cert();
+        client.setCert(cert);
+       PageInfo<Client>list=service.queryAdd(client,1,3);
+        for (Client client1 : list.getList()) {
+            System.out.println(client1);
+        }
     }
 }

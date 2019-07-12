@@ -4,75 +4,89 @@
 		<meta charset="{CHARSET}">
 		<title>黑名单管理</title>
 
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+
 	</head>
 	<body>
-	<div>
+
 		<h2 align="center">黑名单管理</h2>
-		<table border="1" align="center" cellpadding="0" cellspacing="0" id="table1">
+		<!--模糊查询(客户名称)-->
+
+		<form  align="center" action="/wblick/queryAll" method="get">
+		<table  border="1" align="center" cellpadding="0" cellspacing="0" id="table1" class="layui-table">
+					<tr>
+				<td>
+				客户名称:
+					<form action="/wblick/queryAll" method="get">
+				<input type="text" name="client.clientName" id="selectname"  th:value="${blist.client.clientName}" />
+				<button type="submit">查询</button></form>
+			</td>
+
+				<td>
+				客户类型:
+					<select  name="client.clientType" >
+						<option value="-1" th:selected="${blist.client.clientType==-1}" >--请选择--</option>
+						<option value="1" th:selected="${blist.client.clientType==1}" >--机构--</option>
+						<option value="2" th:selected="${blist.client.clientType==2}" >--自然人--</option>
+						<option value="3" th:selected="${blist.client.clientType==3}" >--全部--</option>
+					</select>
+				</td>
+						<td>
+
+						</td>
+					</tr>
 			<tr>
 				<td>
-				客户名称:<input type="text" name="select" align="left">
-				<button align="left" id="FromButton1">查询</button>
+
+					证件号码:<input type="text" align="right"  name="client.certnumber"  th:value="${blist.client.certnumber}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+				客户状态:
+					<select name="client.clientstatus">
+						<option value="-1" th:selected="${blist.client.clientstatus==-1}">--请选择--</option>
+						<option value="1" th:selected="${blist.client.clientstatus==1}">全部</option>
+						<option value="2" th:selected="${blist.client.clientstatus==2}">无</option>
+						<option value="3" th:selected="${blist.client.clientstatus==3}">正常</option>
+						<option value="4" th:selected="${blist.client.clientstatus==4}">活跃</option>
+						<option value="5" th:selected="${blist.client.clientstatus==5}">睡眠</option>
+						<option value="6" th:selected="${blist.client.clientstatus==6}">流失</option>
+					</select>
 			</td>
 				<td>
-				客户类型:<input type="text" name="select" align="left">
-				<select>
-					<option selected="selected">0</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
+				是否以添加黑名单:
+					<select name="client.blacklist">
+					<option value="-1" th:selected="${blist.client.blacklist==-1}">--请选择--</option>
+					<option value="1" th:selected="${blist.client.blacklist==1}">--是--</option>
+					<option value="2" th:selected="${blist.client.blacklist==2}">--否--</option>
 				</select>
 			</td>
-				<td>
-				证件类型:<input type="text" name="select" align="left">
-				<select>
-					<option selected="selected">0</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-				</select>
-			</td>
-				
 			</tr>
-			
-			<tr>
-				<td>
-			证件号码:	<input type="text" name="select" align="left">
-			</td>
-				<td>
-				客户状态:<input type="text" name="select" align="left">
-					<select>
-					<option selected="selected">0</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-				</select>
-			</td>
-				<td>
-				是否以添加黑名单:<input type="text" name="select" align="left">
-					<select>
-					<option selected="selected">0</option>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-				</select>
-			</td>
-				
-			</tr>
-				
+
 		</table>
-		<p align="center">
-			<input type="button" value="查询">
-			<input type="reset" value="重置">
-								
-			</p>
 			<p align="center">
-				<button >添加黑名单</button>
-				<button >撤销黑名单</button>
-			</p>
+				<input class="layui-btn layui-btn-normal layui-btn-radius" type="submit" value="查询" >
 
-			<table border="1" cellpadding="0" cellspacing="0" align="center">
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<input class="layui-btn layui-btn-normal layui-btn-radius" type="reset" value="重置">
 
+			<p/>
+
+		</form>
+		<br>
+		<p>
+			<form action="/wblick/updateBlack" method="post" align="left">
+						<input class="layui-btn layui-btn-normal layui-btn-radius" type="submit" value="撤销黑名单" id="updateBlack"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input  type="button"   id="add" value="添加黑名单" class="layui-btn layui-btn-normal layui-btn-radius"/>
+					</form>
+				</p>
+
+
+			<table class="layui-table" border="1" cellspacing="0" align="center">
+				<br>
+
+				<br>
 				<tr >
 					<td>选择</td>
 					<td>客户名称</td>
@@ -88,36 +102,161 @@
 					<td>添加人</td>
 				</tr>
 
-				<tr th:each="black:${blacklist}">
+				<tr th:each="blacklist:${pageInfo.list}">
 					<td align="center">
-						<input type="checkbox" name="clientid">
+						<input type="checkbox" class="check" name="clientid" th:value="${blacklist.client.clientid}">
+
+						<input type="hidden"  class="hidden" th:value="${blacklist.blackid}">
+						<input type="hidden"  class="hidden" id="clientid" th:value="${blacklist.client.clientid}">
 					</td>
-					<td th:text="${black.clientName}"></td>
-					<td th:text="${black.clientType}"></td>
-					<td th:text="${black.clientstatus}"></td>
-					<td th:text="${black.Fact}"></td>
-					<td th:text="${black.Fmid}"></td>
-					<td th:text="${black.Fact}"></td>
-					<td th:text="${black.blacklist}"></td>
-					<td th:text="${black.blackremarks}"></td>
-					<td th:text="${black.newaddblackdate}"></td>
-					<td th:text="${black.newrevokeblackdate}"></td>
-					<td th:text="${black.addingpeople}"></td>
+
+					<td th:text="${blacklist.client.clientName}"></td>
+					<!--<td th:text="${blacklist.client.clientType}"></td>-->
+					<td th:if="${blacklist.client.clientType eq 1}">机构</td>
+					<td th:if="${blacklist.client.clientType eq 2}">自然人</td>
+					<td th:if="${blacklist.client.clientType eq 3}">全部</td>
+
+					<!--<td th:text="${blacklist.client.clientstatus}"></td>-->
+					<td th:if="${blacklist.client.clientstatus eq 1}">全部</td>
+					<td th:if="${blacklist.client.clientstatus eq 2}">无</td>
+					<td th:if="${blacklist.client.clientstatus eq 3}">正常</td>
+					<td th:if="${blacklist.client.clientstatus eq 4}">活跃</td>
+					<td th:if="${blacklist.client.clientstatus eq 5}">睡眠</td>
+					<td th:if="${blacklist.client.clientstatus eq 6}">流失</td>
+					<!--<td th:text="${blacklist.client.Fact}"></td>-->
+					<td th:if="${blacklist.client.Fact eq 1}">全部</td>
+					<td th:if="${blacklist.client.Fact eq 2}">是</td>
+					<td th:if="${blacklist.client.Fact eq 3}">否</td>
+
+					<!--<td th:text="${blacklist.client.Fmid}"></td>-->
+					<td th:if="${blacklist.client.Fmid eq 1}">主要理财经理</td>
+					<td th:if="${blacklist.client.Fmid eq 2}">次要理财经理</td>
+					<td th:text="${blacklist.client.Fmid}"></td>
+					<!--<td th:text="${blacklist.client.blacklist}"></td>-->
+					<td th:if="${blacklist.client.blacklist eq 1}">是</td>
+					<td th:if="${blacklist.client.blacklist eq 2}">否</td>
+
+					<td th:text="${blacklist.blackremarks}"></td>
+					<td th:text="*{#dates.format(blacklist.newaddblackdate,'yyyy-MM-dd')}"></td>
+					<td th:text="*{#dates.format(blacklist.newrevokeblackdate,'yyyy-MM-dd')}"></td>
+					<td th:text="${blacklist.addingpeople}"></td>
+
 
 				</tr>
 
 			</table>
-		<p align="center">
-		每页显示记录	<select >
-		<option>10条</option>
-		<option>15条</option>
-		<option>20条</option>
-	</select>
-		<button>首页</button>&nbsp;&nbsp;<button><上一页></上一页></button><button>下一页></button><button>末页</button>第1页/共25页  到第<input type="text" />页<button>转到</button>
-		</p>
-	</div>
+		<p align="left">
+			<input type="checkbox" id="checkAll">当前页面全选</td>
 
-			
+		</p>
+
+		<p align="center">
+			共<span th:text="${pageInfo.total}"></span>条记录
+			[<span th:text="${pageInfo.pageNum}"></span>  /
+			<span th:text="${pageInfo.pages}"></span>
+			]
+
+			<button name="query" th:no="1">首页</button>
+			<button name="query" th:no="${pageInfo.prePage}">上一页</button>
+			<button name="query" th:no="${pageInfo.pageNum+1}">下一页</button>
+			<button name="query" th:no="${pageInfo.pages}">尾页</button>
+			<input type="hidden" id="pages" th:value="${pageInfo.pages}">
+		</p>
+
+
 	</body>
+	<script type="text/javascript" th:src="@{/js/jquery-1.12.4.js}">
+
+	</script>
+	<script type="text/javascript">
+
+		$(function () {
+					$("#add").click(function () {
+						var ids=[];
+						var check=$(".check");
+                        for (i = 0; i < check.length; i++) {
+                            if (check[i].checked == true) {
+								ids.push(parseInt(check[i].value));
+                            }
+                        }
+                        ids= $.makeArray(ids);
+						alert(ids);
+						location.href='/wblick/queryBlickCName?clientid='+ids;
+                    })
+
+
+			//全选黑名单
+            $("#checkAll").change(function () {
+                if ((this).checked) {
+                    $(".check").attr("checked","checked");
+
+                }
+
+                else {
+                    $(".check").attr("checked",false);
+                }
+
+            })
+
+				//撤销黑名单
+            $("#updateBlack").click(function () {
+                var  check=$(".check");
+                var smids=$(".hidden");
+                var boxs=[];
+                var smid=[];
+
+                for(i=0;i<check.length;i++){
+                    if( check[i].checked == true){
+
+                        boxs.push(check[i].value);
+                        smid.push(smids[i].value);
+                    }
+                }
+                boxs=$.makeArray(boxs);
+                smid=$.makeArray(smid);
+                $.ajax({
+                    url: 'updateBlack',
+                    data:{ids:boxs,smids:smid},
+                    type:'post',
+                    traditional:true,
+                    success:function (data) {
+                        for(var i=0;i<boxs.length;i++){
+                          //  alert(boxs[i]+"号	"+data[boxs[i]])
+                            location.href='queryAll';
+                        }
+
+                    },
+                    error:function (error) {
+                       alert(error);
+                    }
+                })
+            })
+
+
+
+            //隔行变色
+            $("tr:even").css("background","#ccc");
+
+            //分页按钮的单击
+            $("button[name='query']").click(function () {
+                //获取分页的页码
+                var pageNo=$(this).attr("no");
+                if(pageNo<=0){
+                    pageNo=1;
+				alert("pageNo");
+                }
+                if(pageNo>=$("#pages").val()){
+                    pageNo=$("#pages").val();
+                    alert("pages");
+                }
+                //分页访问
+                location.href="queryAll?pageNo="+pageNo;
+
+            })
+
+        });
+
+
+	</script>
 
 </html>
