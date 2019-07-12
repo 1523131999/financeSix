@@ -22,13 +22,14 @@
 <ul class="layui-nav layui-bg-green" lay-filter="component-nav">
 	<li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
 	<li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
-	<li class="layui-nav-item"><a href="javascript:;">预约</a></li>
-	<li class="layui-nav-item"><a href="javascript:;">经纪关系</a></li>
-	<li class="layui-nav-item"><a href="javascript:;">联系人</a></li>
+	<li class="layui-nav-item"><a href="/client/toyuyue">预约</a></li>
+	<li class="layui-nav-item"><a href="/client/tojingjiren">经纪关系</a></li>
+	<li class="layui-nav-item"><a href="/client/tolianxiren">联系人</a></li>
 	<li class="layui-nav-item"><a href="javascript:;">事件提醒</a></li>
 	<li class="layui-nav-item"><a href="javascript:;">附件</a></li>
 </ul>
 <!--选项卡结束-->
+
 <span>
 		<table class="layui-table">
 			<tr align="left" height="" style="margin: 0px;padding: 0px">
@@ -38,31 +39,31 @@
 			</tr>
 		</table>
 	</span>
-<form action="queryNowAssets" id="form" method="get">
+<form action="/client/toyuyue" id="form" method="get">
 
 	<table align="center" width="90%" >
 		<br/>
 		<tr height="50px">
 			<td width="">到账状态</td>
 			<td  style="font-size: 11px;">
-				<input type="checkbox" name=""    value="未到账"  />未到账
-				<input type="checkbox" name=""  value="确认中" />确认中
-				<input type="checkbox" name=""  value="部分到账" />部分到账
-				<input type="checkbox" name=""  value="足额到账" />足额到账
+				<input type="checkbox" name="arrivalslist"  class="a"  value="1"  />未到账
+				<input type="checkbox" name="arrivalslist" class="a" value="2" />确认中
+				<input type="checkbox" name="arrivalslist" class="a" value="3" />部分到账
+				<input type="checkbox" name="arrivalslist" class="a"value="4" />足额到账
 			</td>
 			<td width="">预约状态</td>
 			<td  style="font-size: 11px;">
-				<input type="checkbox" name=""    value="排队中"  />排队中
-				<input type="checkbox" name=""  value="已撤销" />已撤销
-				<input type="checkbox" name=""  value="已过期" />已过期
-				<input type="checkbox" name=""  value="排队成功" />排队成功
+				<input type="checkbox" name="appoislist"  class="a" value="1"  />排队中
+				<input type="checkbox" name="appoislist"  class="a" value="2" />已撤销
+				<input type="checkbox" name="appoislist"  class="a" value="3" />已过期
+				<input type="checkbox" name="appoislist"  class="a" value="4" />排队成功
 			</td>
 			<td width="">收款收据状态</td>
 			<td  style="font-size: 11px;">
-				<input type="checkbox" name=""    value="未申请"  />未申请
-				<input type="checkbox" name=""  value="已导出" />已导出
-				<input type="checkbox" name=""  value="已申请" />已申请
-				<input type="checkbox" name=""  value="已撤销" />已撤销
+				<input type="checkbox" name="rrstatelist"  class="a"  value="1"  />未申请
+				<input type="checkbox" name="rrstatelist" class="a"   value="2" />已导出
+				<input type="checkbox" name="rrstatelist" class="a"   value="3" />已申请
+				<input type="checkbox" name="rrstatelist" class="a"    value="4" />已撤销
 			</td>
 
 
@@ -74,28 +75,29 @@
 
 			<td>项目名称:</td>
 			<td >
-				<input type="text"name="" id=""/>
+				<input type="text"name="Entryname" id="Entryname"/>
 			</td>
-			<td>销售渠道:</td>
+			<td>客户名称:</td>
 			<td >
-				<input type="text" id="Distributionchannel" name="Distributionchannel"/>
+				<input type="text" id="clientName" name="clientName"/>
 			</td>
-			<td>预约时间:</td>
-			<td >
-				<input type="text"  id="" name="Distributionchannel"/>&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text"   id="" name="Distributionchannel"/>
-			</td>
+			<td></td>
+			<!--<td >
+				<input type="text"  id="appoindate" name="appoindate"/>&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text"   id="" name="actualdate"/>
+			</td>-->
 
 
 		</tr>
 		<tr align="center" height="60px">
 			<td colspan="6" width="100px">
-				<button class="layui-btn layui-btn-normal layui-btn-radius" id="query">查询</button>
-				<button class="layui-btn layui-btn-normal layui-btn-radius" id="reset">重置</button>
+
+				<button class="layui-btn layui-btn-normal layui-btn-radius" type="submit" id="query">查询</button>
+				<button class="layui-btn layui-btn-normal layui-btn-radius"  type="button" id="reset">重置</button>
 			</td>
 		</tr>
 	</table>
 </form>
-<hr />
+<hr /><!--
 <table  width="90%" align="center"  class="layui-table">
 	<tr>
 		<td>
@@ -104,7 +106,7 @@
 
 		</td>
 	</tr>
-</table>
+</table>-->
 <table class="layui-table" id="dataTable" style="border: none; margin-top: 20px;" align="center" width="90%" border="1" cellpadding="0" cellspacing="0">
 	<tr align="center">
 		<td>操作</td>
@@ -124,11 +126,39 @@
 		<td>实际到期时间</td>
 		<td>收款收据状态</td>
 	</tr>
+	<tr align="center" th:each="a:${pageInfo.list}" th:object="${a}">
+		<td ></td>
+		<td th:if="*{client.clientType eq 1}">自然人</td>
+		<td th:if="*{client.clientType eq 2}">机构</td>
+		<td th:text="*{client.clientName}">客户名称</td>
+		<td th:text="*{item_sheet.Entryname}">项目名称</td>
+		<td th:text="*{appoinm}">预约金额</td>
+		<td th:text="*{appoinyear}">预期年华收益率</td>
+		<td th:text="*{subscriptionf}">认购费率</td>
+		<td th:text="*{subscriptiont}">认购费合计</td>
+		<td th:text="*{#dates.format(appoindate,'yyyy-MM-dd')}">预约时间</td>
+		<td th:text="*{#dates.format(lineupsu,'yyyy-MM-dd')}">预约时间</td>
+		<td th:if="*{appois eq 1}">排队中</td>
+		<td th:if="*{appois eq 2}">已撤销</td>
+		<td th:if="*{appois eq 3}">已过期</td>
+		<td th:if="*{appois eq 4}">排队成功</td>
+		<td th:if="*{businesstype eq 1}">基金</td>
+		<td th:if="*{businesstype eq 2}">信托</td>
+		<td th:if="*{arrivals eq 1}">未到账</td>
+		<td th:if="*{arrivals eq 2}">确认中</td>
+		<td th:if="*{arrivals eq 3}">超额到账</td>
+		<td th:if="*{arrivals eq 4}">足额到账</td>
+		<td th:if="*{contractstate eq 1}">未签订</td>
+		<td th:if="*{contractstate eq 2}">已签订</td>
+		<td th:text="*{#dates.format(actualdate,'yyyy-MM-dd')}">预约时间</td>
+		<td th:if="*{rrstate eq 1}">未申请</td>
+		<td th:if="*{rrstate eq 2}">已导出</td>
+		<td th:if="*{rrstate eq 3}">已申请</td>
+		<td th:if="*{rrstate eq 4}">已撤销</td>
+	</tr>
 
-
-	<!--<tr align="center" >
-		<td colspan="11">
-
+	<tr align="center">
+		<td colspan="16">
 			每页显示记录
 			<select name=""  style="width: 60px;">
 				<option value="">10条</option>
@@ -140,9 +170,40 @@
 			<button name="jkl" th:no="${pageInfo.pages}">尾页</button>
 			<input type="hidden" id="fff" th:value="${pageInfo.pages}">
 		</td>
-	</tr>-->
+	</tr>
 </table>
 <script type="text/javascript" >
+    $(function () {
+
+        //重置
+        $("#reset").click(function () {
+            $("#arrivals").val("");
+            $("#clientName").val("");
+            $("#Entryname").val("");
+            $("#appoindate").val("");
+            var arrivals=$(".a");
+            for (i=0;i<arrivals.length;i++){
+                if(arrivals[i].checked==true){
+                    arrivals[i].checked=false;
+                }
+            }
+        });
+
+        $("button[name='jkl']").click(function () {
+            var pages = $("#fff").val();
+            var pageSize=3;
+            var pagno = $(this).attr("no");
+            var data=$("#form").serialize();
+            if (pagno <= 1) {
+                pagno = 1;
+            }
+            if (pagno >= pages) {
+                pagno = pages;
+            }
+            location.href = 'toyuyue?pageNo='+ pagno+"&pageSize="+pageSize+"&"+data;
+        });
+    })
+
 </script>
 </body>
 </html>
