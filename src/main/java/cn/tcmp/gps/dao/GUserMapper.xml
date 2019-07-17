@@ -50,4 +50,51 @@
     <resultMap id="iMap" type="Item_sheet" autoMapping="true">
         <id column="ItemID" property="ItemID"/>
     </resultMap>
+
+
+    <select id="selectContacts" parameterType="Integer" resultType="Contacts">
+        SELECT co.* FROM `client` c,`contacts` co WHERE c.contactsid=co.contactid AND c.clientid=#{id}
+    </select>
+
+    <insert id="insertAppointment" parameterType="Appointment">
+
+INSERT INTO `financedb`.`appointment` (
+
+  `clientid`,
+  `projectid`,
+  `appoinm`,
+  `appoinyear`,
+  `subscriptionf`,
+  `subscriptiont`,
+  `appoindate`,
+  `lineupsu`,
+  `appois`,
+  `appoied`,
+  `businesstype`,
+  `arrivals`,
+  `contractstate`,
+  `actualdate`,
+  `rrstate`
+)
+VALUES
+  (
+    #{client.clientid},
+    #{item_sheet.ItemID},
+    #{appoinm},
+    #{appoinyear},
+    #{subscriptionf},
+    #{subscriptiont},
+    #{appoindate},
+    #{lineupsu},
+    #{appois},
+    #{appoied},
+    #{businesstype},
+    #{arrivals},
+    #{contractstate},
+    #{actualdate},
+    #{rrstate}
+  );
+
+    </insert>
+
 </mapper>

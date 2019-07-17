@@ -2,6 +2,7 @@ package cn.tcmp.gps.service;
 
 import cn.tcmp.entity.Appointment;
 import cn.tcmp.entity.Client;
+import cn.tcmp.entity.Contacts;
 import cn.tcmp.entity.Item_sheet;
 import cn.tcmp.gps.dao.GUserMapper;
 import com.github.pagehelper.PageHelper;
@@ -24,5 +25,15 @@ public class GUserServiceImpl implements GUserService {
         return  pageInfo;
 
 
+    }
+
+    @Override
+    public Contacts selectContacts(Integer id) {
+        return gUserMapper.selectContacts(id);
+    }
+
+    @Override
+    public Integer insertAppointment(Appointment appointment) {
+        return gUserMapper.insertAppointment(appointment);
     }
 }

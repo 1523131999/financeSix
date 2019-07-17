@@ -29,7 +29,7 @@ public class GClientController {
     @RequestMapping("queryClientDetail")
     public  String queryClient(Integer id, Model model){
         //项目未集成 所以id 暂时写死
-        id=1;
+      //  id=1;
         Client client=gClientService.query(id);
         List<Assetsrecord> alist=gClientService.queryAllByClientId(id);
         List<Assets> assetsList=gClientService.queryAllAssets(id);
@@ -52,7 +52,17 @@ public class GClientController {
         model.addAttribute("client",client);
         model.addAttribute("alist",alist);
         System.out.println(client);
-        return  "gps/ziranren";
+        if(client.getClientType()==1){//是否是自然人
+
+            if(client.getFact()==1){
+                return  "gps/ziranren";
+            }else{
+                return "gps/qianzai";
+            }
+        }else {
+            return "gps/d";
+        }
+
 
     }
 
@@ -266,12 +276,20 @@ public class GClientController {
 
 
     @RequestMapping(value = "tolianxiren",method = RequestMethod.GET)
-    public  String tojingji(){
+    public  String tojingji(Integer id,Model model){
+        id=1;
+        Contacts contacts=gUserService.selectContacts(id);
+        model.addAttribute("Contacts",contacts);
         return "gps/lianxinren";
     }
     @RequestMapping(value = "tojingjiren",method = RequestMethod.GET)
     public  String tojingjiren(){
         return "gps/jingjiguanxi";
+    }
+
+    @RequestMapping(value = "toqianzai",method = RequestMethod.GET)
+    public  String toqianzai(){
+        return "gps/qianzai";
     }
 
 

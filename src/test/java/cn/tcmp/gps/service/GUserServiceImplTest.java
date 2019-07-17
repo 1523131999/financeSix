@@ -2,6 +2,7 @@ package cn.tcmp.gps.service;
 
 import cn.tcmp.entity.Appointment;
 import cn.tcmp.entity.Client;
+import cn.tcmp.entity.Contacts;
 import cn.tcmp.entity.Item_sheet;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
@@ -39,5 +40,19 @@ public class GUserServiceImplTest {
 
     @Test
     public void queryAllApppointment1() {
+    }
+
+    @Test
+    public void selectContacts() {
+        Contacts contacts=gUserService.selectContacts(1);
+        System.out.println(contacts);
+
+
+    }
+
+    @Test
+    public void insertAppointment() {
+
+
     }
 }

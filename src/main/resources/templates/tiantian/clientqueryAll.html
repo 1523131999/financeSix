@@ -148,7 +148,7 @@
 				<td>
 					<input type="checkbox" />
 				</td>
-				<td th:text="${cli.clientName}"></td>
+				<td><a th:no="${cli.clientid}" name="a" th:text="${cli.clientName}"></a></td>
 				<td th:text="${cli.cert.certtype}"></td>
 				<td th:text="${cli.certnumber}"></td>
 
@@ -214,8 +214,14 @@
             $("#yeshu").val(pagno);
             //location.href = 'querygerenAll?pagenum='+ pagno+"&pageSize="+pageSize+"&"+data;
         	$('form').submit();
+        });
+		$(function () {
+			$("a").click(function () {
+				var idd=$(this).attr("no");
+			//	alert(idd);
+				location.href="/client/queryClientDetail?id="+idd;
+            })
         })
-
 	</script>
 
 		
