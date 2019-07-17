@@ -86,14 +86,15 @@
 
         </td>
         <td th:text="${item.clientName}">xxxx</td>
-        <td th:if="${item.cert.certid eq 1}">身份证</td>
+        <td th:if="${item.cert.certid eq 1}">身份证</td    >
         <td th:if="${item.cert.certid eq 2}">护照</td>
 
         <td th:text="${item.certnumber}">xxxx</td>
         <td th:if="${item.clientType eq 1}">自然人</td>
         <td th:if="${item.clientType eq 2}">非金融客户</td>
         <td th:if="${item.clientType eq 3}">金融客户</td>
-        <td th:text="${item.clientlevel}">xxxx</td>
+        <td th:if="${item.clientlevel eq 1}">普通客户</td>
+        <td th:if="${item.clientlevel eq 2}">Vip客户</td>
         <td th:if="${item.clientstatus eq 1}">正常</td>
         <td th:if="${item.clientstatus eq 2}">流失</td>
         <td th:if="${item.Fact eq 1}">事实客户</td>

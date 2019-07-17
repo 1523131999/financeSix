@@ -97,7 +97,8 @@
             <td th:if="${item.clientType eq 1}">自然人客户</td>
             <td th:if="${item.clientType eq 2}">金融机构客户</td>
             <td th:if="${item.clientType eq 3}">非金融机构客户</td>
-            <td th:text="${item.clientlevel}">xxxx</td>
+            <td th:if="${item.clientlevel eq 1}">普通客户</td>
+            <td th:if="${item.clientlevel eq 2}">Vip客户</td>
             <td th:if="${item.clientstatus eq 1}">正常</td>
             <td th:if="${item.clientstatus eq 2}">流失</td>
             <td th:text="${item.Fact}">xxxx</td>
