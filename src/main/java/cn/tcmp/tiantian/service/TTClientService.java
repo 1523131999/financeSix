@@ -23,4 +23,8 @@ public interface TTClientService {
     PageInfo<Client> queryjigouAll(Integer pagesize, Integer pagenum,Client client);
     //联系人查询
     List<Contacts> queryContactsAll(Contacts contacts);
+    //查询个人客户详情信息
+    Client detailByclient(Integer id);
+    //修改个人信息
+    Integer updateClient(Client client);
 }

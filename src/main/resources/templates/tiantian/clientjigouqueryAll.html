@@ -87,7 +87,7 @@
 		<table  width="90%" align="center" >
 			<tr>
 				<td>
-					<a href="addjigouClient">
+					<a href="toaddjigouClient">
 						<input style="width: 80px;" type="button" value="新建" />
 					</a>
 				</td>
@@ -128,8 +128,8 @@
 				<td th:text="'高级客户'" th:if="${cli.clientlevel == 1}"></td>
 				<td th:text="'VIP客户'" th:if="${cli.clientlevel == 2}"></td>
 
-				<td th:text="'全部'"  th:if="${cli.clientstatus == 1}"></td>
-				<td th:text="'无'"  th:if="${cli.clientstatus == 2}"></td>
+				<!--<td th:text="'全部'"  th:if="${cli.clientstatus == 1}"></td>-->
+				<td th:text="'无'"  th:if="${cli.clientstatus == 1}"></td>
 				<td th:text="'正常'"  th:if="${cli.clientstatus == 3}"></td>
 				<td th:text="'活跃'"  th:if="${cli.clientstatus == 4}"></td>
 				<td th:text="'睡眠'"  th:if="${cli.clientstatus == 5}"></td>
@@ -141,8 +141,8 @@
 				<td th:text="'蔡文姬'" th:if="${cli.Fmid == 4}"></td>
 				<td th:text="'狄仁杰'" th:if="${cli.Fmid == 5}"></td>
 
-				<td th:text="'全部'"  th:if="${cli.Fact == 1}"></td>
-				<td th:text="'是'"  th:if="${cli.Fact == 2}"></td>
+				<!--<td th:text="'全部'"  th:if="${cli.Fact == 1}"></td>-->
+				<td th:text="'是'"  th:if="${cli.Fact == 1}"></td>
 				<td th:text="'否'"  th:if="${cli.Fact == 3}"></td>
 
 

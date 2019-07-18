@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				font-size: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<table align="center" width="90%">
+			<tr>
+				<td width="300px" rowspan="12">
+					<img style="margin-top: -100px; margin-left: 100px;" width="120px" height="160px" src="img/3bbff849d09944ee844715290116c174e8d1ed745db84-LUNs0q_fw658.jpg"/>
+					<br /> 
+					<span th:text="${client.clientName}" style="font-size: 25px; margin-left: 95px;">狗亮</span>
+					<span style="background-color: dodgerblue; color: white;">个人潜在用户</span>
+				</td>
+				<td width="150px">客户名称:</td>
+				<td width="150px" th:text="${client.clientName}">
+				</td>
+				<td>生肖:</td>
+				<td th:text="${shengxiao}">
+					
+				</td>
+			</tr>
+			<tr>
+				<td>客户类型:</td>
+				<td th:text="'机构'" th:if="${client.clientType == 1}"></td>
+				<td th:text="'自然人'" th:if="${client.clientType == 2}"></td>
+				<td th:text="'全部'" th:if="${client.clientType == 3}"></td>
+				<td>星座:</td>
+				<td>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>证件号码:</td>
+				<td th:text="${client.certnumber}">
+				</td>
+				<td>民族:</td>
+				<td th:text="${client.nation}">
+				</td>
+			</tr>
+			<tr>
+				<td>证件有效期:</td>
+				<td th:text="${client.certtime}">
+				</td>
+				<td>手机号码:</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>出生日期（公历）:</td>
+				<td th:text="${#dates.format(client.birthdateZC, 'yyyy-MM-dd')}">
+				</td>
+				<td>联系地址:</td>
+				<td th:text="${client.address}">
+					
+				</td>
+			</tr>
+			<tr>
+				<td>出生日期（农历）:</td>
+				<td></td>
+				<td>电子邮件:</td>
+				<td th:text="${client.eamil}">
+					
+				</td>
+			</tr>
+			<tr>
+				<td>性别:</td>
+				<td th:text="'男'" th:if="${client.gender == 1}"></td>
+				<td th:text="'女'" th:if="${client.gender == 2}"></td>
+				<td>客户经理:</td>
+				<td th:text="'张国强'" th:if="${client.Fmid == 1}"></td>
+				<td th:text="'李佳霖'" th:if="${client.Fmid == 2}"></td>
+				<td th:text="'郭德纲'" th:if="${client.Fmid == 3}"></td>
+				<td th:text="'蔡文姬'" th:if="${client.Fmid == 4}"></td>
+				<td th:text="'狄仁杰'" th:if="${client.Fmid == 5}"></td>
+			</tr>
+			<tr>
+				<td>国籍:</td>
+				<td th:text="${client.nationality}">
+					
+				</td>
+				<td>联系电话:</td>
+				<td th:text="${client.phone}">
+					
+				</td>
+			</tr>
+			<tr>
+				<td>婚姻状况:</td>
+				<td th:text="'已婚'" th:if="${client.marital == 1}"></td>
+				<td th:text="'未婚'" th:if="${client.marital == 2}"></td>
+				<td>职业:</td>
+				<td th:text="${client.occpation}"></td>
+			</tr>
+			<tr>
+				<td>是否事实客户:</td>
+				<td th:text="'是'" th:if="${client.Fact == 1}"></td>
+				<td th:text="'否'" th:if="${client.Fact == 2}"></td>
+				<td>备注:</td>
+				<td th:text="${client.remarks}"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td>联系偏好:</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>风险评级(信托版)</td>
+				<td></td>
+				<td>风险评级(基金版)</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<a th:href="@{/addQianZaiUser(id=${client.clientid})}"><input type="button" value="编辑" style="margin-left: 500px; margin-top: 60px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/></a>
+				</td>
+			</tr>
+		</table>
+		
+		
+	</body>
+</html>

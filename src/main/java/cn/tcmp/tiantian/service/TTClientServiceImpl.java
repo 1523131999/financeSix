@@ -60,5 +60,15 @@ public class TTClientServiceImpl implements TTClientService {
         return clientMapper.queryContactsAll(contacts);
     }
 
+    @Override
+    public Client detailByclient(Integer id) {
+        return clientMapper.detailByclient(id);
+    }
+
+    @Override
+    public Integer updateClient(Client client) {
+        return clientMapper.updateClient(client);
+    }
+
 
 }

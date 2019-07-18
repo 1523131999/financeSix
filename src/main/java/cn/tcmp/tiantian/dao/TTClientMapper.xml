@@ -55,7 +55,12 @@
 			newfinancialmanager,
 			blacklist,
 			Finance,
-			certid
+			certid,
+			Workunitname,
+			trade,
+			nature,
+			position,
+			Title
 			)
 			VALUES
 			(
@@ -96,7 +101,12 @@
 			#{newfinancialmanager},
 			#{blacklist},
 			#{Finance},
-			#{cert.certid}
+			#{cert.certid},
+			#{Workunitname},
+			#{trade},
+			#{nature},
+			#{position},
+			#{Title}
 			);
     </insert>
 	<insert id="addcontacts" parameterType="Contacts">
@@ -203,9 +213,62 @@
 		<if test="client.Fact!=null and client.Fact!= 0">
 			AND Fact = #{client.Fact}
 		</if>
-
+		 order by cl.clientid desc
 	</select>
 	<select id="queryContactsAll" resultType="Contacts">
 		select * from financedb.contacts
 	</select>
+	<select id="detailByclient" parameterType="Integer" resultMap="map">
+		     SELECT * FROM CLIENT cl,cert ce,contacts co WHERE cl.certid = ce.certid AND cl.contactsid = co.contactid AND cl.clientid = #{id};
+	</select>
+
+	<update id="updateClient" parameterType="Client">
+		UPDATE financedb.client
+	SET
+	clientName = #{clientName},
+	clientType = #{clientType},
+	certnumber = #{certnumber} ,
+	Fmid = #{Fmid},
+	Fact = #{Fact},
+	clientstatus = #{clientstatus},
+	clientlevel = #{clientlevel},
+	risklevelTE = #{risklevelTE},
+	risklevelFE = #{risklevelFE},
+	FinanID = #{FinanID},
+	contactsid = #{contacts.contactid},
+	assset = #{assset},
+	gender = #{gender},
+	certtime = #{certtime},
+	birthdateZC = #{birthdateZC},
+	birthdateLC = #{birthdateLC},
+	nationality = #{nationality},
+	marital = #{marital},
+	nation = #{nation},
+	phone = #{phone},
+	address = #{address},
+	eamil = #{eamil},
+	occpation = #{occpation},
+	remarks = #{remarks},
+	contactpreference = #{contactpreference},
+	controller = #{controller},
+	workingyears = #{workingyears},
+	legalname = #{legalname},
+	Lcerttype = #{Lcerttype},
+	Lcertnumber = #{Lcertnumber},
+	Lcerttime = #{Lcerttime},
+	scopebusiness = #{scopebusiness},
+	registermoney = #{registermoney},
+	creationtime = #{creationtime},
+	newfinancialmanager = #{newfinancialmanager},
+	blacklist = #{blacklist},
+	Finance = #{Finance},
+	certid = #{cert.certid},
+	Workunitname = #{Workunitname},
+	trade = #{trade},
+	nature = #{nature},
+	POSITION = #{position},
+	Title = #{Title}
+	WHERE
+	clientid = #{clientid};
+	</update>
 </mapper>

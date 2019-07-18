@@ -148,7 +148,9 @@
 				<td>
 					<input type="checkbox" />
 				</td>
-				<td th:text="${cli.clientName}"></td>
+				<td>
+					<a th:text="${cli.clientName}" th:href="@{/selectClient(id=${cli.clientid})}"></a>
+				</td>
 				<td th:text="${cli.cert.certtype}"></td>
 				<td th:text="${cli.certnumber}"></td>
 

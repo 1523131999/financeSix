@@ -30,7 +30,6 @@
 		</td>
 	</tr>
 	<tr>
-		<!--证件类型-->
 		<td>证件类型:</td>
 		<td>
 			<select name="creatid"  style="width: 124px; height: 24px;">
@@ -81,7 +80,7 @@
 	<tr>
 		<td>出生日期（公历）:</td>
 		<td>
-			<input style="width: 100px;" name="birthdateZC" class="laydate-icon" id="demo1" value="">
+			<input style="width: 100px;" name="birthdateZC" class="laydate-icon" id="demo1">
 		</td>
 		<td>电子邮件:</td>
 		<td>
@@ -174,12 +173,13 @@
 		<tr>
 			<td>职业:</td>
 			<td>
-				<input type="text" name="occpation"/>
+				<input type="text" name="Title"/>
 			</td>
 			<td>所属行业:</td>
 			<td>
 				<select name="trade"  style="width: 160px; height: 20px;">
-					<option value="">工业生产</option>
+					<option value="工业生产">工业生产</option>
+					<option value="it">it</option>
 				</select>
 			</td>
 		</tr>
@@ -191,7 +191,8 @@
 			<td>单位性质:</td>
 			<td>
 				<select name="nature"  style="width: 160px; height: 20px;">
-					<option value="">国有</option>
+					<option value="国有">国有</option>
+					<option value="外企">外企</option>
 				</select>
 			</td>
 		</tr>
@@ -203,7 +204,8 @@
 			<td>职称:</td>
 			<td>
 				<select name="Title"  style="width: 160px; height: 20px;">
-					<option value="">高级</option>
+					<option value="高级">高级</option>
+					<option value="初级">初级</option>
 				</select>
 			</td>
 		</tr>
@@ -211,7 +213,8 @@
 			<td>是否单位实际控制人:</td>
 			<td>
 				<select name="ontroller"  style="width: 160px; height: 20px;">
-					<option value="">请选择</option>
+					<option value="">是</option>
+					<option value="">否</option>
 				</select>
 			</td>
 			<td>工龄（年）:</td>
@@ -223,31 +226,40 @@
 		<tr style="text-align: center"  height="60px">
 			<td colspan="4">
 				<input type="button"onclick="zhiye1()" id="xianshi2"  value="保存" style="background-color: dodgerblue; color: white; width: 70px;"/>
-				<input type="reset" value="取消" style="margin-left: 20px;background-color: dodgerblue; color: white; width: 70px;" />
+				<input type="reset" value="取消" onclick="zhiye2()" style="margin-left: 20px;background-color: dodgerblue; color: white; width: 70px;" />
 			</td>
-
-
 		</tr>
 	</table>
 </div>
-
-</body>
 </form>
+</body>
+
 <script type="text/javascript" src="/js/laydate.js"></script>
 <script type="text/javascript">
-    function zhiye1(){
+    function zhiye1() {
         var xian = $('#zhiye').attr("xian");
-        if(xian == 'x'){
-            $("#xianshi").css("display","block");
-            $('#zhiye').attr("xian","y");
-        }else{
+        if (xian == 'x') {
+            $("#xianshi").css("display", "block");
+            $('#zhiye').attr("xian", "y");
+        } else {
             var baocun = confirm("确定保存吗？");
-            if(baocun == true){
-                $("#xianshi").css("display","none");
-                $('#zhiye').attr("xian","x");
+            if (baocun == true) {
+                $("#xianshi").css("display", "none");
+                $('#zhiye').attr("xian", "x");
             }
         }
     }
+
+        function zhiye2() {
+            var xian = $('#zhiye').attr("xian");
+            if (xian == 'x') {
+                $("#xianshi").css("display", "block");
+                $('#zhiye').attr("xian", "y");
+            } else {
+                $("#xianshi").css("display", "none");
+                $('#zhiye').attr("xian", "x");
+            }
+        }
 </script>
 <script type="text/javascript">
     !function(){

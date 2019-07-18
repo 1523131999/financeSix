@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="js/jquery-1.12.4.js" ></script>
 	</head>
 	<body>
+	<form action="addjigouClient">
 		<table align="center" width="90%">
 			<tr>
 				
@@ -27,8 +28,7 @@
 			<tr>
 				<td>证件类型:</td>
 				<td>
-					<select name="creatid"  style="width: 124px; height: 24px;">
-						<option value="0">全部</option>
+					<select name="certid"  style="width: 124px; height: 24px;">
 						<option th:each="cert1:${cert}" th:text="${cert1.certtype}"  th:value="${cert1.certid}">身份证</option>
 					</select>
 				</td>
@@ -110,9 +110,11 @@
 				<td>
 					<input style="width: 100px;" name="Lcerttime">
 				</td>
-				<td>备注:</td>
+				<td>联系人:</td>
 				<td>
-					<input type="text" style="width: 80px;"  name="remarks"/> <input type="button" xian="x" onclick="zhiye()" id="zhiye" value="修改"/>
+					<input type="text" style="width: 80px;"  name="" />
+					<input type="hidden" th:value="'1'" name="contactsid">
+					<!--<input type="button" xian="x" onclick="zhiye()" id="zhiye" value="修改"/>-->
 				</td>
 			</tr>
 			<tr>
@@ -146,7 +148,7 @@
 			</tr>
 			<tr style="text-align: center">
 				<td colspan="4" style="text-align: center">
-					<input type="button" value="保存" style="margin-left: 300px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
+					<input type="submit" value="保存" style="margin-left: 300px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
 					<input type="button" value="取消"  style="margin-left: 30px; border-radius: 7px; background-color: dodgerblue; color: white; width: 70px;"/>
 				</td>
 			</tr>
@@ -216,10 +218,11 @@
 				</tr>
 			</table>
 		</div>
+	</form>
 	</body>
 	<script type="text/javascript">
 		!function(){
-			laydate.skin('molv');//切换皮肤，请查看skins下面皮肤库
+			laydate.skin('molv');//切换 皮肤，请查看skins下面皮肤库
 			laydate({elem: '#demo'});//绑定元素
 		}();
 		!function(){
