@@ -49,7 +49,6 @@
 						<td>证件号码</td>
 						<td>是否事实客户</td>
 						<td>当前理财经理</td>
-						<td>新理财经理</td>
 						<td>创建时间</td>
 					</tr>
 					<tr th:each="item:${pageinfo.list}">
@@ -59,8 +58,8 @@
 						<td th:text="${item.certnumber}"></td>
 						<td th:if="${item.Fact eq 1}">事实</td>
 						<td th:if="${item.Fact eq 2}">潜在</td>
-						<td th:text="${item.Fmid}"></td>
-						<td th:text="${item.newfinancialmanager}"></td>
+						<td th:if="${item.Fmid eq 1}">总经理</td>
+						<td th:if="${item.Fmid eq 2}">大区经理</td>
 						<td th:text="${#dates.format(item.creationtime,'yyyy-MM-dd')}"></td>
 					</tr>
 

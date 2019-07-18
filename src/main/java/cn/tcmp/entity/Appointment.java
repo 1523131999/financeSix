@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * appoIntegerment  generated at 2019-06-26 10:30:13 by: eric
@@ -31,6 +32,8 @@ public class Appointment{
 	private Integer contractstate;
 	private Date actualdate;
 	private Integer rrstate;
-
+	private List<Integer> arrivalslist;
+	private List<Integer> rrstatelist;
+	private List<Integer> appoislist;
 
 }

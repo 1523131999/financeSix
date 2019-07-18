@@ -20,10 +20,9 @@
     <li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
     <li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
     <li class="layui-nav-item"><a href="/client/toyuyue">预约</a></li>
-    <li class="layui-nav-item"><a href="javascript:;">经纪关系</a></li>
-    <li class="layui-nav-item"><a href="javascript:;">联系人</a></li>
-    <li class="layui-nav-item"><a href="javascript:;">事件提醒</a></li>
-    <li class="layui-nav-item"><a href="javascript:;">附件</a></li>
+    <li class="layui-nav-item"><a href="/client/tojingjiren">经纪关系</a></li>
+    <li class="layui-nav-item"><a href="/client/tolianxiren">联系人</a></li>
+
 </ul>
 <!--选项卡结束-->
 
@@ -53,7 +52,7 @@
                         </p>
 
 
-                        <button style="margin: 1px;" class="layui-btn layui-btn-fluid">事件提醒</button>
+                 <!--  //     <button style="margin: 1px;" class="layui-btn layui-btn-fluid">事件提醒</button>-->
                       <p>
                           <button class="layui-btn layui-btn-fluid" style=" margin: 1px;display:inline">资产信息</button>
                           <button class="layui-btn layui-btn-fluid"   style="  margin: 1px;display:inline">联系人</button>
@@ -127,7 +126,9 @@
                       <img style="margin-left: 70px;"  th:if="${jijin eq 2}" src="/img/chanpinbule.png" height="40" width="40"/>
                       <img  style="margin-left: 70px"  th:if="${guanli == null}" src="/img/chanpin.png" height="40" width="40"/>
                       <img  style="margin-left: 70px"   th:if="${guanli eq 3}" src="/img/chanpinbule.png" height="40" width="40"/>
-
+                      <input type="hidden" th:value="${guanli}">
+                      <input type="hidden" th:value="${xintuo}">
+                      <input type="hidden" th:value="${jijin}">
 
 
                    </div>

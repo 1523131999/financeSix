@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>联系人信息</title>
+    <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../../layuiadmin/style/template.css" media="all">
+    <script src="../../echarts.min.js"></script>
+    <script th:src="@{/js/jquery-1.12.4.js}"></script>
+</head>
+<!--选项卡开始-->
+<ul class="layui-nav layui-bg-green" lay-filter="component-nav">
+    <li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
+    <li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
+    <li class="layui-nav-item"><a href="/client/toyuyue">预约</a></li>
+    <li class="layui-nav-item"><a href="/client/tojingjiren">经纪关系</a></li>
+    <li class="layui-nav-item"><a href="/client/tolianxiren">联系人</a></li>
+
+</ul>
+<!--选项卡结束-->
+
+<body>
+
+<table>
+    <button  style="margin: 0px;" id="now" class="layui-btn layui-btn-normal">经济关系</button>
+</table>
+<hr/>
+<p><span>当前经济关系：</span><span style="color: red">张三（主）<span>,赵虎</span></span></p>
+<hr/>
+<table class="layui-table">
+
+    <tr>
+        <td colspan="5">经济关系变更记录</td>
+    </tr>
+    <tr style="background-color: #CCCCCC">
+        <td>现客户经理</td>
+        <td>原客户经理</td>
+        <td>操作时间</td>
+        <td>操作人</td>
+        <td>转移原因</td>
+    </tr>
+
+    <tr>
+        <td style="color: red">张三</td>
+        <td style="color: red">李四</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="color: red">李四</td>
+        <td style="color: red">李四</td>
+
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+</table>
+
+
+</body>
+</html>

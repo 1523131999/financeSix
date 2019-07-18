@@ -18,17 +18,17 @@
 
 	</head>
 <body>
-	<!--选项卡开始-->
-	<ul class="layui-nav layui-bg-green" lay-filter="component-nav">
-		<li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
-		<li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
-		<li class="layui-nav-item"><a href="javascript:;">预约</a></li>
-		<li class="layui-nav-item"><a href="javascript:;">经纪关系</a></li>
-		<li class="layui-nav-item"><a href="javascript:;">联系人</a></li>
-		<li class="layui-nav-item"><a href="javascript:;">事件提醒</a></li>
-		<li class="layui-nav-item"><a href="javascript:;">附件</a></li>
-	</ul>
-	<!--选项卡结束-->
+<!--选项卡开始-->
+<ul class="layui-nav layui-bg-green" lay-filter="component-nav">
+	<li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
+	<li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
+	<li class="layui-nav-item"><a href="/client/toyuyue">预约</a></li>
+	<li class="layui-nav-item"><a href="/client/tojingjiren">经纪关系</a></li>
+	<li class="layui-nav-item"><a href="/client/tolianxiren">联系人</a></li>
+
+</ul>
+<!--选项卡结束-->
+
 	<span>
 		<table class="layui-table">
 			<tr align="left" height="" style="margin: 0px;padding: 0px">
@@ -170,13 +170,7 @@
                 pagno = pages;
             }
             location.href = 'queryNowAssets?pageNo='+ pagno+"&pageSize="+pageSize+"&"+data;
-        })
-
-
-
-
-
-
+        });
     })
 
 

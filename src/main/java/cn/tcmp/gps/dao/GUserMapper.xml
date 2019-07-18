@@ -3,6 +3,39 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.tcmp.gps.dao.GUserMapper">
+    <select id="queryAllApppointment" resultMap="aMap">
+        SELECT * FROM `appointment` a, `client`c ,`item_sheet` i WHERE a.`clientid`=c.`clientid` AND a.projectid=i.`ItemID`
+        <if test="appointment.arrivalslist!=null">
+            AND arrivals in
+            <foreach collection="appointment.arrivalslist" open="(" close=")" item="trisk" separator=",">
+                #{trisk}
+            </foreach>
+        </if>
+        <if test="appointment.rrstatelist!=null">
+            AND rrstate in
+            <foreach collection="appointment.rrstatelist" open="(" close=")" item="trisk" separator=",">
+            #{trisk}
+        </foreach>
+        </if>
+        <if test="appointment.appoislist!=null">
+            AND appois in
+            <foreach collection="appointment.appoislist" open="(" close=")" item="trisk" separator=",">
+            #{trisk}
+        </foreach>
+        </if>
+        <if test="item.Entryname!=null and item.Entryname!=''">
+            AND i.`EntryName`=#{item.Entryname}
+        </if>
+        <if test="client.clientName!=null and client.clientName!=''">
+            AND c.`clientName` =#{client.clientName}
+        </if>
+        <if test="appointment.appoindate!=null and appointment.appoindate!=''">
+            AND #{appointment.appoindate}  &lt; NOW()
+        </if>
+        <if test="appointment.actualdate!=null and appointment.actualdate!=''">
+            AND  #{appointment.actualdate} > NOW()
+        </if>
+    </select>
     <resultMap id="aMap" type="Appointment" autoMapping="true">
         <id column="appointmentid" property="appointmentid"/>
         <association property="client" resultMap="cMap"></association>
@@ -12,12 +45,56 @@
         <id column="clientid" property="clientid" />
         <result column="clientName" property="clientName"></result>
     </resultMap>
+
+
     <resultMap id="iMap" type="Item_sheet" autoMapping="true">
         <id column="ItemID" property="ItemID"/>
     </resultMap>
 
 
-    <select id="queryAllApppointment" resultMap="aMap">
-          SELECT * FROM `appointment` a, `client`c ,`item_sheet` i WHERE a.`clientid`=c.`clientid` AND a.projectid=i.`ItemID`
+    <select id="selectContacts" parameterType="Integer" resultType="Contacts">
+        SELECT co.* FROM `client` c,`contacts` co WHERE c.contactsid=co.contactid AND c.clientid=#{id}
     </select>
+
+    <insert id="insertAppointment" parameterType="Appointment">
+
+INSERT INTO `financedb`.`appointment` (
+
+  `clientid`,
+  `projectid`,
+  `appoinm`,
+  `appoinyear`,
+  `subscriptionf`,
+  `subscriptiont`,
+  `appoindate`,
+  `lineupsu`,
+  `appois`,
+  `appoied`,
+  `businesstype`,
+  `arrivals`,
+  `contractstate`,
+  `actualdate`,
+  `rrstate`
+)
+VALUES
+  (
+    #{client.clientid},
+    #{item_sheet.ItemID},
+    #{appoinm},
+    #{appoinyear},
+    #{subscriptionf},
+    #{subscriptiont},
+    #{appoindate},
+    #{lineupsu},
+    #{appois},
+    #{appoied},
+    #{businesstype},
+    #{arrivals},
+    #{contractstate},
+    #{actualdate},
+    #{rrstate}
+  );
+
+    </insert>
+
 </mapper>

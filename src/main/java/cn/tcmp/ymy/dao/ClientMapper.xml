@@ -67,7 +67,7 @@
 
 
     <select id="queryAllFact" parameterType="Client" resultMap="faMap">
-        SELECT * FROM CLIENT WHERE client.fact=1
+        SELECT * FROM CLIENT,cert WHERE client.fact=1 and client.certid=cert.certid
         <if test="clientName!=null and clientName!=''">
             and clientName like concat('%',#{clientName},'%')
         </if>

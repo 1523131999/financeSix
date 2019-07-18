@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				font-size: 15px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css"/>
+		<link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css"/>
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+		<link rel="stylesheet" href="../../layuiadmin/style/template.css" media="all">
+		<script th:src="@{/js/jquery-1.12.4.js}"></script>
+	</head>
+	<!--选项卡开始-->
+	<ul class="layui-nav layui-bg-green" lay-filter="component-nav">
+		<li class="layui-nav-item"><a href="/client/queryClientDetail">主页</a></li>
+		<li class="layui-nav-item "><a href="/client/queryNowAssets">资产</a></li>
+		<li class="layui-nav-item"><a href="/client/toyuyue">预约</a></li>
+		<li class="layui-nav-item"><a href="/client/tojingjiren">经纪关系</a></li>
+		<li class="layui-nav-item"><a href="/client/tolianxiren">联系人</a></li>
+
+	</ul>
+	<!--选项卡结束-->
+
+	<body>
+<table  width="90%" align="center"  class="layui-table">
+<tr>
+    <td>
+        <button  style="margin: 0px;" id="now" class="layui-btn layui-btn-normal">新建</button>
+        <button style="margin: 0px;" id="all" class="layui-btn layui-btn-normal">查看详情</button>
+
+    </td>
+</tr>
+</table>
+		<table class="layui-table" style="border: none; margin-top: 20px;" align="center" width="90%" border="1" cellpadding="0" cellspacing="0">
+			<tr align="center">
+				<td>选择</td>
+				<td>名称</td>
+				<td>证件类型</td>
+				<td>证件号码</td>
+				<td>客户类型</td>
+				<td>联系人类型</td>
+				<td>联系电话</td>
+				<td>备注</td>
+			</tr>
+			<tr align="center">
+				<td><input type="checkbox"></td>
+				<td th:text="${Contacts.contactname}">名称</td>
+				<td th:if="${Contacts.Lcerttype eq 1}">身份证</td>
+				<td th:if="${Contacts.Lcerttype eq 2}">护照</td>
+				<td th:if="${Contacts.Lcerttype eq 3}">港澳通行证</td>
+				<td th:text="${Contacts.certnumber}">证件号码</td>
+				<td th:if="${Contacts.clienttype eq 1}">自然人客户</td>
+				<td th:if="${Contacts.clienttype eq 2}">机构客户</td>
+				<td th:if="${Contacts.contactstype eq 1}">夫妻</td>
+				<td th:if="${Contacts.contactstype eq 2}">父母子女</td>
+				<td th:if="${Contacts.contactstype eq 3}">亲戚</td>
+				<td th:text="${Contacts.contactsphone}">联系电话</td>
+				<td th:text="${Contacts.remarks}">备注</td>
+			</tr>
+
+
+
+		</table>
+
+
+	</body>
+</html>

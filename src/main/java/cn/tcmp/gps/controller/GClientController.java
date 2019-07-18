@@ -2,15 +2,16 @@ package cn.tcmp.gps.controller;
 
 import cn.tcmp.entity.*;
 import cn.tcmp.gps.service.GClientService;
+import cn.tcmp.gps.service.GUserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +22,14 @@ public class GClientController {
 
     @Autowired
     private GClientService gClientService;
-
+    @Autowired
+    private GUserService gUserService;
 
     //查询客户详情
     @RequestMapping("queryClientDetail")
     public  String queryClient(Integer id, Model model){
         //项目未集成 所以id 暂时写死
-        id=1;
+      //  id=1;
         Client client=gClientService.query(id);
         List<Assetsrecord> alist=gClientService.queryAllByClientId(id);
         List<Assets> assetsList=gClientService.queryAllAssets(id);
@@ -50,7 +52,17 @@ public class GClientController {
         model.addAttribute("client",client);
         model.addAttribute("alist",alist);
         System.out.println(client);
-        return  "gps/ziranren";
+        if(client.getClientType()==1){//是否是自然人
+
+            if(client.getFact()==1){
+                return  "gps/ziranren";
+            }else{
+                return "gps/qianzai";
+            }
+        }else {
+            return "gps/d";
+        }
+
 
     }
 
@@ -194,9 +206,93 @@ public class GClientController {
     //跳转预约信息
 
     @RequestMapping(value = "toyuyue",method = RequestMethod.GET)
-    public  String toyuyue(){
+    public  String toyuyue(Integer pageNo, Integer pageSize,Appointment appointment, Client client, Item_sheet item_sheet,Model model,Integer[] arrivalslist,Integer[] appoislist,Integer[] rrstatelist){
+        if (appointment==null ){
+            appointment=new Appointment();
+        }
+        if (client==null){
+            client=new Client();
+        }
+        if (item_sheet==null){
+            item_sheet=new Item_sheet();
+        }
+
+        if(null == pageNo){
+            pageNo=1;
+        }
+        if(null==pageSize){
+            pageSize=3;
+        }
+        if(appoislist!=null && appoislist.length!=0){
+            for(int i=0;i<appoislist.length;i++){
+                if(appoislist[i].toString()!=""){
+                        String a=appoislist[i].toString().replace("[","").trim();
+                        String b=a.replace("]","").trim();
+                        Integer.parseInt(b);
+                    Integer c=Integer.valueOf(b);
+                    appoislist[i]=c;
+                }
+
+            }  appointment.setAppoislist(null);
+            appointment.setAppoislist(Arrays.asList(appoislist));
+        }
+
+        if(rrstatelist!=null &&  rrstatelist.length!=0){
+            for(int i=0;i<rrstatelist.length;i++){
+                if(rrstatelist[i].toString()!=""){
+                    String a=rrstatelist[i].toString().replace("[","").trim();
+                    String b=a.replace("]","").trim();
+                    Integer.parseInt(b);
+                    Integer c=Integer.valueOf(b);
+                    rrstatelist[i]=c;
+                }
+
+            }
+
+            appointment.setRrstatelist(null);
+            appointment.setRrstatelist(Arrays.asList(rrstatelist));
+        }
+
+        if(arrivalslist!=null &&  arrivalslist.length!=0){
+            for(int i=0;i<arrivalslist.length;i++){
+                if(arrivalslist[i].toString()!=""){
+                    String a=arrivalslist[i].toString().replace("[","").trim();
+                    String b=a.replace("]","").trim();
+                    Integer.parseInt(b);
+                    Integer c=Integer.valueOf(b);
+                    arrivalslist[i]=c;
+                }
+
+            }
+            appointment.setArrivalslist(null);
+            appointment.setArrivalslist(Arrays.asList(arrivalslist));
+        }
+        PageInfo<Appointment> pageInfo=gUserService.queryAllApppointment(pageNo,pageSize,appointment,client,item_sheet);
+        model.addAttribute("pageInfo",pageInfo);
         return  "gps/yuyue";
     }
+
+
+
+
+    @RequestMapping(value = "tolianxiren",method = RequestMethod.GET)
+    public  String tojingji(Integer id,Model model){
+        id=1;
+        Contacts contacts=gUserService.selectContacts(id);
+        model.addAttribute("Contacts",contacts);
+        return "gps/lianxinren";
+    }
+    @RequestMapping(value = "tojingjiren",method = RequestMethod.GET)
+    public  String tojingjiren(){
+        return "gps/jingjiguanxi";
+    }
+
+    @RequestMapping(value = "toqianzai",method = RequestMethod.GET)
+    public  String toqianzai(){
+        return "gps/qianzai";
+    }
+
+
 
 
 }
